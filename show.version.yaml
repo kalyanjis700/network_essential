@@ -11,6 +11,4 @@
       register: print_output
     - debug: var=print_output.stdout_lines
     - name: save output to a file
-      #copy: content="{{ print_output.stdout[0] }}" dest="./output/{{ inventory_hostname }}.txt"
-      copy: content="{{ print_output.stdout[0] }}" dest=/home/indrnil/"output.txt"
-
+      copy: content="{{ print_output.stdout[0] }}" dest="./output/{{ inventory_hostname }}.txt"
