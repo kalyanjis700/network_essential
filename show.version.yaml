@@ -8,9 +8,29 @@
       ios_command:
         commands:
           - show version
+      dest="./{{ inventory_hostname }}.txt"
       register: print_output
     - debug: var=print_output.stdout_lines
-    - name: save output to a file
-      copy: content="{{ print_output.stdout[0] }}" dest="./output/{{ inventory_hostname }}.txt"
-      
-    - name: git operation
+
+    - name: git pull operation
+      shell: |
+        git pull
+      run_once: True
+    -name: Config git options
+     shell: |
+       git config --global user.name "indranil"
+       git config --global user.email "indra_bdn@hotmail.com"
+       git config --global push.default matching
+     run_once: True
+
+    - name: add to repository
+      shell: |
+        git add -A
+      run_once: True
+
+    -name: commt changes
+     shell: |
+       git commit -m "commit cfg files"
+     run_once: True
+     ignore_errors: yes
+     
