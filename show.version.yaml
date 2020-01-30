@@ -23,7 +23,7 @@
       run_once: True
     - name: Config git options
       shell: |
-        git config --global user.name "indranil"
+        git config --global user.name "kalyanjis700"
         git config --global user.email "indra_bdn@hotmail.com"
         git config --global push.default matching
       run_once: True
