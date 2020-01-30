@@ -8,7 +8,7 @@
       ios_command:
         commands:
           - show version
-          dest="./{{ inventory_hostname }}.txt"
+          dest: "./{{ inventory_hostname }}.txt"
       register: print_output
     - debug: var=print_output.stdout_lines
 
