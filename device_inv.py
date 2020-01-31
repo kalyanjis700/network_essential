@@ -24,7 +24,7 @@ for DICT in TOTAL_LIST:
         net_connect = ConnectHandler(device_type='cisco_ios', ip=DICT, username=USERNAME, password=PASSWORD, port=22)
         net_connect.enable()
         print("connection successfull to " + DICT)
-        hostname = net_connect.find_prompt().replace('>','')
+        hostname = net_connect.find_prompt() #.replace('>','')
         model = net_connect.send_command("show inventory | i SN:").strip()
         version = net_connect.send_command("show version | i Version").strip()
         description = net_connect.send_command("show int description | ex down|Vl|Po").strip()
