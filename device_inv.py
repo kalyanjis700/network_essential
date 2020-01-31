@@ -16,28 +16,28 @@ print(TOTAL_LIST)
 
 raw_input('\n''TASK LIST HAS BBEN PREPARED , Press any key to connect the listed device and get the output ')
 for DICT in TOTAL_LIST:
-    Header = ('Hostname,Model,IOS')
+    Header = ('Hostname,Model,IOS,serial')
     Capture = open('OUTPUT.txt', 'a')
     Capture.write(Header + '\n')
     try:
         print('Connecting to ' + str(DICT))
         net_connect = ConnectHandler(device_type='cisco_ios', ip=DICT, username=USERNAME, password=PASSWORD, port=22)
         print("connection successfull to " + DICT)
-        net_connect.enable()
-        hostname = net_connect.find_prompt()
+        hostname = net_connect.find_prompt().replace('>','')
         model = net_connect.send_command("show inventory | i SN:").strip()
         version = net_connect.send_command("show version | i Version").strip()
-        description = net_connect.send_command("show int description").strip()
-        cdpinfo = net_connect.send_command("show cdp nei | b Device").strip()
+        description = net_connect.send_command("show int description | ex down|Vl|Po").strip()
+        cdpinfo = net_connect.send_command("show ip arp").strip()
         for line in model.splitlines():
             if 'SN:' in line:
                 model = line.split()[1].strip()
+                serial = line.split()[-1].strip()
                 break
         for line in version.splitlines():
             if 'Version' in line:
                 version = line.split(',')[2].strip()
                 break
-        Capture.write(hostname +','+ model + ','+ version+ '\n'+'\n')
+        Capture.write(hostname +','+ model + ','+ version+ ','+serial+'\n'+'\n')
         Capture.write(description + '\n'+'\n')
         Capture.write(cdpinfo + '\n'+'\n')
 
