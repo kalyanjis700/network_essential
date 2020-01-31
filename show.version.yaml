@@ -14,7 +14,7 @@
     - debug: var=print_output.stdout_lines
 
     - name: save output to a file
-      copy: content="{{ print_output.stdout[0] }}" dest="cd ../output.txt"
+      local_action: content="{{ print_output.stdout[0] }}" dest="cd ../output.txt"
       #copy: content="{{ print_output.stdout[0] }}" dest="./{{ inventory_hostname }}.txt"
 #
 #    - name: git pull operation
