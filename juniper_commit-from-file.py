@@ -23,7 +23,7 @@ for devices in device_list:
     x = raw_input(str('Proceed to commit(Y or N) : '))
     if x == 'Y':
         print ('Commiting')
-        connect.send_config_set('commit')
+        connect.commit()#connect.send_config_set('commit')
         connect.exit_config_mode()
         connect.disconnect()
     else:
