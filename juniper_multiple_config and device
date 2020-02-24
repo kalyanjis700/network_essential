@@ -1,0 +1,61 @@
+from netmiko import ConnectHandler
+import getpass
+from datetime import datetime
+import time
+import csv
+start_time = datetime.now()
+print('''
+
+===================================
+This Script is to push config to multiple device from multiple config file
+Just create a file named DEVICE_LIST.csv and provide inventory in below format
+
+Device_Name/IP:Config_File.txt
+10.116.10.1:router1config.txt
+10.116.10.2:router2config.txt
+
+and keep all these config files in same directory...Please be carefull this script
+is going to write on device. So please verify the config before pushing it to device.
+===================================
+
+
+''')
+username =  raw_input('Login as : ')
+password =  getpass.getpass('password : ')
+time.sleep(1)
+with open('DEVICE_LIST.csv', 'r') as csvfile:
+    reader = csv.reader(csvfile)
+    next(reader)
+    TOTAL_LIST = []
+    for row in reader:
+        for line in row:
+            TOTAL_LIST.append(line)
+print(TOTAL_LIST)
+for line in TOTAL_LIST:
+    devices=line.split(':')[0]
+    config =line.split(':')[1]
+    connect = ConnectHandler(device_type='juniper',ip=devices,username=username,password=password,port=22,global_delay_factor=2)
+    connect.find_prompt()
+    time.sleep(1)
+    print('Connect Successfully')
+    connect.config_mode()
+    print(connect.send_config_set('rollback 0'))
+    connect.send_config_from_file(config)
+    print(connect.send_config_set('show | compare'))
+    print(connect.send_config_set('commit check'))
+    x = raw_input(str('Proceed to commit(Y or N) : '))
+    if x == 'Y':
+        print ('Commiting')
+        connect.commit()#connect.send_config_set('commit')
+        print('Below configuration hasbeen modified to device')
+        print('==================')
+        print(connect.send_config_set('show | compare rollback 1'))
+        connect.exit_config_mode()
+        connect.disconnect()
+    else:
+        connect.send_config_set('rollback 0')
+        connect.commit()
+        connect.disconnect()        
+end_time = datetime.now()
+print("Total time: {}".format(end_time - start_time))
+print ('Completed Successfully!!')
