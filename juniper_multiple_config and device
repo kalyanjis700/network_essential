@@ -45,13 +45,24 @@ for line in TOTAL_LIST:
     print(connect.send_config_set('commit check'))
     x = raw_input(str('Proceed to commit(Y or N) : '))
     if x == 'Y':
-        print ('Commiting')
-        connect.commit()#connect.send_config_set('commit')
-        print('Below configuration hasbeen modified to device')
-        print('==================')
-        print(connect.send_config_set('show | compare rollback 1'))
-        connect.exit_config_mode()
-        connect.disconnect()
+        t = raw_input(str('Please enter to commit directly else provide confirmation time : '))
+        if t == '':
+                print ('Commiting')
+                connect.commit()#connect.send_config_set('commit')
+                print('Below configuration hasbeen modified to device')
+                print('==================')
+                print(connect.send_config_set('show | compare rollback 1'))
+                connect.exit_config_mode()
+                connect.disconnect()
+        else:
+                print ('Commit will be autimatically rollback after ' + str(t)+' seconds')
+                cmd = 'commit confirmed rollback '+ str(t)
+                connect.send_config_set(cmd)
+                print('Below configuration hasbeen modified to device')
+                print('==================')
+                print(connect.send_config_set('show | compare rollback 1'))
+                connect.exit_config_mode()
+                connect.disconnect()   
     else:
         connect.send_config_set('rollback 0')
         connect.commit()
@@ -59,4 +70,3 @@ for line in TOTAL_LIST:
 end_time = datetime.now()
 print("Total time: {}".format(end_time - start_time))
 print ('Completed Successfully!!')
-
