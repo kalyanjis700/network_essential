@@ -59,3 +59,4 @@ for line in TOTAL_LIST:
 end_time = datetime.now()
 print("Total time: {}".format(end_time - start_time))
 print ('Completed Successfully!!')
+
