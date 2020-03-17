@@ -1,0 +1,70 @@
+from netmiko import ConnectHandler
+import getpass
+from datetime import datetime
+import time
+import difflib
+import csv
+start_time = datetime.now()
+print('''
+
+===================================
+This Script is to compare config between two pair of device.
+Just create a file named DEVICE_LIST.csv and provide device pair in below format
+
+1st Device,2nd Device
+10.116.10.1:10.116.10.2
+WANRTI:MXLANCORE
+
+and keep all these files in same directory...
+===================================
+
+
+''')
+f=open('compareresult.txt','a')
+username =  raw_input('Login as : ')
+password =  getpass.getpass('password : ')
+with open('DEVICE_LIST.csv', 'r') as csvfile:
+    reader = csv.reader(csvfile)
+    next(reader)
+    TOTAL_LIST = []
+    for row in reader:
+        for line in row:
+            TOTAL_LIST.append(line)
+print(TOTAL_LIST)
+for line in TOTAL_LIST:
+    devicea = line.split(':')[0]
+    deviceb = line.split(':')[1]
+    #connecting to device A
+    connecta = ConnectHandler(device_type='juniper',ip=devicea,username=username,password=password,port=22,global_delay_factor=2)
+    connecta.find_prompt()
+    time.sleep(1)
+    print('Connected Successfully to ' + str(devicea))
+    configa = connecta.send_command('show configuration | display set | no-more')
+    print('Collected data successfully from ' + str(devicea))
+    #connecting to device B
+    connectb = ConnectHandler(device_type='juniper',ip=deviceb,username=username,password=password,port=22,global_delay_factor=2)
+    connectb.find_prompt()
+    time.sleep(1)
+    print('Connected Successfully to ' + str(deviceb))
+    configb = connectb.send_command('show configuration | display set | no-more')
+    print('Collected data successfully from ' + str(deviceb))
+    configurationa = configa.splitlines()
+    configurationb = configb.splitlines()
+
+    #d=difflib.Differ()
+    #diff =list(d.compare(configurationa, configurationb))
+    print('=====++++========++++++')
+    print('Taking ' + str(devicea) + ' as a reference, preparing a result of configurations which added/removed to '+str(deviceb))
+    print(raw_input('''Press any key to continue : '''))
+
+
+    #print('\n'.join(diff))
+    f.write('\n'+'Diff between '+ str(devicea)+ ' and ' + str(deviceb)+'\n')
+    f.write('==================================================='+'\n')
+    f.write('Taking ' + str(devicea) + ' as a reference and showing a result of configurations which added/removed to '+str(deviceb)+'\n')
+    for line in difflib.unified_diff(configurationa, configurationb):
+    #       print line
+            f.write(line + '\n')
+end_time = datetime.now()
+print("Total time: {}".format(end_time - start_time))
+print ('Completed Successfully !! Result Stored in compareresult.txt in same directory...')
