@@ -1,0 +1,37 @@
+from netmiko import ConnectHandler
+import getpass
+from datetime import datetime
+import time
+import difflib
+print('''
+WELCOME TO COMPARE CONFIG ON A JUNIPER DEVICE PAIR
+''')
+devicea = raw_input(str('Kindly Enter your First Device Name/IP : '))
+deviceb = raw_input(str('Kindly Enter your Second Device Name/IP : '))
+f=open('compareresult.txt','a')
+username =  raw_input('Login as : ')
+password =  getpass.getpass('password : ')
+#connecting to device A
+connecta = ConnectHandler(device_type='juniper',ip=devicea,username=username,password=password,port=22,global_delay_factor=2)
+connecta.find_prompt()
+time.sleep(1)
+print('Connected Successfully to ' + str(devicea))
+configa = connecta.send_command('show configuration | display set | no-more')
+print('Collected data successfully from ' + str(devicea))
+#connecting to device B
+connectb = ConnectHandler(device_type='juniper',ip=deviceb,username=username,password=password,port=22,global_delay_factor=2)
+connectb.find_prompt()
+time.sleep(1)
+print('Connected Successfully to ' + str(deviceb))
+configb = connectb.send_command('show configuration | display set | no-more')
+print('Collected data successfully from ' + str(deviceb))
+configurationa = configa.splitlines()
+configurationb = configb.splitlines()
+
+d=difflib.Differ()
+diff =list(d.compare(configurationa, configurationb))
+print('=====++++========++++++')
+print('Taking ' + str(devicea) + ' as a reference and showing a result of configurations which added/removed to '+str(deviceb))
+print(raw_input('''Press any key to continue : '''))
+print('\n'.join(diff))
+print ('Completed Successfully !!')
