@@ -1,0 +1,21 @@
+---
+- name: "Configure Device"
+  hosts: dc1
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: "Configure op script"
+      juniper_junos_config:
+        config_mode: "private"
+        load: "set"
+        lines:
+          - "set vlans xyz"
+          - "set vlans xyz vlan-id 123"
+          - "set interfaces ge-x/x/x unit 0 family ethernet-switching vlan members xyz"
+          - "set interfaces ge-x/x/z unit 0 family ethernet-switching vlan members xyz"
+      register: response
+    - name: "Print the config changes"
+      debug:
+      var: response.diff_lines
