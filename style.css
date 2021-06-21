@@ -1,0 +1,174 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    cursor: pointer;
+}
+.nav-list{
+    width: 100%;
+    /* background-color: rgb(214, 196, 196); */
+    display: flex;
+    align-items: center;
+    
+}
+.nav-list h1{
+    color: rgb(235, 213, 213);
+    padding-right: 500px;
+}
+.nav-list li{
+    list-style: none;
+    padding: 10px 20px;
+}
+.nav-list li a{
+    color: rgb(235, 213, 213);
+    text-decoration:solid;
+}
+.nav-list li a:hover{
+    color: rgb(199, 28, 28);
+    text-decoration: none;
+}
+.rightNav{
+    width: 50%;
+    /* background-color: rgb(214, 196, 196); */
+    text-align: right;
+    padding: 0 23px;
+}
+.logo{
+    width: 20%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.logo img{
+    width: 70%;
+    border: 3px solid #d1bcbc;
+    border-radius: 50px;
+}
+#search{
+    padding: 5px;
+    font-size: 20px;
+    border: 2px solid #d1bcbc;
+    border-radius: 9px;
+}
+.background{
+    background: rgba(0, 0, 0, 0.7) url('../img/networking-basics.jpg');
+    background-size: cover;     
+    background-blend-mode: darken;   
+}
+.firstSection{
+    height: 70vh;
+}
+.box-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(228, 196, 204);
+    padding: 180px;
+}
+.firstHalf{
+    width: 100%;
+}
+.seconfHalf{
+    width: 30%;
+}
+.secondHalf img{
+    width: 100%;
+    border: 4px solid white;
+    border-radius: 150px;
+    display:inline-block;
+    margin: auto;
+}
+.text-big{
+    font-size: 30px;
+    padding-bottom: 50px;
+}
+.small-text{
+    font-size: 18px;
+}
+.btn{
+    padding: 9px 20px;
+    margin: 8px 10px;
+    border: 2px solid white;
+    border-radius: 8px 10px;
+    color: white;
+    cursor: pointer;
+    background: none;
+    align-items: center;
+}
+.btn:hover{
+    color: rgb(199, 28, 28);
+    text-decoration: none;
+}
+.thirdHalf{
+    display: flex;
+    padding: 40px 90px;
+    font-size: 30px;
+    color: rgb(235, 213, 213);
+    margin: 8px 10px;
+    align-items: center;
+}
+.fourthHalf{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    display: flex;
+    color: rgb(235, 213, 213);
+}
+.secRight{
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    max-width: 80%;
+    margin: auto;
+}
+.secRight .thumbnails{
+    width: 50%;
+    align-content: center;
+    /* padding-left: 200px; */
+}
+
+.para {
+    width: 50%;
+    padding: 50px;
+}
+.thumbnails img{
+    width: 60%;
+    border: 4px solid white;
+    border-radius: 150px;
+    display:inline-block;
+    margin: auto;
+}
+.secLeft{
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    max-width: 80%;
+    margin: auto;
+    flex-direction: row-reverse;
+}
+.secLeft .thumbnails{
+    width: 50%;
+    align-content: center;
+}
+.text-footer{
+    text-align: center;
+}
+
+.background1{
+    background: rgba(0, 0, 0, 0.7) url('../img/under-construction-warning-sign.jpg');
+    background-size: cover;     
+    background-blend-mode: darken;
+}
+.firstSection1{
+    height: 90vh;
+    max-width: 100%;
+}
