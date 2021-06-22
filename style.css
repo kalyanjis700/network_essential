@@ -63,7 +63,7 @@
     background-blend-mode: darken;   
 }
 .firstSection{
-    height: 70vh;
+    height: 30vh;
 }
 .box-main{
     display: flex;
@@ -122,7 +122,7 @@
     color: rgb(235, 213, 213);
 }
 .secRight{
-    height: 300px;
+    height: 350px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -134,6 +134,7 @@
     align-content: center;
     /* padding-left: 200px; */
 } */
+
 
 .para {
     width: 50%;
@@ -167,7 +168,7 @@
     background-size: cover;     
     background-blend-mode: darken;
 }
-.firstSection1{
+/* .firstSection1{
     height: 90vh;
     max-width: 100%;
-}
+} */
