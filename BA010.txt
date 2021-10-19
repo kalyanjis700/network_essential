@@ -1,0 +1,2421 @@
+﻿nvsfarsyed@USDALIGW-LANOBA010> 
+
+{master:1}
+nvsfarsyed@USDALIGW-LANOBA010> show configuration | display set | no-more 
+set version 12.3R3.4
+set system host-name USDALIGW-LANOBA010
+set system time-zone UTC
+set system authentication-order tacplus
+set system ports console log-out-on-disconnect
+set system root-authentication encrypted-password /* SECRET-DATA */
+set system name-server 10.1.4.11
+set system name-server 10.1.4.12
+set system tacplus-server 10.128.128.34 timeout 5
+set system tacplus-server 10.128.128.34 source-address 158.28.75.54
+set system tacplus-server 10.159.217.6 timeout 5
+set system tacplus-server 10.159.217.6 source-address 158.28.75.54
+set system tacplus-server 172.25.21.5 timeout 5
+set system tacplus-server 172.25.21.5 source-address 158.28.75.54
+set system radius-options password-protocol mschap-v2
+set system tacplus-options exclude-cmd-attribute
+set system accounting events change-log
+set system accounting events interactive-commands
+set system accounting destination tacplus server 10.128.128.34 timeout 5
+set system accounting destination tacplus server 10.128.128.34 source-address 158.28.75.54
+set system accounting destination tacplus server 10.159.217.6 timeout 5
+set system accounting destination tacplus server 10.159.217.6 source-address 158.28.75.54
+set system accounting destination tacplus server 172.25.21.5 timeout 5
+set system accounting destination tacplus server 172.25.21.5 source-address 158.28.75.54
+set system login message "\n********************************************************************************\n\n\nThis is a privately owned computing system. Access permitted only by authorized\nemployees or agents of the Company for authorized company business. Company\nmanagement approval is required for all access privileges. This system is\nequipped with a security system to prevent and record unauthorized access\nattempts or attempted access. Unauthorized access or use is a violation of\nthe law.\n\n\n********************************************************************************"
+set system login class NVS-ID idle-timeout 10
+set system login class NVS-ID permissions maintenance
+set system login class RR-ID permissions configure
+set system login class RR-ID permissions firewall
+set system login class RR-ID permissions firewall-control
+set system login class RR-ID permissions interface
+set system login class RR-ID permissions interface-control
+set system login class RR-ID permissions rollback
+set system login class RR-ID permissions shell
+set system login class RR-ID permissions view
+set system login class RR-ID permissions view-configuration
+set system login user remote-nvs uid 2005
+set system login user remote-nvs class NVS-ID
+set system login user xstwglobal uid 2000
+set system login user xstwglobal class RR-ID
+set system login user xstwglobal authentication encrypted-password /* SECRET-DATA */
+set system login password minimum-length 15
+set system services ssh root-login allow
+set system services ssh protocol-version v2
+set system services netconf ssh port 830
+set system syslog archive size 10m
+set system syslog archive files 10
+set system syslog user * any emergency
+set system syslog host 10.128.128.4 any notice
+set system syslog host 10.128.128.4 authorization info
+set system syslog host 10.128.128.4 structured-data
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file messages explicit-priority
+set system syslog file interactive-commands interactive-commands any
+set system syslog file interactive-commands explicit-priority
+set system syslog source-address 158.28.75.54
+set system license autoupdate url https://ae1.juniper.net/junos/key_retrieval
+set system commit synchronize
+set system ntp authentication-key 24 type md5
+set system ntp authentication-key 24 value /* SECRET-DATA */
+set system ntp server 131.126.135.7 key /* SECRET-DATA */
+set system ntp server 131.126.135.6 key /* SECRET-DATA */
+set system ntp server 198.43.1.15 key /* SECRET-DATA */
+set system ntp server 198.43.1.14 key /* SECRET-DATA */
+set system ntp trusted-key 24
+set system ntp source-address 158.28.75.54
+set chassis redundancy graceful-switchover
+set chassis aggregated-devices ethernet device-count 20
+set interfaces interface-range Mobility-N-Servers member ge-0/0/1
+set interfaces interface-range Mobility-N-Servers member ge-0/0/5
+set interfaces interface-range Mobility-N-Servers member ge-0/0/6
+set interfaces interface-range Mobility-N-Servers member ge-0/0/7
+set interfaces interface-range Mobility-N-Servers member ge-0/0/8
+set interfaces interface-range Mobility-N-Servers member ge-0/0/9
+set interfaces interface-range Mobility-N-Servers member ge-1/0/0
+set interfaces interface-range Mobility-N-Servers member ge-1/0/1
+set interfaces interface-range Mobility-N-Servers member ge-1/0/3
+set interfaces interface-range Mobility-N-Servers member ge-1/0/2
+set interfaces interface-range Mobility-N-Servers member ge-1/0/5
+set interfaces interface-range Mobility-N-Servers member ge-1/0/6
+set interfaces interface-range Mobility-N-Servers member ge-1/0/7
+set interfaces interface-range Mobility-N-Servers member ge-1/0/8
+set interfaces interface-range Mobility-N-Servers member ge-1/0/9
+set interfaces interface-range Mobility-N-Servers member ge-0/0/17
+set interfaces interface-range Mobility-N-Servers member ge-0/0/19
+set interfaces interface-range Mobility-N-Servers member ge-0/0/20
+set interfaces interface-range Mobility-N-Servers member ge-0/0/4
+set interfaces interface-range Mobility-N-Servers member ge-1/0/4
+set interfaces interface-range Mobility-N-Servers member ge-4/0/0
+set interfaces interface-range Mobility-N-Servers member ge-5/0/0
+set interfaces interface-range Mobility-N-Servers member ge-5/0/21
+set interfaces interface-range Mobility-N-Servers member ge-5/0/20
+set interfaces interface-range Mobility-N-Servers member-range ge-1/0/36 to ge-1/0/38
+set interfaces interface-range Mobility-N-Servers member-range ge-2/0/0 to ge-2/0/5
+set interfaces interface-range Mobility-N-Servers member-range ge-3/0/0 to ge-3/0/5
+set interfaces interface-range Mobility-N-Servers description "Mobility N (Servers)"
+set interfaces interface-range Mobility-N-Servers unit 0 family ethernet-switching port-mode access
+set interfaces interface-range Mobility-N-Servers unit 0 family ethernet-switching vlan members Mobility-N-Servers
+set interfaces interface-range Mobility-S-Servers member ge-0/0/23
+set interfaces interface-range Mobility-S-Servers member ge-0/0/24
+set interfaces interface-range Mobility-S-Servers member ge-0/0/25
+set interfaces interface-range Mobility-S-Servers member ge-0/0/26
+set interfaces interface-range Mobility-S-Servers member ge-0/0/27
+set interfaces interface-range Mobility-S-Servers member ge-0/0/28
+set interfaces interface-range Mobility-S-Servers member ge-1/0/28
+set interfaces interface-range Mobility-S-Servers member ge-1/0/27
+set interfaces interface-range Mobility-S-Servers member ge-1/0/26
+set interfaces interface-range Mobility-S-Servers member ge-1/0/25
+set interfaces interface-range Mobility-S-Servers member ge-1/0/24
+set interfaces interface-range Mobility-S-Servers member ge-1/0/23
+set interfaces interface-range Mobility-S-Servers member ge-0/0/32
+set interfaces interface-range Mobility-S-Servers member ge-0/0/33
+set interfaces interface-range Mobility-S-Servers member ge-1/0/33
+set interfaces interface-range Mobility-S-Servers member ge-1/0/32
+set interfaces interface-range Mobility-S-Servers member ge-2/0/20
+set interfaces interface-range Mobility-S-Servers member ge-3/0/20
+set interfaces interface-range Mobility-S-Servers member ge-4/0/1
+set interfaces interface-range Mobility-S-Servers member ge-5/0/1
+set interfaces interface-range Mobility-S-Servers member-range ge-0/0/36 to ge-0/0/38
+set interfaces interface-range Mobility-S-Servers member-range ge-2/0/8 to ge-2/0/13
+set interfaces interface-range Mobility-S-Servers member-range ge-3/0/8 to ge-3/0/13
+set interfaces interface-range Mobility-S-Servers description "Mobility S (Servers)"
+set interfaces interface-range Mobility-S-Servers unit 0 family ethernet-switching port-mode access
+set interfaces interface-range Mobility-S-Servers unit 0 family ethernet-switching vlan members Mobility-S-Servers
+set interfaces interface-range Mobility-S-Servers-NA member ge-0/0/18
+set interfaces interface-range Mobility-S-Servers-NA member ge-1/0/17
+set interfaces interface-range Mobility-S-Servers-NA member ge-1/0/18
+set interfaces interface-range Mobility-S-Servers-NA member ge-1/0/19
+set interfaces interface-range Mobility-S-Servers-NA member ge-1/0/20
+set interfaces interface-range Mobility-S-Servers-NA member ge-0/0/0
+set interfaces interface-range Mobility-S-Servers-NA member ge-0/0/3
+set interfaces interface-range Mobility-S-Servers-NA member ge-0/0/2
+set interfaces interface-range Mobility-S-Servers-NA member ge-0/0/13
+set interfaces interface-range Mobility-S-Servers-NA member ge-0/0/14
+set interfaces interface-range Mobility-S-Servers-NA member ge-0/0/15
+set interfaces interface-range Mobility-S-Servers-NA member ge-0/0/16
+set interfaces interface-range Mobility-S-Servers-NA member ge-1/0/13
+set interfaces interface-range Mobility-S-Servers-NA member ge-1/0/14
+set interfaces interface-range Mobility-S-Servers-NA member ge-1/0/15
+set interfaces interface-range Mobility-S-Servers-NA member ge-1/0/16
+set interfaces interface-range Mobility-S-Servers-NA member ge-4/0/20
+set interfaces interface-range Mobility-S-Servers-NA member ge-4/0/21
+set interfaces interface-range Mobility-S-Servers-NA description "Mobility S (Servers / NA domain)"
+set interfaces interface-range Mobility-S-Servers-NA unit 0 family ethernet-switching port-mode access
+set interfaces interface-range Mobility-S-Servers-NA unit 0 family ethernet-switching vlan members Mobility-S-Servers-NA
+set interfaces interface-range SharedServices-S-Servers member ge-0/0/21
+set interfaces interface-range SharedServices-S-Servers member ge-0/0/22
+set interfaces interface-range SharedServices-S-Servers member ge-1/0/22
+set interfaces interface-range SharedServices-S-Servers member ge-1/0/21
+set interfaces interface-range SharedServices-S-Servers member ge-0/0/29
+set interfaces interface-range SharedServices-S-Servers member ge-1/0/29
+set interfaces interface-range SharedServices-S-Servers member ge-0/0/31
+set interfaces interface-range SharedServices-S-Servers member ge-1/0/31
+set interfaces interface-range SharedServices-S-Servers member ge-2/0/14
+set interfaces interface-range SharedServices-S-Servers member ge-3/0/14
+set interfaces interface-range SharedServices-S-Servers member ge-1/0/30
+set interfaces interface-range SharedServices-S-Servers member ge-0/0/30
+set interfaces interface-range SharedServices-S-Servers member ge-2/0/7
+set interfaces interface-range SharedServices-S-Servers member ge-3/0/7
+set interfaces interface-range SharedServices-S-Servers member ge-0/0/10
+set interfaces interface-range SharedServices-S-Servers member ge-0/0/11
+set interfaces interface-range SharedServices-S-Servers member ge-0/0/12
+set interfaces interface-range SharedServices-S-Servers member ge-1/0/12
+set interfaces interface-range SharedServices-S-Servers member ge-1/0/11
+set interfaces interface-range SharedServices-S-Servers member ge-1/0/10
+set interfaces interface-range SharedServices-S-Servers member ge-7/0/2
+set interfaces interface-range SharedServices-S-Servers member ge-6/0/2
+set interfaces interface-range SharedServices-S-Servers member ge-7/0/1
+set interfaces interface-range SharedServices-S-Servers member ge-6/0/1
+set interfaces interface-range SharedServices-S-Servers description "Shared Services S (Servers)"
+set interfaces interface-range SharedServices-S-Servers unit 0 family ethernet-switching port-mode access
+set interfaces interface-range SharedServices-S-Servers unit 0 family ethernet-switching vlan members SharedServices-S-Servers
+set interfaces interface-range MOBILITYACC-N-SERVERS-RANGE member ge-7/0/27
+set interfaces interface-range MOBILITYACC-N-SERVERS-RANGE member-range ge-2/0/16 to ge-2/0/17
+set interfaces interface-range MOBILITYACC-N-SERVERS-RANGE member-range ge-3/0/16 to ge-3/0/17
+set interfaces interface-range MOBILITYACC-N-SERVERS-RANGE member-range ge-6/0/17 to ge-6/0/18
+set interfaces interface-range MOBILITYACC-N-SERVERS-RANGE member-range ge-7/0/17 to ge-7/0/18
+set interfaces interface-range MOBILITYACC-N-SERVERS-RANGE description "MobilityACC N (Servers)"
+set interfaces interface-range MOBILITYACC-N-SERVERS-RANGE unit 0 family ethernet-switching port-mode access
+set interfaces interface-range MOBILITYACC-N-SERVERS-RANGE unit 0 family ethernet-switching vlan members MOBILITYACC-N-SERVERS-VLAN
+set interfaces interface-range MOBILITYACC-S-SERVERS-RANGE member-range ge-2/0/18 to ge-2/0/19
+set interfaces interface-range MOBILITYACC-S-SERVERS-RANGE member-range ge-3/0/18 to ge-3/0/19
+set interfaces interface-range MOBILITYACC-S-SERVERS-RANGE description "MobilityACC S (Servers)"
+set interfaces interface-range MOBILITYACC-S-SERVERS-RANGE unit 0 family ethernet-switching port-mode access
+set interfaces interface-range MOBILITYACC-S-SERVERS-RANGE unit 0 family ethernet-switching vlan members MOBILITYACC-S-SERVERS-VLAN
+set interfaces interface-range Cloud-Servers description "Cloud (Servers)"
+set interfaces interface-range Cloud-Servers unit 0 family ethernet-switching port-mode access
+set interfaces interface-range Cloud-Servers unit 0 family ethernet-switching vlan members Cloud-Servers
+deactivate interfaces interface-range Cloud-Servers
+set interfaces interface-range Mobility-N-VIPs member-range ge-2/0/21 to ge-2/0/25
+set interfaces interface-range Mobility-N-VIPs member-range ge-3/0/21 to ge-3/0/25
+set interfaces interface-range Mobility-N-VIPs description "Mobility N (VIPs)"
+set interfaces interface-range Mobility-N-VIPs unit 0 family ethernet-switching port-mode access
+set interfaces interface-range Mobility-N-VIPs unit 0 family ethernet-switching vlan members Mobility-N-VIPs
+set interfaces interface-range vlan-902 member ge-2/0/7
+set interfaces interface-range VC-N-SERVERS-RANGE member ge-2/0/26
+set interfaces interface-range VC-N-SERVERS-RANGE description "Video Conferencing N (Servers)"
+set interfaces interface-range VC-N-SERVERS-RANGE unit 0 family ethernet-switching port-mode access
+set interfaces interface-range VC-N-SERVERS-RANGE unit 0 family ethernet-switching vlan members VC-N-SERVERS-VLAN
+set interfaces interface-range VC-S-SERVERS-RANGE member ge-2/0/27
+set interfaces interface-range VC-S-SERVERS-RANGE member ge-2/0/28
+set interfaces interface-range VC-S-SERVERS-RANGE member ge-2/0/29
+set interfaces interface-range VC-S-SERVERS-RANGE description "Video Conferencing S (Servers)"
+set interfaces interface-range VC-S-SERVERS-RANGE unit 0 family ethernet-switching port-mode access
+set interfaces interface-range VC-S-SERVERS-RANGE unit 0 family ethernet-switching vlan members VC-S-SERVERS-VLAN
+set interfaces interface-range OI-ACC-S-SERVERS member-range ge-3/0/26 to ge-3/0/29
+set interfaces interface-range OI-ACC-S-SERVERS member-range ge-2/0/30 to ge-2/0/31
+set interfaces interface-range OI-ACC-S-SERVERS member-range ge-3/0/30 to ge-3/0/31
+set interfaces interface-range OI-ACC-S-SERVERS description "Outbound Internet Acceptance S (Servers)"
+set interfaces interface-range OI-ACC-S-SERVERS unit 0 family ethernet-switching port-mode access
+set interfaces interface-range OI-ACC-S-SERVERS unit 0 family ethernet-switching vlan members OI-ACC-S-SERVERS-VLAN
+set interfaces interface-range OI-ACC-N-SERVERS member-range ge-2/0/34 to ge-2/0/37
+set interfaces interface-range OI-ACC-N-SERVERS member-range ge-3/0/34 to ge-3/0/37
+set interfaces interface-range OI-ACC-N-SERVERS description "Outbound Internet Acceptance N (Servers)"
+set interfaces interface-range OI-ACC-N-SERVERS unit 0 family ethernet-switching port-mode access
+set interfaces interface-range OI-ACC-N-SERVERS unit 0 family ethernet-switching vlan members OI-ACC-N-SERVERS-VLAN
+set interfaces interface-range OI-ACC-S-FIREEYE member xe-4/0/5
+set interfaces interface-range OI-ACC-S-FIREEYE description "Outbound Internet Acceptance S (FIREEYE)"
+set interfaces interface-range OI-ACC-S-FIREEYE unit 0 family ethernet-switching port-mode access
+set interfaces interface-range OI-ACC-S-FIREEYE unit 0 family ethernet-switching vlan members OI-ACC-S-FIREEYE-VLAN
+set interfaces interface-range CHOKE-FIREEYE member xe-4/0/4
+set interfaces interface-range CHOKE-FIREEYE description "CHOKE (FIREEYE)"
+set interfaces interface-range CHOKE-FIREEYE unit 0 family ethernet-switching port-mode access
+set interfaces interface-range CHOKE-FIREEYE unit 0 family ethernet-switching vlan members CHOKE-FIREEYE-VLAN
+set interfaces interface-range OI-ACC-N-NGFW_EXT member xe-4/0/7
+set interfaces interface-range OI-ACC-N-NGFW_EXT member xe-5/0/7
+set interfaces interface-range OI-ACC-N-NGFW_EXT description "NGFW - SourceFire External interfaces"
+set interfaces interface-range OI-ACC-N-NGFW_EXT mtu 9192
+set interfaces interface-range OI-ACC-N-NGFW_EXT unit 0 family ethernet-switching port-mode access
+set interfaces interface-range OI-ACC-N-NGFW_EXT unit 0 family ethernet-switching vlan members OI-ACC-N-NGFW_EXT-VLAN
+set interfaces interface-range OI-ACC-N-NGFW_INT member xe-4/0/6
+set interfaces interface-range OI-ACC-N-NGFW_INT member xe-5/0/6
+set interfaces interface-range OI-ACC-N-NGFW_INT description "NGFW - SourceFire Internal interfaces"
+set interfaces interface-range OI-ACC-N-NGFW_INT mtu 9192
+set interfaces interface-range OI-ACC-N-NGFW_INT unit 0 family ethernet-switching port-mode access
+set interfaces interface-range OI-ACC-N-NGFW_INT unit 0 family ethernet-switching vlan members OI-ACC-N-NGFW_INT-VLAN
+set interfaces interface-range O365-N-SERVERS-RANGE member ge-2/0/6
+set interfaces interface-range O365-N-SERVERS-RANGE member ge-2/0/15
+set interfaces interface-range O365-N-SERVERS-RANGE member ge-2/0/38
+set interfaces interface-range O365-N-SERVERS-RANGE description "O365 N (Servers)"
+set interfaces interface-range O365-N-SERVERS-RANGE unit 0 family ethernet-switching port-mode access
+set interfaces interface-range O365-N-SERVERS-RANGE unit 0 family ethernet-switching vlan members O365-N-SERVERS-VLAN
+set interfaces interface-range O365-S-SERVERS-RANGE member ge-3/0/6
+set interfaces interface-range O365-S-SERVERS-RANGE member ge-3/0/38
+set interfaces interface-range O365-S-SERVERS-RANGE description "O365 S (Servers)"
+set interfaces interface-range O365-S-SERVERS-RANGE unit 0 family ethernet-switching port-mode access
+set interfaces interface-range O365-S-SERVERS-RANGE unit 0 family ethernet-switching vlan members O365-S-SERVERS-VLAN
+set interfaces interface-range O365-S-SERVERSNA-RANGE member ge-3/0/15
+set interfaces interface-range O365-S-SERVERSNA-RANGE description "O365 S (Servers NA)"
+set interfaces interface-range O365-S-SERVERSNA-RANGE unit 0 family ethernet-switching port-mode access
+set interfaces interface-range O365-S-SERVERSNA-RANGE unit 0 family ethernet-switching vlan members O365-S-SERVERSNA-VLAN
+set interfaces interface-range DIDDSLW01 member ge-0/0/34
+set interfaces interface-range DIDDSLW01 member ge-1/0/34
+set interfaces interface-range DIDDSLW01 description "UHSIS ports to DIDDSLW01"
+set interfaces interface-range DIDDSLW01 ether-options 802.3ad ae0
+set interfaces interface-range DIDDSLW02 member ge-0/0/35
+set interfaces interface-range DIDDSLW02 member ge-1/0/35
+set interfaces interface-range DIDDSLW02 description "UHSIS ports to DIDDSLW02"
+set interfaces interface-range DIDDSLW02 ether-options 802.3ad ae1
+set interfaces interface-range OI-N-NGFW_INT member xe-4/0/13
+set interfaces interface-range OI-N-NGFW_INT member xe-5/0/13
+set interfaces interface-range OI-N-NGFW_INT description "NGFW - SourceFire OI PROD"
+set interfaces interface-range OI-N-NGFW_INT unit 0 family ethernet-switching port-mode access
+set interfaces interface-range OI-N-NGFW_INT unit 0 family ethernet-switching vlan members OI-N-NGFW_INT-VLAN
+set interfaces interface-range SS-N-NGFW_INT member xe-4/0/12
+set interfaces interface-range SS-N-NGFW_INT member xe-5/0/12
+set interfaces interface-range SS-N-NGFW_INT description "NGFW - SourceFire Shared Services North"
+set interfaces interface-range SS-N-NGFW_INT unit 0 family ethernet-switching port-mode access
+set interfaces interface-range SS-N-NGFW_INT unit 0 family ethernet-switching vlan members SS-N-NGFW_INT-VLAN
+set interfaces interface-range OI-N-SERVERS member ge-6/0/36
+set interfaces interface-range OI-N-SERVERS member ge-6/0/37
+set interfaces interface-range OI-N-SERVERS member ge-7/0/36
+set interfaces interface-range OI-N-SERVERS member ge-7/0/37
+set interfaces interface-range OI-N-SERVERS description "Outbound Internet Production N (Servers)"
+set interfaces interface-range OI-N-SERVERS unit 0 family ethernet-switching port-mode access
+set interfaces interface-range OI-N-SERVERS unit 0 family ethernet-switching vlan members OI-N-SERVERS-VLAN
+set interfaces interface-range CHOKE-FIREEYE-PROD member xe-5/0/4
+set interfaces interface-range CHOKE-FIREEYE-PROD description "CHOKE (FIREEYE) VLAN 836"
+set interfaces interface-range CHOKE-FIREEYE-PROD unit 0 family ethernet-switching port-mode access
+set interfaces interface-range CHOKE-FIREEYE-PROD unit 0 family ethernet-switching vlan members CHOKE-FIREEYE-VLAN-PROD
+set interfaces interface-range OI-S-FIREEYE member xe-5/0/5
+set interfaces interface-range OI-S-FIREEYE description "Outbound Internet S (FIREEYE) VLAN 835"
+set interfaces interface-range OI-S-FIREEYE unit 0 family ethernet-switching port-mode access
+set interfaces interface-range OI-S-FIREEYE unit 0 family ethernet-switching vlan members OI-S-FIREEYE-VLAN
+set interfaces interface-range EDMZ-N-SERVERS member xe-4/0/15
+set interfaces interface-range EDMZ-N-SERVERS description "Public Zone eDMZ North (Servers)"
+set interfaces interface-range EDMZ-N-SERVERS unit 0 family ethernet-switching port-mode access
+set interfaces interface-range EDMZ-N-SERVERS unit 0 family ethernet-switching vlan members EDMZ-N-SERVERS-VLAN
+set interfaces interface-range OI-S-XTO-SERVERS member ge-6/0/26
+set interfaces interface-range OI-S-XTO-SERVERS member-range ge-7/0/32 to ge-7/0/33
+set interfaces interface-range OI-S-XTO-SERVERS member-range ge-6/0/32 to ge-6/0/33
+set interfaces interface-range OI-S-XTO-SERVERS description "XTO WebSense V10Ks USDIGWCGP01/USDIGWCGP02"
+set interfaces interface-range OI-S-XTO-SERVERS unit 0 family ethernet-switching port-mode access
+set interfaces interface-range OI-S-XTO-SERVERS unit 0 family ethernet-switching vlan members OI-S-XTO-SERVERS-VLAN
+set interfaces interface-range OI-N-DIRECT member xe-4/0/14
+set interfaces interface-range OI-N-DIRECT member xe-5/0/14
+set interfaces interface-range OI-N-DIRECT description "VLAN746: OI North Direct Outbound"
+set interfaces interface-range OI-N-DIRECT unit 0 family ethernet-switching port-mode access
+set interfaces interface-range OI-N-DIRECT unit 0 family ethernet-switching vlan members OI-N-DIRECT-VLAN
+set interfaces interface-range vrf42-server-vir_mgmt-912 member-range ge-6/0/20 to ge-6/0/25
+set interfaces interface-range vrf42-server-vir_mgmt-912 member-range ge-7/0/20 to ge-7/0/25
+set interfaces interface-range vrf42-server-vir_mgmt-912 description "vrf42-server-vir_mgmt-912 - VIM-Servers"
+set interfaces interface-range vrf42-server-vir_mgmt-912 unit 0 family ethernet-switching port-mode access
+set interfaces interface-range vrf42-server-vir_mgmt-912 unit 0 family ethernet-switching vlan members vrf42-server-vir_mgmt-912_vlan
+set interfaces interface-range MOBILITYACC-S-XTO-SERVERS-RANGE member ge-7/0/28
+set interfaces interface-range MOBILITYACC-S-XTO-SERVERS-RANGE description "MobilityACC S (XTO Servers)"
+set interfaces interface-range MOBILITYACC-S-XTO-SERVERS-RANGE unit 0 family ethernet-switching port-mode access
+set interfaces interface-range MOBILITYACC-S-XTO-SERVERS-RANGE unit 0 family ethernet-switching vlan members MOBILITYACC-S-XTO-SERVERS-VLAN
+set interfaces interface-range MOBILITY-S-XTO-SERVERS-RANGE member-range ge-6/0/13 to ge-6/0/14
+set interfaces interface-range MOBILITY-S-XTO-SERVERS-RANGE member-range ge-7/0/13 to ge-7/0/14
+set interfaces interface-range MOBILITY-S-XTO-SERVERS-RANGE description "Mobility Prod S (XTO Servers)"
+set interfaces interface-range MOBILITY-S-XTO-SERVERS-RANGE unit 0 family ethernet-switching port-mode access
+set interfaces interface-range MOBILITY-S-XTO-SERVERS-RANGE unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces interface-range EDMZ-S-SERVERS member xe-4/0/16
+set interfaces interface-range EDMZ-S-SERVERS description "Public Zone eDMZ South (Servers)"
+set interfaces interface-range EDMZ-S-SERVERS unit 0 family ethernet-switching port-mode access
+set interfaces interface-range EDMZ-S-SERVERS unit 0 family ethernet-switching vlan members EDMZ-S-SERVERS-VLAN
+set interfaces interface-range USDID-LANDCA001 member xe-4/0/17
+set interfaces interface-range USDID-LANDCA001 member xe-5/0/17
+set interfaces interface-range USDID-LANDCA001 member xe-4/0/18
+set interfaces interface-range USDID-LANDCA001 member xe-5/0/18
+set interfaces interface-range USDID-LANDCA001 description "Ports to USDID-LANDCA001"
+set interfaces interface-range USDID-LANDCA001 ether-options 802.3ad ae11
+set interfaces interface-range AZURE-N-NGFW_INT member xe-4/0/22
+set interfaces interface-range AZURE-N-NGFW_INT member xe-5/0/22
+set interfaces interface-range AZURE-N-NGFW_INT description "Azure North - NGFW"
+set interfaces interface-range AZURE-N-NGFW_INT mtu 9192
+set interfaces interface-range AZURE-N-NGFW_INT unit 0 family ethernet-switching port-mode access
+set interfaces interface-range AZURE-N-NGFW_INT unit 0 family ethernet-switching vlan members AZURE-N-NGFW_INT-VLAN
+set interfaces interface-range AZURE-S-NGFW_INT member xe-4/0/23
+set interfaces interface-range AZURE-S-NGFW_INT member xe-5/0/23
+set interfaces interface-range AZURE-S-NGFW_INT description "Azure South - NGFW"
+set interfaces interface-range AZURE-S-NGFW_INT mtu 9192
+set interfaces interface-range AZURE-S-NGFW_INT unit 0 family ethernet-switching port-mode access
+set interfaces interface-range AZURE-S-NGFW_INT unit 0 family ethernet-switching vlan members AZURE-S-NGFW_INT-VLAN
+set interfaces ge-0/0/0 unit 0 family ethernet-switching
+set interfaces xe-0/0/0 unit 0 family ethernet-switching
+set interfaces ge-0/0/1 unit 0 family ethernet-switching
+set interfaces xe-0/0/1 unit 0 family ethernet-switching
+set interfaces ge-0/0/2 unit 0 family ethernet-switching
+set interfaces xe-0/0/2 unit 0 family ethernet-switching
+set interfaces ge-0/0/3 unit 0 family ethernet-switching
+set interfaces xe-0/0/3 unit 0 family ethernet-switching
+set interfaces ge-0/0/4 unit 0 family ethernet-switching
+set interfaces xe-0/0/4 unit 0 family ethernet-switching
+set interfaces ge-0/0/5 description " DALAPP242 Mobility N(Servers)"
+set interfaces ge-0/0/5 unit 0 family ethernet-switching
+set interfaces xe-0/0/5 unit 0 family ethernet-switching
+set interfaces ge-0/0/6 description " DALAPP244 Mobility N (Servers)"
+set interfaces ge-0/0/6 unit 0 family ethernet-switching
+set interfaces xe-0/0/6 unit 0 family ethernet-switching
+set interfaces ge-0/0/7 description " DALAPP243 Mobility N (Servers)"
+set interfaces ge-0/0/7 unit 0 family ethernet-switching
+set interfaces xe-0/0/7 unit 0 family ethernet-switching
+set interfaces ge-0/0/8 description " DALAPP245 Mobility N (Servers)"
+set interfaces ge-0/0/8 unit 0 family ethernet-switching
+set interfaces xe-0/0/8 unit 0 family ethernet-switching
+set interfaces ge-0/0/9 description " DALAPP246 Mobility N (Servers)"
+set interfaces ge-0/0/9 unit 0 family ethernet-switching
+set interfaces xe-0/0/9 unit 0 family ethernet-switching
+set interfaces ge-0/0/10 unit 0 family ethernet-switching
+set interfaces xe-0/0/10 description "DALLCX30 NIC1"
+set interfaces xe-0/0/10 unit 0 family ethernet-switching port-mode access
+set interfaces xe-0/0/10 unit 0 family ethernet-switching vlan members 3209
+set interfaces ge-0/0/11 unit 0 family ethernet-switching
+set interfaces xe-0/0/11 description "DALLCX31 NIC1"
+set interfaces xe-0/0/11 unit 0 family ethernet-switching port-mode access
+set interfaces xe-0/0/11 unit 0 family ethernet-switching vlan members 3209
+set interfaces ge-0/0/12 unit 0 family ethernet-switching
+set interfaces xe-0/0/12 description "DALLCX32 NIC1"
+set interfaces xe-0/0/12 unit 0 family ethernet-switching port-mode access
+set interfaces xe-0/0/12 unit 0 family ethernet-switching vlan members 3209
+set interfaces ge-0/0/13 unit 0 family ethernet-switching
+set interfaces xe-0/0/13 unit 0 family ethernet-switching
+set interfaces ge-0/0/14 unit 0 family ethernet-switching
+set interfaces xe-0/0/14 unit 0 family ethernet-switching
+set interfaces ge-0/0/15 unit 0 family ethernet-switching
+set interfaces xe-0/0/15 unit 0 family ethernet-switching
+set interfaces ge-0/0/16 unit 0 family ethernet-switching
+set interfaces xe-0/0/16 unit 0 family ethernet-switching
+set interfaces ge-0/0/17 unit 0 family ethernet-switching
+set interfaces xe-0/0/17 unit 0 family ethernet-switching
+set interfaces ge-0/0/18 unit 0 family ethernet-switching
+set interfaces xe-0/0/18 unit 0 family ethernet-switching
+set interfaces ge-0/0/19 unit 0 family ethernet-switching
+set interfaces xe-0/0/19 unit 0 family ethernet-switching
+set interfaces ge-0/0/20 unit 0 family ethernet-switching
+set interfaces xe-0/0/20 unit 0 family ethernet-switching
+set interfaces ge-0/0/21 unit 0 family ethernet-switching
+set interfaces xe-0/0/21 unit 0 family ethernet-switching
+set interfaces ge-0/0/22 unit 0 family ethernet-switching
+set interfaces xe-0/0/22 unit 0 family ethernet-switching
+set interfaces ge-0/0/23 description " DALAPP241 Mobility S (Servers)"
+set interfaces ge-0/0/23 unit 0 family ethernet-switching
+set interfaces xe-0/0/23 unit 0 family ethernet-switching
+set interfaces ge-0/0/24 description " DALAPP242 Mobility S (Servers)"
+set interfaces ge-0/0/24 unit 0 family ethernet-switching
+set interfaces xe-0/0/24 unit 0 family ethernet-switching
+set interfaces ge-0/0/25 description " DALAPP243 Mobility S (Servers)"
+set interfaces ge-0/0/25 unit 0 family ethernet-switching
+set interfaces xe-0/0/25 unit 0 family ethernet-switching
+set interfaces ge-0/0/26 description " DALAPP244 Mobility S (Servers)"
+set interfaces ge-0/0/26 unit 0 family ethernet-switching
+set interfaces xe-0/0/26 unit 0 family ethernet-switching
+set interfaces ge-0/0/27 unit 0 family ethernet-switching
+set interfaces xe-0/0/27 unit 0 family ethernet-switching
+set interfaces ge-0/0/28 description " DALAPP246 Mobility S (Servers)"
+set interfaces ge-0/0/28 unit 0 family ethernet-switching
+set interfaces xe-0/0/28 unit 0 family ethernet-switching
+set interfaces ge-0/0/29 unit 0 family ethernet-switching
+set interfaces xe-0/0/29 unit 0 family ethernet-switching
+set interfaces ge-0/0/30 unit 0 family ethernet-switching
+set interfaces xe-0/0/30 unit 0 family ethernet-switching
+set interfaces ge-0/0/31 unit 0 family ethernet-switching
+set interfaces xe-0/0/31 unit 0 family ethernet-switching
+set interfaces ge-0/0/32 unit 0 family ethernet-switching
+set interfaces ge-0/0/33 unit 0 family ethernet-switching
+deactivate interfaces ge-0/0/33
+set interfaces xe-0/0/33 unit 0 family ethernet-switching
+set interfaces xe-0/0/34 unit 0 family ethernet-switching
+set interfaces xe-0/0/35 unit 0 family ethernet-switching
+set interfaces ge-0/0/36 description "Mobility  (Servers)"
+set interfaces ge-0/0/36 unit 0 family ethernet-switching vlan members 802
+set interfaces xe-0/0/36 unit 0 family ethernet-switching
+set interfaces ge-0/0/37 description "Mobility  (Servers)"
+set interfaces ge-0/0/37 unit 0 family ethernet-switching vlan members 802
+set interfaces xe-0/0/37 unit 0 family ethernet-switching
+set interfaces ge-0/0/38 unit 0 family ethernet-switching
+set interfaces xe-0/0/38 unit 0 family ethernet-switching
+set interfaces ge-0/0/39 mtu 9216
+set interfaces ge-0/0/39 unit 0 family ethernet-switching
+set interfaces xe-0/0/39 unit 0 family ethernet-switching
+set interfaces ge-0/1/0 unit 0 family ethernet-switching
+set interfaces xe-0/1/0 description "USDIDSEC01 xe-5/1/1 reth0"
+set interfaces xe-0/1/0 disable
+set interfaces xe-0/1/0 mtu 9192
+set interfaces xe-0/1/0 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members CHOKE-FIREEYE-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members Cloud-Servers
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members MOBILITYACC-N-SERVERS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members MOBILITYACC-N-VIPS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members MOBILITYACC-S-SERVERS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members Mobility-N-Servers
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members Mobility-N-VIPs
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members Mobility-S-Servers
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members Mobility-S-Servers-NA
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members Mobility-S-VIPs
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members OI-ACC-N-SERVERS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members OI-ACC-S-SERVERS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members OI-ACC-S-VIPs-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members SharedServices-S-Servers
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members VC-N-SERVERS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members VC-S-SERVERS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members O365-N-SERVERS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members O365-S-SERVERS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members O365-S-SERVERSNA-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members UHSIS-S
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members UHSIS-N
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members OI-N-SERVERS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members OI-S-SERVERS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members OI-S-VIPs-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members CHOKE-FIREEYE-VLAN-PROD
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members OI-S-XTO-SERVERS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members vrf42-server-vir_mgmt-912_vlan
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members vrf35-server-phy_general-848_vlan
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members MOBILITYACC-S-XTO-SERVERS-VLAN
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members vrf46-server-phy_general-903_vlan
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members SWIFT_VPN_PROD_NORTH
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members SWIFT_VPN_PROD_BU_NORTH
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members SWIFT_VPN_PROD_SOUTH
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members vrf46-server-phy_general-904_vlan
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members vrf42-server-VMotion_Hosts_Shared_Services_3547_vlan
+set interfaces xe-0/1/0 unit 0 family ethernet-switching vlan members vrf45-server-phy_general-3021_vlan
+set interfaces ge-0/1/1 unit 0 family ethernet-switching
+set interfaces xe-0/1/1 unit 0 family ethernet-switching
+set interfaces ge-0/1/2 unit 0 family ethernet-switching
+set interfaces xe-0/1/2 unit 0 family ethernet-switching
+set interfaces ge-0/1/3 unit 0 family ethernet-switching
+set interfaces xe-0/1/3 unit 0 family ethernet-switching
+set interfaces ge-0/2/0 unit 0 family ethernet-switching
+set interfaces xe-0/2/0 description "USDIDNWAH01 F5 Load balancer"
+set interfaces xe-0/2/0 disable
+set interfaces xe-0/2/0 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members Mobility-N-Servers
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members MOBILITYACC-N-SERVERS-VLAN
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members MOBILITYACC-N-VIPS-VLAN
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members Mobility-N-VIPs
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members Mobility-S-VIPs
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members OI-ACC-S-SERVERS-VLAN
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members OI-ACC-S-VIPs-VLAN
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members O365-N-SERVERS-VLAN
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members O365-S-SERVERS-VLAN
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members O365-S-SERVERSNA-VLAN
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members OI-S-SERVERS-VLAN
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members OI-S-VIPs-VLAN
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members OI-S-XTO-SERVERS-VLAN
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members OI-S-XTO-VIP-VLAN
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members MOBILITYACC-S-SERVERS-VLAN
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_747_vlan
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_748_vlan
+set interfaces xe-0/2/0 unit 0 family ethernet-switching vlan members EDMZ-N-SERVERS-VLAN
+set interfaces ge-0/2/1 unit 0 family ethernet-switching
+set interfaces xe-0/2/1 unit 0 family ethernet-switching
+set interfaces ge-0/2/2 unit 0 family ethernet-switching
+set interfaces xe-0/2/2 unit 0 family ethernet-switching
+set interfaces ge-0/2/3 unit 0 family ethernet-switching
+set interfaces xe-0/2/3 unit 0 family ethernet-switching
+set interfaces ge-1/0/6 description " DALAPP243  Mobility N (Servers)"
+set interfaces ge-1/0/10 unit 0 family ethernet-switching
+set interfaces xe-1/0/10 description "DALLCX30 NIC2"
+set interfaces xe-1/0/10 unit 0 family ethernet-switching port-mode access
+set interfaces xe-1/0/10 unit 0 family ethernet-switching vlan members 3009
+set interfaces ge-1/0/11 unit 0 family ethernet-switching
+set interfaces xe-1/0/11 description "DALLCX31 NIC2"
+set interfaces xe-1/0/11 unit 0 family ethernet-switching port-mode access
+set interfaces xe-1/0/11 unit 0 family ethernet-switching vlan members 3009
+set interfaces ge-1/0/12 unit 0 family ethernet-switching
+set interfaces xe-1/0/12 description "DALLCX32 NIC2"
+set interfaces xe-1/0/12 unit 0 family ethernet-switching port-mode access
+set interfaces xe-1/0/12 unit 0 family ethernet-switching vlan members 3009
+set interfaces ge-1/0/27 description " DALAPP245 Mobility S (Servers)"
+set interfaces xe-1/0/32 description "Connection to USDIDIGW-LANDCO003 - xe-1/0/0"
+set interfaces xe-1/0/32 ether-options 802.3ad ae17
+set interfaces xe-1/0/33 description "Connection to USDIDIGW-LANDCO003 - xe-0/0/4"
+set interfaces xe-1/0/33 ether-options 802.3ad ae17
+set interfaces ge-1/0/39 unit 0 family ethernet-switching
+set interfaces xe-1/1/0 description "USDIDSEC01 xe-17/1/1 reth0"
+set interfaces xe-1/1/0 disable
+set interfaces xe-1/1/0 mtu 9192
+set interfaces xe-1/1/0 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members CHOKE-FIREEYE-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members Cloud-Servers
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members MOBILITYACC-N-SERVERS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members MOBILITYACC-N-VIPS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members MOBILITYACC-S-SERVERS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members Mobility-N-Servers
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members Mobility-N-VIPs
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members Mobility-S-Servers
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members Mobility-S-Servers-NA
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members Mobility-S-VIPs
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members OI-ACC-N-SERVERS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members OI-ACC-S-SERVERS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members OI-ACC-S-VIPs-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members SharedServices-S-Servers
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members VC-N-SERVERS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members VC-S-SERVERS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members O365-N-SERVERS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members O365-S-SERVERS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members O365-S-SERVERSNA-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members UHSIS-S
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members UHSIS-N
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members OI-N-SERVERS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members OI-S-SERVERS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members OI-S-VIPs-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members CHOKE-FIREEYE-VLAN-PROD
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members OI-S-XTO-SERVERS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members vrf42-server-vir_mgmt-912_vlan
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members vrf35-server-phy_general-848_vlan
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members MOBILITYACC-S-XTO-SERVERS-VLAN
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members vrf46-server-phy_general-903_vlan
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members SWIFT_VPN_PROD_NORTH
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members SWIFT_VPN_PROD_BU_NORTH
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members SWIFT_VPN_PROD_SOUTH
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members vrf46-server-phy_general-904_vlan
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members vrf42-server-VMotion_Hosts_DMZ_Application_3548_vlan
+set interfaces xe-1/1/0 unit 0 family ethernet-switching vlan members vrf45-server-phy_general-3021_vlan
+set interfaces xe-1/2/0 description "USDIDNWAH02 F5 Load balancer"
+set interfaces xe-1/2/0 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members Mobility-N-Servers
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members MOBILITYACC-N-SERVERS-VLAN
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members MOBILITYACC-N-VIPS-VLAN
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members Mobility-N-VIPs
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members Mobility-S-VIPs
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members OI-ACC-S-SERVERS-VLAN
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members OI-ACC-S-VIPs-VLAN
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members O365-N-SERVERS-VLAN
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members O365-S-SERVERS-VLAN
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members O365-S-SERVERSNA-VLAN
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members OI-S-SERVERS-VLAN
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members OI-S-VIPs-VLAN
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members OI-S-XTO-SERVERS-VLAN
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members OI-S-XTO-VIP-VLAN
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members MOBILITYACC-S-SERVERS-VLAN
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_747_vlan
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_748_vlan
+set interfaces xe-1/2/0 unit 0 family ethernet-switching vlan members EDMZ-N-SERVERS-VLAN
+set interfaces ge-2/0/1 description " DALAPP211 Mobility N (Servers)"
+set interfaces ge-2/0/7 unit 0 family ethernet-switching
+set interfaces ge-2/0/8 description " DALAPP210 Mobility S (Servers)"
+set interfaces ge-2/0/20 description "Oracle Exadata Gateway Net0 VLAN465"
+set interfaces ge-2/0/20 mtu 9216
+set interfaces ge-2/0/20 unit 0 family ethernet-switching port-mode access
+set interfaces ge-2/0/20 unit 0 family ethernet-switching vlan members 465
+set interfaces ge-2/0/21 description "Oracle Exadata Gateway Net2 VLAN466"
+set interfaces ge-2/0/21 mtu 9216
+set interfaces ge-2/0/21 unit 0 family ethernet-switching port-mode access
+set interfaces ge-2/0/21 unit 0 family ethernet-switching vlan members 466
+set interfaces ge-2/0/22 description "Oracle Exadata Gateway ILOM VLAN466"
+set interfaces ge-2/0/22 unit 0 family ethernet-switching port-mode access
+set interfaces ge-2/0/22 unit 0 family ethernet-switching vlan members 466
+set interfaces ge-2/0/32 description DALWSG32
+set interfaces ge-2/0/32 unit 0 family ethernet-switching interface-mode access
+set interfaces ge-2/0/32 unit 0 family ethernet-switching vlan members 832
+set interfaces ge-2/0/33 unit 0 family ethernet-switching vlan members 832
+set interfaces xe-2/0/36 description "DALLCX30 NIC3"
+set interfaces xe-2/0/36 unit 0 family ethernet-switching port-mode access
+set interfaces xe-2/0/36 unit 0 family ethernet-switching vlan members 3209
+set interfaces xe-2/0/37 description "DALLCX31 NIC3"
+set interfaces xe-2/0/37 unit 0 family ethernet-switching port-mode access
+set interfaces xe-2/0/37 unit 0 family ethernet-switching vlan members 3209
+set interfaces xe-2/0/38 description "DALLCX32 NIC3"
+set interfaces xe-2/0/38 unit 0 family ethernet-switching port-mode access
+set interfaces xe-2/0/38 unit 0 family ethernet-switching vlan members 3209
+set interfaces ge-3/0/0 description " DALAPP210 Mobility N (Servers)"
+set interfaces ge-3/0/2 description " DALAPP212 Mobility N (Servers)"
+set interfaces ge-3/0/3 description " DALAPP213 Mobility N (Servers)"
+set interfaces ge-3/0/4 description " DALAPP214 Mobility N (Servers)"
+set interfaces ge-3/0/5 description " DALAPP215 Mobility N (Servers)"
+set interfaces ge-3/0/9 description "DALAPP211 Mobility S (Servers)"
+set interfaces ge-3/0/10 description " DALAPP212 Mobility S (Servers)"
+set interfaces ge-3/0/11 description " DALAPP213 Mobility S (Servers)"
+set interfaces ge-3/0/12 description " DALAPP214 Mobility S (Servers)"
+set interfaces ge-3/0/13 description " DALAPP215 Mobility S (Servers)"
+set interfaces ge-3/0/16 description " DALAPP216 MobilityACC N (Servers)"
+set interfaces ge-3/0/17 description " DALAPP217 MobilityACC N (Servers)"
+set interfaces ge-3/0/18 description " DALAPP216 MobilityACC S (Servers)"
+set interfaces ge-3/0/19 description " DALAPP217 MobilityACC S (Servers)"
+set interfaces ge-3/0/20 description "Oracle Exadata Gateway Net1 VLAN465"
+set interfaces ge-3/0/21 description "Oracle Exadata Gateway Net3 VLAN466"
+set interfaces xe-3/0/36 description "DALLCX30 NIC4"
+set interfaces xe-3/0/36 unit 0 family ethernet-switching port-mode access
+set interfaces xe-3/0/36 unit 0 family ethernet-switching vlan members 3009
+set interfaces xe-3/0/37 description "DALLCX31 NIC4"
+set interfaces xe-3/0/37 unit 0 family ethernet-switching port-mode access
+set interfaces xe-3/0/37 unit 0 family ethernet-switching vlan members 3009
+set interfaces xe-3/0/38 description "DALLCX32 NIC4"
+set interfaces xe-3/0/38 unit 0 family ethernet-switching port-mode access
+set interfaces xe-3/0/38 unit 0 family ethernet-switching vlan members 3009
+set interfaces xe-3/0/39 disable
+set interfaces xe-4/0/2 description "USDIDSEC01:xe-5/1/0 reth2"
+set interfaces xe-4/0/2 disable
+set interfaces xe-4/0/2 mtu 9192
+set interfaces xe-4/0/2 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members OI-ACC-N-NGFW_EXT-VLAN
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members OI-ACC-N-NGFW_INT-VLAN
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members OI-N-NGFW_INT-VLAN
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members SS-N-NGFW_INT-VLAN
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members EDMZ-N-SERVERS-VLAN
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_748_vlan
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members OI-N-DIRECT-VLAN
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_747_vlan
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members AZURE-N-NGFW_INT-VLAN
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members AZURE-S-NGFW_INT-VLAN
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members vrf58_server_phy_general_3431
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members vrf60_server_phy_general_3206
+set interfaces xe-4/0/2 unit 0 family ethernet-switching vlan members vrf44-server-phy_general-3436_vlan
+set interfaces xe-4/0/3 description "USDIDSEC01:xe-5/0/1 reth3"
+set interfaces xe-4/0/3 disable
+set interfaces xe-4/0/3 mtu 9192
+set interfaces xe-4/0/3 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-4/0/3 unit 0 family ethernet-switching vlan members OI-ACC-S-FIREEYE-VLAN
+set interfaces xe-4/0/3 unit 0 family ethernet-switching vlan members OI-S-FIREEYE-VLAN
+set interfaces xe-4/0/3 unit 0 family ethernet-switching vlan members vrf35-server-phy_general-848_vlan
+set interfaces xe-4/0/3 unit 0 family ethernet-switching vlan members vrf35_server_phy_general_849_vlan
+set interfaces xe-4/0/3 unit 0 family ethernet-switching vlan members EDMZ-S-SERVERS-VLAN
+set interfaces xe-4/0/3 unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces ge-4/0/5 unit 0 description iXi
+set interfaces ge-4/0/5 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-4/0/6 description "USDIDNEC01-P S1p1 OI-ACC-N"
+set interfaces xe-4/0/6 disable
+set interfaces xe-4/0/7 description "USDIDNEC01-P S1p2 OI-SCREENING"
+set interfaces xe-4/0/7 disable
+set interfaces xe-4/0/8 description "DIDWCM03 X10G WebSense A1 Switch"
+set interfaces xe-4/0/8 ether-options 802.3ad ae4
+set interfaces xe-4/0/9 description "DIDWCM02 X10G WebSense A1 Switch"
+set interfaces xe-4/0/9 ether-options 802.3ad ae2
+set interfaces xe-4/0/10 description "DIDWCM01 X10G WebSense A1 Switch"
+set interfaces xe-4/0/10 ether-options 802.3ad ae3
+set interfaces xe-4/0/12 description "USDIDNEC01-P s2p1 eDMZ"
+set interfaces xe-4/0/12 disable
+set interfaces xe-4/0/13 description "USDIDNEC01-P s2p3 OI-N"
+set interfaces xe-4/0/13 disable
+set interfaces xe-4/0/14 description "USDIDNEC01-P s2p2 Direct Outbound"
+set interfaces xe-4/0/14 disable
+set interfaces xe-4/0/15 description "Infoblox IBDIDIPA00 LAN1"
+set interfaces xe-4/0/16 description "Infoblox IBDIDIPA00 LAN2"
+set interfaces xe-4/0/17 description "USDID-LANDCA001 xe-0/1/0"
+set interfaces xe-4/0/18 description "USDID-LANDCA001 xe-1/1/0"
+set interfaces ge-4/0/20 description "DALTMG06 NIC1"
+set interfaces ge-4/0/20 unit 0 family ethernet-switching
+set interfaces ge-4/0/21 description "DALTMG07 NIC1"
+set interfaces ge-4/0/21 unit 0 family ethernet-switching
+set interfaces xe-4/0/22 description "USDIDNEC01-P S1p3 AZURE-N"
+set interfaces xe-4/0/22 disable
+set interfaces xe-4/0/23 description "USDIDNEC01-P S2p4 AZURE-S"
+set interfaces xe-4/0/23 disable
+set interfaces xe-4/0/24 description "USDIDNWAH02 F5 Load balancer NEW"
+set interfaces xe-4/0/24 disable
+set interfaces xe-4/0/24 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members Mobility-N-Servers
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members MOBILITYACC-N-SERVERS-VLAN
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members MOBILITYACC-N-VIPS-VLAN
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members Mobility-N-VIPs
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members Mobility-S-VIPs
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members OI-ACC-S-SERVERS-VLAN
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members OI-ACC-S-VIPs-VLAN
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members O365-N-SERVERS-VLAN
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members O365-S-SERVERS-VLAN
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members O365-S-SERVERSNA-VLAN
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members OI-S-SERVERS-VLAN
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members OI-S-VIPs-VLAN
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members OI-S-XTO-SERVERS-VLAN
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members OI-S-XTO-VIP-VLAN
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members MOBILITYACC-S-SERVERS-VLAN
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_747_vlan
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_748_vlan
+set interfaces xe-4/0/24 unit 0 family ethernet-switching vlan members EDMZ-N-SERVERS-VLAN
+set interfaces xe-4/0/32 description "Connection to USDIDIGW-LANDCO004 - xe-1/0/0"
+set interfaces xe-4/0/32 ether-options 802.3ad ae17
+set interfaces xe-4/0/33 description "Connection to USDIDIGW-LANDCO004 - xe-0/0/4"
+set interfaces xe-4/0/33 ether-options 802.3ad ae17
+set interfaces xe-4/0/39 disable
+set interfaces xe-5/0/2 description "USDIDSEC01:xe-17/1/0 reth2"
+set interfaces xe-5/0/2 disable
+set interfaces xe-5/0/2 mtu 9192
+set interfaces xe-5/0/2 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members OI-ACC-N-NGFW_EXT-VLAN
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members OI-ACC-N-NGFW_INT-VLAN
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members OI-N-NGFW_INT-VLAN
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members SS-N-NGFW_INT-VLAN
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members EDMZ-N-SERVERS-VLAN
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_747_vlan
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members OI-N-DIRECT-VLAN
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_748_vlan
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members AZURE-N-NGFW_INT-VLAN
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members AZURE-S-NGFW_INT-VLAN
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members vrf60_server_phy_general_3206
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members vrf58_server_phy_general_3431
+set interfaces xe-5/0/2 unit 0 family ethernet-switching vlan members vrf44-server-phy_general-3436_vlan
+set interfaces xe-5/0/3 description "USDIDSEC01:xe-17/0/1 reth3"
+set interfaces xe-5/0/3 disable
+set interfaces xe-5/0/3 mtu 9192
+set interfaces xe-5/0/3 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-5/0/3 unit 0 family ethernet-switching vlan members OI-ACC-S-FIREEYE-VLAN
+set interfaces xe-5/0/3 unit 0 family ethernet-switching vlan members OI-S-FIREEYE-VLAN
+set interfaces xe-5/0/3 unit 0 family ethernet-switching vlan members vrf35-server-phy_general-848_vlan
+set interfaces xe-5/0/3 unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces xe-5/0/3 unit 0 family ethernet-switching vlan members vrf35_server_phy_general_849_vlan
+set interfaces xe-5/0/3 unit 0 family ethernet-switching vlan members EDMZ-S-SERVERS-VLAN
+set interfaces xe-5/0/6 description "USDIDNEC01-S S1p1 OI-ACC-N"
+set interfaces xe-5/0/6 disable
+set interfaces xe-5/0/7 description "USDIDNEC01-S S1p2 OI-SCREENING"
+set interfaces xe-5/0/7 disable
+set interfaces xe-5/0/8 description "DIDWCM03 X10G WebSense A2 Switch"
+set interfaces xe-5/0/8 ether-options 802.3ad ae4
+set interfaces xe-5/0/9 description "DIDWCM02 X10G WebSense A2 Switch"
+set interfaces xe-5/0/9 ether-options 802.3ad ae2
+set interfaces xe-5/0/10 description "DIDWCM01 X10G WebSense A2 Switch"
+set interfaces xe-5/0/10 ether-options 802.3ad ae3
+set interfaces xe-5/0/12 description "USDIDNEC01-S s2p1 eDMZ"
+set interfaces xe-5/0/12 disable
+set interfaces xe-5/0/13 description "USDIDNEC01-S s2p3 OI-N"
+set interfaces xe-5/0/13 disable
+set interfaces xe-5/0/14 description "USDIDNEC01-S s2p2 Direct Outbound"
+set interfaces xe-5/0/14 disable
+set interfaces xe-5/0/17 description "USDID-LANDCA001 xe-0/1/2"
+set interfaces xe-5/0/18 description "USDID-LANDCA001 xe-1/1/2"
+set interfaces ge-5/0/20 description "DALTMG06 NIC2"
+set interfaces ge-5/0/20 unit 0 family ethernet-switching
+set interfaces ge-5/0/21 description "DALTMG07 NIC2"
+set interfaces ge-5/0/21 unit 0 family ethernet-switching
+set interfaces xe-5/0/22 description "USDIDNEC01-S S1p3 AZURE-N"
+set interfaces xe-5/0/22 disable
+set interfaces xe-5/0/23 description "USDIDNEC01-S S2p4 AZURE-S"
+set interfaces xe-5/0/23 disable
+set interfaces xe-5/0/24 description "USDIDNWAH01 F5 Load balancer NEW"
+set interfaces xe-5/0/24 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members Mobility-N-Servers
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members MOBILITYACC-N-SERVERS-VLAN
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members MOBILITYACC-N-VIPS-VLAN
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members Mobility-N-VIPs
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members Mobility-S-VIPs
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members OI-ACC-S-SERVERS-VLAN
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members OI-ACC-S-VIPs-VLAN
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members O365-N-SERVERS-VLAN
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members O365-S-SERVERS-VLAN
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members O365-S-SERVERSNA-VLAN
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members OI-S-SERVERS-VLAN
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members OI-S-VIPs-VLAN
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members OI-S-XTO-SERVERS-VLAN
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members OI-S-XTO-VIP-VLAN
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members MOBILITYACC-S-SERVERS-VLAN
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_747_vlan
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_748_vlan
+set interfaces xe-5/0/24 unit 0 family ethernet-switching vlan members EDMZ-N-SERVERS-VLAN
+set interfaces ge-6/0/3 description "VCS Expressway outside"
+set interfaces ge-6/0/3 unit 0 family ethernet-switching port-mode access
+set interfaces ge-6/0/3 unit 0 family ethernet-switching vlan members 722
+set interfaces xe-6/0/4 description "DALVESXDMZP11 (SN JVTHDX1) NIC1"
+set interfaces xe-6/0/4 ether-options 802.3ad ae7
+set interfaces xe-6/0/5 description "DALVESXDMZP12 (SN JVT87Y1) NIC1"
+set interfaces xe-6/0/5 ether-options 802.3ad ae8
+set interfaces xe-6/0/6 description "DALSNDMZP11A XTO DMZ"
+set interfaces xe-6/0/6 mtu 9192
+set interfaces xe-6/0/6 unit 0 description iXi
+set interfaces xe-6/0/6 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-6/0/6 unit 0 family ethernet-switching vlan members SharedServices-S-Servers
+set interfaces xe-6/0/6 unit 0 family ethernet-switching vlan members MOBILITYACC-S-XTO-SERVERS-VLAN
+set interfaces xe-6/0/6 unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces xe-6/0/6 unit 0 family ethernet-switching vlan members OI-S-XTO-SERVERS-VLAN
+set interfaces ge-6/0/7 description "FTWMAPPAWDP02 / 2JMGSW1 NIC1"
+set interfaces ge-6/0/7 mtu 9192
+set interfaces ge-6/0/7 unit 0 description iXi
+set interfaces ge-6/0/7 unit 0 family ethernet-switching port-mode trunk
+set interfaces ge-6/0/7 unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces xe-6/0/8 ether-options 802.3ad ae16
+set interfaces xe-6/0/9 ether-options 802.3ad ae16
+set interfaces xe-6/0/10 description "DALVESXDMZP01 (SN JVTHN22) NIC1"
+set interfaces xe-6/0/10 ether-options 802.3ad ae5
+set interfaces xe-6/0/11 description "DALVESXDMZP02 (SN JVT8H02) NIC1"
+set interfaces xe-6/0/11 ether-options 802.3ad ae6
+set interfaces xe-6/0/12 description DALSNDMZ01B
+set interfaces xe-6/0/12 mtu 9192
+set interfaces xe-6/0/12 unit 0 description iXi
+set interfaces xe-6/0/12 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-6/0/12 unit 0 family ethernet-switching vlan members vrf35_server_phy_general_849_vlan
+set interfaces xe-6/0/12 unit 0 family ethernet-switching vlan members vrf35-server-phy_general-848_vlan
+set interfaces xe-6/0/12 unit 0 family ethernet-switching vlan members vrf46-server-phy_general-903_vlan
+set interfaces xe-6/0/15 description "DALVESXDMZP01 (SN JVTHN22) NIC 5 (Team)"
+set interfaces xe-6/0/15 ether-options 802.3ad ae9
+set interfaces xe-6/0/16 description "DALVESXDMZP02 (SN JVT8H02) NIC 5 (Team)"
+set interfaces xe-6/0/16 ether-options 802.3ad ae10
+set interfaces ge-6/0/17 description "IBDALIPA85 H51 U36"
+set interfaces ge-6/0/17 unit 0 family ethernet-switching interface-mode access
+set interfaces ge-6/0/17 unit 0 family ethernet-switching vlan members 902
+set interfaces xe-6/0/17 description "XTO DALMSECTMGP01"
+set interfaces xe-6/0/18 description "XTO DALMSECTMGP02"
+set interfaces ge-6/0/19 description "FTWMAPPAWDP01 / BML98X1  NIC1"
+set interfaces ge-6/0/19 mtu 9192
+set interfaces ge-6/0/19 unit 0 description iXi
+set interfaces ge-6/0/19 unit 0 family ethernet-switching port-mode trunk
+set interfaces ge-6/0/19 unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces ge-6/0/30 description DALTX-SSLASA03-5525
+set interfaces ge-6/0/30 ether-options 802.3ad ae14
+set interfaces ge-6/0/31 description DALTX-SSLASA04-5525
+set interfaces ge-6/0/31 ether-options 802.3ad ae15
+set interfaces ge-6/0/32 description " DALMXP70nic1@  H49-test"
+set interfaces ge-6/0/32 unit 0 family ethernet-switching vlan members 3023
+set interfaces ge-6/0/33 description " DALMXP70nic2@  H49-test"
+set interfaces ge-6/0/33 unit 0 family ethernet-switching vlan members 3445
+set interfaces ge-6/0/34 description DALTX-VPNRTR01-4451
+set interfaces ge-6/0/34 ether-options 802.3ad ae13
+set interfaces ge-6/0/35 description "DALTX-DMVPN-ASR1002 / FOX1250GH73"
+set interfaces ge-6/0/35 ether-options 802.3ad ae12
+set interfaces ge-6/0/36 description " DALMXP70nic1@  H49"
+set interfaces ge-6/0/36 unit 0 family ethernet-switching vlan members 3023
+set interfaces ge-6/0/37 description " DALMXP70nic2@  H49"
+set interfaces ge-6/0/37 unit 0 family ethernet-switching vlan members 3445
+set interfaces xe-6/0/38 disable
+set interfaces ge-7/0/3 description "VCS Expressway inside"
+set interfaces ge-7/0/3 unit 0 family ethernet-switching port-mode access
+set interfaces ge-7/0/3 unit 0 family ethernet-switching vlan members 822
+set interfaces xe-7/0/4 description "DALVESXDMZP11 (SN JVTHDX1) NIC3"
+set interfaces xe-7/0/4 ether-options 802.3ad ae7
+set interfaces xe-7/0/5 description "DALVESXDMZP12 (SN JVT87Y1) NIC3"
+set interfaces xe-7/0/5 ether-options 802.3ad ae8
+set interfaces xe-7/0/6 description "DALSNDMZP11B XTO DMZ"
+set interfaces xe-7/0/6 mtu 9192
+set interfaces xe-7/0/6 unit 0 description iXi
+set interfaces xe-7/0/6 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-7/0/6 unit 0 family ethernet-switching vlan members SharedServices-S-Servers
+set interfaces xe-7/0/6 unit 0 family ethernet-switching vlan members MOBILITYACC-S-XTO-SERVERS-VLAN
+set interfaces xe-7/0/6 unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces xe-7/0/6 unit 0 family ethernet-switching vlan members OI-S-XTO-SERVERS-VLAN
+set interfaces ge-7/0/7 description "FTWMAPPAWDP02 / 2JMGSW1 NIC2"
+set interfaces ge-7/0/7 mtu 9192
+set interfaces ge-7/0/7 unit 0 description iXi
+set interfaces ge-7/0/7 unit 0 family ethernet-switching port-mode trunk
+set interfaces ge-7/0/7 unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces xe-7/0/8 ether-options 802.3ad ae16
+set interfaces xe-7/0/9 ether-options 802.3ad ae16
+set interfaces xe-7/0/10 description "DALVESXDMZP01 (SN JVTHN22) NIC3"
+set interfaces xe-7/0/10 ether-options 802.3ad ae5
+set interfaces xe-7/0/11 description "DALVESXDMZP02 (SN JVT8H02) NIC3"
+set interfaces xe-7/0/11 ether-options 802.3ad ae6
+set interfaces ge-7/0/12 unit 0 family ethernet-switching
+set interfaces xe-7/0/12 description DALSNDMZ01B
+set interfaces xe-7/0/12 mtu 9192
+set interfaces xe-7/0/12 unit 0 description iXi
+set interfaces xe-7/0/12 unit 0 family ethernet-switching port-mode trunk
+set interfaces xe-7/0/12 unit 0 family ethernet-switching vlan members vrf35_server_phy_general_849_vlan
+set interfaces xe-7/0/12 unit 0 family ethernet-switching vlan members vrf35-server-phy_general-848_vlan
+set interfaces xe-7/0/12 unit 0 family ethernet-switching vlan members vrf46-server-phy_general-903_vlan
+set interfaces xe-7/0/15 description "DALVESXDMZP01 (SN JVTHN22) NIC 7 (Team)"
+set interfaces xe-7/0/15 ether-options 802.3ad ae9
+set interfaces xe-7/0/16 description "DALVESXDMZP02 (SN JVT8H02) NIC 7 (Team)"
+set interfaces xe-7/0/16 ether-options 802.3ad ae10
+set interfaces ge-7/0/17 description "IBDALIPA86 H51 U35"
+set interfaces ge-7/0/17 unit 0 family ethernet-switching interface-mode access
+set interfaces ge-7/0/17 unit 0 family ethernet-switching vlan members 902
+set interfaces xe-7/0/17 description "XTO DALMSECTMGP01"
+set interfaces xe-7/0/18 description "XTO DALMSECTMGP02"
+set interfaces ge-7/0/19 description "FTWMAPPAWDP01 / BML98X1  NIC2"
+set interfaces ge-7/0/19 mtu 9192
+set interfaces ge-7/0/19 unit 0 description iXi
+set interfaces ge-7/0/19 unit 0 family ethernet-switching port-mode trunk
+set interfaces ge-7/0/19 unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces ge-7/0/26 description "DALTX-DMVPN-ASR1002 / FOX1250GH73"
+set interfaces ge-7/0/26 ether-options 802.3ad ae12
+set interfaces ge-7/0/30 description DALTX-SSLASA03-5525
+set interfaces ge-7/0/30 ether-options 802.3ad ae14
+set interfaces ge-7/0/31 description DALTX-SSLASA04-5525
+set interfaces ge-7/0/31 ether-options 802.3ad ae15
+set interfaces ge-7/0/32 description "Marked for deletion (reserve Tom Grisham XTO)"
+set interfaces ge-7/0/33 description "Marked for deletion (reserve Tom Grisham XTO)"
+set interfaces ge-7/0/34 description DALTX-VPNRTR01-4451
+set interfaces ge-7/0/34 ether-options 802.3ad ae13
+set interfaces ae0 description "iPi - (Members: ge-0/0/34 ge-1/0/34)"
+set interfaces ae0 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae0 unit 0 family ethernet-switching vlan members UHSIS-N
+set interfaces ae0 unit 0 family ethernet-switching vlan members UHSIS-S
+set interfaces ae1 description "iPi - (Members: ge-0/0/35 ge-1/0/35)"
+set interfaces ae1 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae1 unit 0 family ethernet-switching vlan members UHSIS-N
+set interfaces ae1 unit 0 family ethernet-switching vlan members UHSIS-S
+set interfaces ae2 description "iPi DIDWCM02 (Members: xe-4/0/9 xe-5/0/9)"
+set interfaces ae2 aggregated-ether-options lacp active
+set interfaces ae2 aggregated-ether-options lacp periodic slow
+set interfaces ae2 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae2 unit 0 family ethernet-switching vlan members OI-S-SERVERS-VLAN
+set interfaces ae2 unit 0 family ethernet-switching vlan members OI-N-SERVERS-VLAN
+set interfaces ae3 description "iPi DIDWCM01 (Members: xe-4/0/10 xe-5/0/10)"
+set interfaces ae3 aggregated-ether-options lacp active
+set interfaces ae3 aggregated-ether-options lacp periodic slow
+set interfaces ae3 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae3 unit 0 family ethernet-switching vlan members OI-S-SERVERS-VLAN
+set interfaces ae3 unit 0 family ethernet-switching vlan members OI-N-SERVERS-VLAN
+set interfaces ae4 description "iPi DIDWCM03 - Room: 216 @J112 (Members: xe-4/0/8 xe-5/0/8)"
+set interfaces ae4 aggregated-ether-options lacp active
+set interfaces ae4 aggregated-ether-options lacp periodic slow
+set interfaces ae4 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae4 unit 0 family ethernet-switching vlan members OI-ACC-S-SERVERS-VLAN
+set interfaces ae4 unit 0 family ethernet-switching vlan members OI-ACC-N-SERVERS-VLAN
+set interfaces ae5 description "iPi to unknown-device (Members: xe-6/0/10 xe-7/0/10) # DALVESXDMZP01"
+set interfaces ae5 mtu 9192
+set interfaces ae5 aggregated-ether-options lacp active
+set interfaces ae5 aggregated-ether-options lacp periodic slow
+set interfaces ae5 unit 0 description "iPi to dalvesxdmzp01.xtonet.com (Members: xe-6/0/10.0 xe-7/0/10.0)"
+set interfaces ae5 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae5 unit 0 family ethernet-switching vlan members vrf61_server_phy_general_3006
+set interfaces ae5 unit 0 family ethernet-switching vlan members 912
+set interfaces ae5 unit 0 family ethernet-switching vlan members 3549
+set interfaces ae5 unit 0 family ethernet-switching vlan members vrf35-server-phy_general-848_vlan
+set interfaces ae5 unit 0 family ethernet-switching vlan members MOBILITYACC-S-XTO-SERVERS-VLAN
+set interfaces ae5 unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces ae5 unit 0 family ethernet-switching vlan members vrf35_server_phy_general_849_vlan
+set interfaces ae5 unit 0 family ethernet-switching vlan members Internet-services-South-devices_I
+set interfaces ae5 unit 0 family ethernet-switching vlan members Internet-services-South-devices_II
+set interfaces ae5 unit 0 family ethernet-switching vlan members CNC-Network-Devices
+set interfaces ae6 description "iPi to unknown-device (Members: xe-6/0/11 xe-7/0/11) # DALVESXDMZP02"
+set interfaces ae6 mtu 9192
+set interfaces ae6 aggregated-ether-options lacp active
+set interfaces ae6 aggregated-ether-options lacp periodic slow
+set interfaces ae6 unit 0 description "iPi to dalvesxdmzp02.xtonet.com (Members: xe-6/0/11.0 xe-7/0/11.0)"
+set interfaces ae6 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae6 unit 0 family ethernet-switching vlan members vrf61_server_phy_general_3006
+set interfaces ae6 unit 0 family ethernet-switching vlan members 912
+set interfaces ae6 unit 0 family ethernet-switching vlan members 3549
+set interfaces ae6 unit 0 family ethernet-switching vlan members vrf35-server-phy_general-848_vlan
+set interfaces ae6 unit 0 family ethernet-switching vlan members MOBILITYACC-S-XTO-SERVERS-VLAN
+set interfaces ae6 unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces ae6 unit 0 family ethernet-switching vlan members vrf35_server_phy_general_849_vlan
+set interfaces ae6 unit 0 family ethernet-switching vlan members Internet-services-South-devices_I
+set interfaces ae6 unit 0 family ethernet-switching vlan members Internet-services-South-devices_II
+set interfaces ae6 unit 0 family ethernet-switching vlan members CNC-Network-Devices
+set interfaces ae7 description "iPi to unknown-device (Members: xe-6/0/4 xe-7/0/4) # DALVESXDMZP11"
+set interfaces ae7 mtu 9192
+set interfaces ae7 aggregated-ether-options lacp active
+set interfaces ae7 aggregated-ether-options lacp periodic slow
+set interfaces ae7 unit 0 description "iPi to dalvesxdmzp11.xtonet.com (Members: xe-6/0/4.0 xe-7/0/4.0)"
+set interfaces ae7 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae7 unit 0 family ethernet-switching vlan members 3023-3024
+set interfaces ae7 unit 0 family ethernet-switching vlan members 3549
+set interfaces ae7 unit 0 family ethernet-switching vlan members SharedServices-S-Servers
+set interfaces ae7 unit 0 family ethernet-switching vlan members vrf46-server-phy_general-903_vlan
+set interfaces ae7 unit 0 family ethernet-switching vlan members vrf46-server-phy_general-904_vlan
+set interfaces ae8 description "iPi to unknown-device (Members: xe-6/0/5 xe-7/0/5) # DALVESXDMZP12"
+set interfaces ae8 mtu 9192
+set interfaces ae8 aggregated-ether-options lacp active
+set interfaces ae8 unit 0 description "iPi to dalvesxdmzp12.xtonet.com (Members: xe-6/0/5.0 xe-7/0/5.0)"
+set interfaces ae8 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae8 unit 0 family ethernet-switching vlan members 3023-3024
+set interfaces ae8 unit 0 family ethernet-switching vlan members 3549
+set interfaces ae8 unit 0 family ethernet-switching vlan members SharedServices-S-Servers
+set interfaces ae8 unit 0 family ethernet-switching vlan members vrf46-server-phy_general-903_vlan
+set interfaces ae8 unit 0 family ethernet-switching vlan members vrf46-server-phy_general-904_vlan
+set interfaces ae9 description "iPi to unknown-device (Members: xe-6/0/15 xe-7/0/15) # DALVESXDMZP01 (External)"
+set interfaces ae9 mtu 9192
+set interfaces ae9 aggregated-ether-options lacp active
+set interfaces ae9 aggregated-ether-options lacp periodic slow
+set interfaces ae9 unit 0 description "iPi to dalvesxdmzp01.xtonet.com (Members: xe-6/0/15.0 xe-7/0/15.0)"
+set interfaces ae9 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae9 unit 0 family ethernet-switching vlan members vrf60_server_phy_general_3206
+set interfaces ae9 unit 0 family ethernet-switching vlan members 912
+set interfaces ae9 unit 0 family ethernet-switching vlan members 3549
+set interfaces ae9 unit 0 family ethernet-switching vlan members MOBILITYACC-N-SERVERS-VLAN
+set interfaces ae9 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_747_vlan
+set interfaces ae9 unit 0 family ethernet-switching vlan members EDMZ-N-SERVERS-VLAN
+set interfaces ae9 unit 0 family ethernet-switching vlan members Mobility-N-Servers
+set interfaces ae9 unit 0 family ethernet-switching vlan members OI-N-SERVERS-VLAN
+set interfaces ae9 unit 0 family ethernet-switching vlan members Internet-services-North-SMTP-servers_I
+set interfaces ae9 unit 0 family ethernet-switching vlan members Internet-services-North-SMTP-servers_II
+set interfaces ae10 description "iPi to unknown-device (Members: xe-6/0/16 xe-7/0/16) # DALVESXDMZP02 (External)"
+set interfaces ae10 mtu 9192
+set interfaces ae10 aggregated-ether-options lacp active
+set interfaces ae10 aggregated-ether-options lacp periodic slow
+set interfaces ae10 unit 0 description "iPi to dalvesxdmzp02.xtonet.com (Members: xe-6/0/16.0 xe-7/0/16.0)"
+set interfaces ae10 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae10 unit 0 family ethernet-switching vlan members vrf60_server_phy_general_3206
+set interfaces ae10 unit 0 family ethernet-switching vlan members 912
+set interfaces ae10 unit 0 family ethernet-switching vlan members 3549
+set interfaces ae10 unit 0 family ethernet-switching vlan members MOBILITYACC-N-SERVERS-VLAN
+set interfaces ae10 unit 0 family ethernet-switching vlan members vrf36_server_phy_general_747_vlan
+set interfaces ae10 unit 0 family ethernet-switching vlan members EDMZ-N-SERVERS-VLAN
+set interfaces ae10 unit 0 family ethernet-switching vlan members Mobility-N-Servers
+set interfaces ae10 unit 0 family ethernet-switching vlan members OI-N-SERVERS-VLAN
+set interfaces ae10 unit 0 family ethernet-switching vlan members Internet-services-North-SMTP-servers_I
+set interfaces ae10 unit 0 family ethernet-switching vlan members Internet-services-North-SMTP-servers_II
+set interfaces ae11 description "iPi to unknown-device (Members: xe-4/0/17 xe-4/0/18 xe-5/0/17 xe-5/0/18) # USDID-LANDCA001 ae0"
+set interfaces ae11 aggregated-ether-options lacp active
+set interfaces ae11 unit 0 description "iPi to USDID-LANDCA001 (Members: xe-4/0/17.0 xe-4/0/18.0 xe-5/0/17.0 xe-5/0/18.0)"
+set interfaces ae11 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae11 unit 0 family ethernet-switching vlan members SWIFT_VPN_PROD_NORTH
+set interfaces ae11 unit 0 family ethernet-switching vlan members SWIFT_VPN_PROD_BU_NORTH
+set interfaces ae11 unit 0 family ethernet-switching vlan members SWIFT_VPN_PROD_SOUTH
+set interfaces ae12 description "iPi to unknown-device (Members: ge-6/0/35 ge-7/0/26) # DALTX-DMVPN-ASR1002"
+set interfaces ae12 aggregated-ether-options lacp active
+set interfaces ae12 aggregated-ether-options lacp periodic slow
+set interfaces ae12 unit 0 description "iPi to daltx-dmvpn-1002.xtonet.com (Members: ge-6/0/35.0 ge-7/0/26.0)"
+set interfaces ae12 unit 0 family ethernet-switching port-mode access
+set interfaces ae12 unit 0 family ethernet-switching vlan members vrf58_server_phy_general_3431
+set interfaces ae13 description "iPi to unknown-device (Members: ge-6/0/34 ge-7/0/34) # DALTX-VPNRTR01-4451"
+set interfaces ae13 aggregated-ether-options lacp active
+set interfaces ae13 aggregated-ether-options lacp periodic slow
+set interfaces ae13 unit 0 description "iPi to unknown-device (Members: ge-6/0/34.0 ge-7/0/34.0)"
+set interfaces ae13 unit 0 family ethernet-switching port-mode access
+set interfaces ae13 unit 0 family ethernet-switching vlan members vrf60_server_phy_general_3206
+set interfaces ae14 description "iPi to unknown-device (Members: ge-6/0/30 ge-7/0/30) # DALTX-SSLASA03-5525"
+set interfaces ae14 aggregated-ether-options lacp active
+set interfaces ae14 aggregated-ether-options lacp periodic slow
+set interfaces ae14 unit 0 description "iPi to unknown-device (Members: ge-6/0/30.0 ge-7/0/30.0)"
+set interfaces ae14 unit 0 family ethernet-switching port-mode access
+set interfaces ae14 unit 0 family ethernet-switching vlan members vrf60_server_phy_general_3206
+set interfaces ae15 description "iPi to unknown-device (Members: ge-6/0/31 ge-7/0/31) # DALTX-SSLASA04-5525"
+set interfaces ae15 aggregated-ether-options lacp active
+set interfaces ae15 aggregated-ether-options lacp periodic slow
+set interfaces ae15 unit 0 description "iPi to unknown-device (Members: ge-6/0/31.0 ge-7/0/31.0)"
+set interfaces ae15 unit 0 family ethernet-switching port-mode access
+set interfaces ae15 unit 0 family ethernet-switching vlan members vrf60_server_phy_general_3206
+set interfaces ae16 description "iPi to unknown-device (Members: xe-6/0/8 xe-6/0/9 xe-7/0/8 xe-7/0/9) # QFX:USDID-LANDCA002"
+set interfaces ae16 mtu 9192
+set interfaces ae16 aggregated-ether-options lacp active
+set interfaces ae16 aggregated-ether-options lacp periodic slow
+set interfaces ae16 unit 0 description "iPi to USDID-LANDCA002 (Members: xe-6/0/8.0 xe-6/0/9.0 xe-7/0/8.0 xe-7/0/9.0)"
+set interfaces ae16 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae16 unit 0 family ethernet-switching vlan members all
+set interfaces ae17 description "iPi to unknown-device (Members: xe-1/0/32 xe-1/0/33 xe-4/0/32 xe-4/0/33) # Connection to USDIDIGW-LANDCO003/004 - ae17"
+set interfaces ae17 mtu 9192
+set interfaces ae17 aggregated-ether-options lacp active
+set interfaces ae17 aggregated-ether-options lacp periodic fast
+set interfaces ae17 unit 0 description "iPi to USDALIGW-LANDCO003 (Members: xe-1/0/32.0 xe-1/0/33.0 xe-4/0/32.0 xe-4/0/33.0)"
+set interfaces ae17 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae17 unit 0 family ethernet-switching vlan members all
+set interfaces ae18 description "FTWMAPPAWDP01 / BML98X1 (Members: ge-6/0/19 ge-7/0/19)"
+set interfaces ae18 mtu 9192
+set interfaces ae18 aggregated-ether-options lacp active
+set interfaces ae18 aggregated-ether-options lacp periodic slow
+set interfaces ae18 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae18 unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces ae19 description "FTWMAPPAWDP02 / 2JMGSW1 (Members: ge-6/0/7 ge-7/0/7)"
+set interfaces ae19 mtu 9192
+set interfaces ae19 aggregated-ether-options lacp active
+set interfaces ae19 aggregated-ether-options lacp periodic slow
+set interfaces ae19 unit 0 family ethernet-switching port-mode trunk
+set interfaces ae19 unit 0 family ethernet-switching vlan members vrfxx_server_phy_general_804_vlan
+set interfaces vlan unit 0 family inet
+set interfaces vme unit 0 description "iLi to USDALIGW-DCNOBA005:Gi0/48 # DIDNW506 0/47"
+set interfaces vme unit 0 family inet address 158.28.75.54/24
+set snmp interface vme.0
+set snmp community "7wt}:7nMq~NnX$Z" authorization read-only
+set snmp community "7wt}:7nMq~NnX$Z" clients 0.0.0.0/0 restrict
+set snmp community "7wt}:7nMq~NnX$Z" clients 158.35.215.0/24
+set snmp community "7wt}:7nMq~NnX$Z" clients 131.126.24.0/24
+set snmp community "7wt}:7nMq~NnX$Z" clients 192.168.13.192/27
+set snmp community "7wt}:7nMq~NnX$Z" clients 172.25.111.0/27
+set snmp community "7wt}:7nMq~NnX$Z" clients 172.19.17.0/27
+set snmp community "7wt}:7nMq~NnX$Z" clients 172.19.56.0/27
+set snmp community "7wt}:7nMq~NnX$Z" clients 144.201.76.0/24
+set snmp community "7wt}:7nMq~NnX$Z" clients 131.126.239.96/28
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.215.168.0/23
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.216.168.0/23
+set snmp community "7wt}:7nMq~NnX$Z" clients 172.19.32.64/27
+set snmp community "7wt}:7nMq~NnX$Z" clients 172.21.144.0/27
+set snmp community "7wt}:7nMq~NnX$Z" clients 131.126.9.142/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 158.35.5.111/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 172.19.27.71/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 158.35.5.108/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 172.19.27.68/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.190.9.100/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 158.35.215.7/32 restrict
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.128.2.94/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.128.6.0/23
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.128.194.0/23
+set snmp community "7wt}:7nMq~NnX$Z" clients 172.30.118.0/27
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.216.190.46/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.216.190.49/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.216.190.58/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.216.190.84/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.216.190.91/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.216.190.110/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.216.190.179/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.26.33.3/32
+set snmp community "7wt}:7nMq~NnX$Z" clients 10.26.43.3/32
+set snmp trap-options source-address 158.28.75.54
+set snmp trap-group EM17s0of version v2
+set snmp trap-group EM17s0of categories chassis
+set snmp trap-group EM17s0of categories routing
+set snmp trap-group EM17s0of targets 10.128.6.42
+set snmp trap-group EM17s0of targets 10.216.168.117
+set snmp trap-group EM17s0of targets 10.128.194.12
+set snmp trap-group EM17s0of targets 10.128.194.17
+set snmp trap-group EM17s0of targets 10.128.128.57
+set snmp trap-group EM17s0of targets 10.216.72.82
+set snmp trap-group EM17s0of targets 10.128.194.11
+set routing-options nonstop-routing
+set routing-options static route 0.0.0.0/0 next-hop 158.28.75.254
+set protocols igmp-snooping vlan all
+set protocols igmp-snooping vlan OI-S-SERVERS-VLAN disable
+set protocols igmp-snooping vlan OI-ACC-S-SERVERS-VLAN disable
+set protocols rstp bridge-priority 4k
+set protocols rstp interface xe-0/1/0.0 disable
+set protocols rstp interface xe-1/1/0.0 disable
+set protocols rstp interface ge-2/0/21.0 mode point-to-point
+set protocols rstp interface ge-2/0/21.0 no-root-port
+set protocols rstp interface ge-2/0/22.0 mode point-to-point
+set protocols rstp interface ge-2/0/22.0 no-root-port
+set protocols rstp interface ge-3/0/21.0 mode point-to-point
+set protocols rstp interface ge-3/0/21.0 no-root-port
+set protocols rstp interface xe-4/0/2.0 disable
+set protocols rstp interface xe-4/0/3.0 disable
+set protocols rstp interface xe-4/0/4.0 disable
+set protocols rstp interface xe-4/0/5.0 disable
+set protocols rstp interface xe-5/0/2.0 disable
+set protocols rstp interface xe-5/0/3.0 disable
+set protocols rstp interface xe-5/0/4.0 disable
+set protocols rstp interface xe-5/0/5.0 disable
+set protocols rstp interface ae2.0 no-root-port
+set protocols rstp interface ae3.0 no-root-port
+set protocols rstp interface ae4.0 no-root-port
+set protocols rstp interface ae5.0 no-root-port
+set protocols rstp interface ae6.0 no-root-port
+set protocols rstp interface ae7.0 no-root-port
+set protocols rstp interface ae8.0 no-root-port
+set protocols rstp interface ae11.0 mode point-to-point
+set protocols rstp interface ae11.0 no-root-port
+set protocols rstp interface ae12.0 no-root-port
+set protocols rstp interface ae13.0 no-root-port
+set protocols rstp interface ae16.0 no-root-port
+set protocols lldp port-id-subtype interface-name
+set protocols lldp interface all
+set ethernet-switching-options analyzer tmg-monitor input ingress interface ge-2/0/27.0
+set ethernet-switching-options analyzer tmg-monitor input ingress interface ge-2/0/26.0
+set ethernet-switching-options analyzer tmg-monitor input egress interface ge-6/0/36.0
+set ethernet-switching-options analyzer tmg-monitor input egress interface ge-6/0/37.0
+set ethernet-switching-options analyzer tmg-monitor input egress interface ge-2/0/27.0
+set ethernet-switching-options analyzer tmg-monitor input egress interface ge-2/0/26.0
+set ethernet-switching-options analyzer tmg-monitor output interface ge-0/0/39.0
+set ethernet-switching-options analyzer OI-ANALYZER input ingress interface xe-4/0/2.0
+set ethernet-switching-options analyzer OI-ANALYZER input egress interface xe-4/0/2.0
+set ethernet-switching-options analyzer OI-ANALYZER output interface ge-0/0/39.0
+deactivate ethernet-switching-options analyzer OI-ANALYZER
+set ethernet-switching-options nonstop-bridging
+set ethernet-switching-options storm-control interface all
+set vlans AZURE-N-NGFW_INT-VLAN vlan-id 751
+set vlans AZURE-S-NGFW_INT-VLAN vlan-id 851
+set vlans CHOKE-FIREEYE-VLAN vlan-id 834
+set vlans CHOKE-FIREEYE-VLAN-PROD vlan-id 836
+set vlans CNC-Network-Devices vlan-id 502
+set vlans Cloud-Servers vlan-id 704
+set vlans EDMZ-N-SERVERS-VLAN vlan-id 745
+set vlans EDMZ-S-SERVERS-VLAN vlan-id 845
+set vlans Internet-services-North-SMTP-servers_I vlan-id 3444
+set vlans Internet-services-North-SMTP-servers_II vlan-id 3445
+set vlans Internet-services-South-devices_I vlan-id 3023
+set vlans Internet-services-South-devices_II vlan-id 3024
+set vlans MOBILITYACC-N-SERVERS-VLAN vlan-id 712
+set vlans MOBILITYACC-N-VIPS-VLAN vlan-id 711
+set vlans MOBILITYACC-S-SERVERS-VLAN vlan-id 812
+set vlans MOBILITYACC-S-XTO-SERVERS-VLAN vlan-id 813
+set vlans Mobility-N-Servers vlan-id 702
+set vlans Mobility-N-VIPs vlan-id 701
+set vlans Mobility-N-VIPs_3209 vlan-id 3209
+set vlans Mobility-S-Servers vlan-id 802
+set vlans Mobility-S-Servers-NA vlan-id 803
+set vlans Mobility-S-Servers_3009 vlan-id 3009
+set vlans Mobility-S-VIPs vlan-id 801
+set vlans O365-N-SERVERS-VLAN vlan-id 705
+set vlans O365-S-SERVERS-VLAN vlan-id 805
+set vlans O365-S-SERVERSNA-VLAN vlan-id 806
+set vlans OI-ACC-N-NGFW_EXT-VLAN vlan-id 733
+set vlans OI-ACC-N-NGFW_INT-VLAN vlan-id 734
+set vlans OI-ACC-N-SERVERS-VLAN vlan-id 732
+set vlans OI-ACC-S-FIREEYE-VLAN vlan-id 833
+set vlans OI-ACC-S-SERVERS-VLAN vlan-id 832
+set vlans OI-ACC-S-VIPs-VLAN vlan-id 831
+set vlans OI-N-DIRECT-VLAN vlan-id 746
+set vlans OI-N-NGFW_INT-VLAN vlan-id 744
+set vlans OI-N-SERVERS-VLAN vlan-id 742
+set vlans OI-S-FIREEYE-VLAN vlan-id 835
+set vlans OI-S-SERVERS-VLAN vlan-id 842
+set vlans OI-S-VIPs-VLAN vlan-id 841
+set vlans OI-S-XTO-SERVERS-VLAN vlan-id 847
+set vlans OI-S-XTO-VIP-VLAN vlan-id 846
+set vlans SS-N-NGFW_INT-VLAN vlan-id 743
+set vlans SWIFT_VPN_PROD_BU_NORTH vlan-id 3237
+set vlans SWIFT_VPN_PROD_NORTH vlan-id 3236
+set vlans SWIFT_VPN_PROD_SOUTH vlan-id 3036
+set vlans SharedServices-S-Servers vlan-id 902
+set vlans UHSIS-N vlan-id 850
+set vlans UHSIS-S vlan-id 750
+set vlans VC-N-SERVERS-VLAN vlan-id 722
+set vlans VC-S-SERVERS-VLAN vlan-id 822
+set vlans VRF202-EXADATA-GATEWAY-NORTH-465 vlan-id 465
+set vlans VRF203-EXADATA-GATEWAY-SOUTH-466 vlan-id 466
+set vlans default l3-interface vlan.0
+set vlans vrf35-server-phy_general-848_vlan vlan-id 848
+set vlans vrf35_server_phy_general_849_vlan vlan-id 849
+set vlans vrf36_server_phy_general_747_vlan vlan-id 747
+set vlans vrf36_server_phy_general_748_vlan vlan-id 748
+set vlans vrf42-server-VMotion_Hosts_DMZ_Application_3548_vlan vlan-id 3548
+set vlans vrf42-server-VMotion_Hosts_Shared_Services_3547_vlan vlan-id 3547
+set vlans vrf42-server-vir_mgmt-3549 vlan-id 3549
+set vlans vrf42-server-vir_mgmt-912_vlan vlan-id 912
+set vlans vrf44-North-LB-Range vlan-id 3438
+set vlans vrf44-North-Load-Balancing-Range vlan-id 3437
+set vlans vrf44-server-phy_general-3436_vlan vlan-id 3436
+set vlans vrf45-Internet-Services-South-3022_vlan vlan-id 3022
+set vlans vrf45-server-eDMZ-VIP-3227_vlan vlan-id 3227
+set vlans vrf45-server-eDMZ-n-3226_vlan vlan-id 3226
+set vlans vrf45-server-eDMZ-n_II-3228_vlan vlan-id 3228
+set vlans vrf45-server-eDMZ-s-3026_vlan vlan-id 3026
+set vlans vrf45-server-eDMZ-s_II-3027_vlan vlan-id 3027
+set vlans vrf45-server-phy_general-3021_vlan vlan-id 3021
+set vlans vrf45-share-services-server-3521_vlan vlan-id 3521
+set vlans vrf46-server-phy_general-903_vlan vlan-id 903
+set vlans vrf46-server-phy_general-904_vlan vlan-id 904
+set vlans vrf55-v0807-mobility-south vlan-id 807
+set vlans vrf55-v0808-mobility-south vlan-id 808
+set vlans vrf58_server_phy_general_3431 vlan-id 3431
+set vlans vrf60_server_phy_general_3206 vlan-id 3206
+set vlans vrf61_server_phy_general_3006 vlan-id 3006
+set vlans vrf94-server-phy_general-3029 description "VLAN3029: eDMZ-SSL-South_I"
+set vlans vrf94-server-phy_general-3029 vlan-id 3029
+set vlans vrf94-server-phy_general-3030 description "VLAN3030: eDMZ-SSL-South_II"
+set vlans vrf94-server-phy_general-3030 vlan-id 3030
+set vlans vrfxx_server_phy_general_804_vlan vlan-id 804
+set virtual-chassis preprovisioned
+set virtual-chassis member 0 role line-card
+set virtual-chassis member 0 serial-number GX0214528106
+set virtual-chassis member 1 role routing-engine
+set virtual-chassis member 1 serial-number GX0212332781
+set virtual-chassis member 2 role line-card
+set virtual-chassis member 2 serial-number GX0212434114
+set virtual-chassis member 3 role line-card
+set virtual-chassis member 3 serial-number GX0212363365
+set virtual-chassis member 4 role routing-engine
+set virtual-chassis member 4 serial-number GX0213506701
+set virtual-chassis member 5 role line-card
+set virtual-chassis member 5 serial-number GX0213516879
+set virtual-chassis member 6 role line-card
+set virtual-chassis member 6 serial-number GX0214357790
+set virtual-chassis member 7 role line-card
+set virtual-chassis member 7 serial-number GX0214267550
+
+{master:1}
+nvsfarsyed@USDALIGW-LANOBA010> show iner
+                                    ^
+syntax error, expecting <command>.
+nvsfarsyed@USDALIGW-LANOBA010> show inerter
+                                    ^
+syntax error, expecting <command>.
+nvsfarsyed@USDALIGW-LANOBA010> show inerter|  
+                                    ^
+syntax error, expecting <command>.
+nvsfarsyed@USDALIGW-LANOBA010> show inerter|no 
+                                    ^
+syntax error, expecting <command>.
+nvsfarsyed@USDALIGW-LANOBA010> show interfaces terse | no-more 
+Interface               Admin Link Proto    Local                 Remote
+ge-0/0/0                up    down
+ge-0/0/0.0              up    down eth-switch
+ge-0/0/1                up    down
+ge-0/0/1.0              up    down eth-switch
+ge-0/0/2                up    down
+ge-0/0/2.0              up    down eth-switch
+ge-0/0/3                up    down
+ge-0/0/3.0              up    down eth-switch
+ge-0/0/4                up    down
+ge-0/0/4.0              up    down eth-switch
+ge-0/0/5                up    down
+ge-0/0/5.0              up    down eth-switch
+ge-0/0/6                up    down
+ge-0/0/6.0              up    down eth-switch
+ge-0/0/7                up    down
+ge-0/0/7.0              up    down eth-switch
+ge-0/0/8                up    down
+ge-0/0/8.0              up    down eth-switch
+ge-0/0/9                up    down
+ge-0/0/9.0              up    down eth-switch
+xe-0/0/10               up    up
+xe-0/0/10.0             up    up   eth-switch
+xe-0/0/11               up    up
+xe-0/0/11.0             up    up   eth-switch
+xe-0/0/12               up    up
+xe-0/0/12.0             up    up   eth-switch
+ge-0/0/13               up    down
+ge-0/0/13.0             up    down eth-switch
+ge-0/0/14               up    down
+ge-0/0/14.0             up    down eth-switch
+ge-0/0/15               up    down
+ge-0/0/15.0             up    down eth-switch
+ge-0/0/16               up    down
+ge-0/0/16.0             up    down eth-switch
+ge-0/0/17               up    down
+ge-0/0/17.0             up    down eth-switch
+ge-0/0/18               up    down
+ge-0/0/18.0             up    down eth-switch
+ge-0/0/19               up    down
+ge-0/0/19.0             up    down eth-switch
+ge-0/0/20               up    down
+ge-0/0/20.0             up    down eth-switch
+ge-0/0/21               up    down
+ge-0/0/21.0             up    down eth-switch
+ge-0/0/22               up    down
+ge-0/0/22.0             up    down eth-switch
+ge-0/0/23               up    down
+ge-0/0/23.0             up    down eth-switch
+ge-0/0/24               up    down
+ge-0/0/24.0             up    down eth-switch
+ge-0/0/25               up    down
+ge-0/0/25.0             up    down eth-switch
+ge-0/0/26               up    down
+ge-0/0/26.0             up    down eth-switch
+ge-0/0/27               up    down
+ge-0/0/27.0             up    down eth-switch
+ge-0/0/28               up    down
+ge-0/0/28.0             up    down eth-switch
+ge-0/0/29               up    up
+ge-0/0/29.0             up    up   eth-switch
+ge-0/0/30               up    down
+ge-0/0/30.0             up    down eth-switch
+ge-0/0/31               up    up
+ge-0/0/31.0             up    up   eth-switch
+ge-0/0/34               up    down
+ge-0/0/34.0             up    down aenet    --> ae0.0
+ge-0/0/35               up    down
+ge-0/0/35.0             up    down aenet    --> ae1.0
+ge-0/0/36               up    down
+ge-0/0/36.0             up    down eth-switch
+ge-0/0/37               up    down
+ge-0/0/37.0             up    down eth-switch
+ge-0/0/38               up    down
+ge-0/0/38.0             up    down eth-switch
+ge-0/0/39               up    up
+ge-0/0/39.0             up    up   eth-switch
+xe-0/1/0                down  down
+xe-0/1/0.0              up    down eth-switch
+xe-0/2/0                down  down
+xe-0/2/0.0              up    down eth-switch
+xe-1/0/10               up    up
+xe-1/0/10.0             up    up   eth-switch
+xe-1/0/11               up    up
+xe-1/0/11.0             up    up   eth-switch
+xe-1/0/12               up    up
+xe-1/0/12.0             up    up   eth-switch
+ge-1/0/13               up    down
+ge-1/0/13.0             up    down eth-switch
+ge-1/0/14               up    down
+ge-1/0/14.0             up    down eth-switch
+ge-1/0/15               up    down
+ge-1/0/15.0             up    down eth-switch
+ge-1/0/16               up    down
+ge-1/0/16.0             up    down eth-switch
+ge-1/0/17               up    down
+ge-1/0/17.0             up    down eth-switch
+ge-1/0/18               up    down
+ge-1/0/18.0             up    down eth-switch
+ge-1/0/19               up    down
+ge-1/0/19.0             up    down eth-switch
+ge-1/0/20               up    down
+ge-1/0/20.0             up    down eth-switch
+ge-1/0/21               up    down
+ge-1/0/21.0             up    down eth-switch
+ge-1/0/22               up    down
+ge-1/0/22.0             up    down eth-switch
+ge-1/0/23               up    down
+ge-1/0/23.0             up    down eth-switch
+ge-1/0/24               up    down
+ge-1/0/24.0             up    down eth-switch
+ge-1/0/25               up    down
+ge-1/0/25.0             up    down eth-switch
+ge-1/0/27               up    down
+ge-1/0/27.0             up    down eth-switch
+ge-1/0/28               up    down
+ge-1/0/28.0             up    down eth-switch
+ge-1/0/29               up    up
+ge-1/0/29.0             up    up   eth-switch
+ge-1/0/30               up    down
+ge-1/0/30.0             up    down eth-switch
+ge-1/0/31               up    up
+ge-1/0/31.0             up    up   eth-switch
+xe-1/0/32               up    up
+xe-1/0/32.0             up    up   aenet    --> ae17.0
+xe-1/0/33               up    up
+xe-1/0/33.0             up    up   aenet    --> ae17.0
+ge-1/0/34               up    down
+ge-1/0/34.0             up    down aenet    --> ae0.0
+ge-1/0/35               up    down
+ge-1/0/35.0             up    down aenet    --> ae1.0
+ge-1/0/36               up    down
+ge-1/0/36.0             up    down eth-switch
+ge-1/0/37               up    down
+ge-1/0/37.0             up    down eth-switch
+ge-1/0/38               up    down
+ge-1/0/38.0             up    down eth-switch
+ge-1/0/39               up    up
+ge-1/0/39.0             up    up   eth-switch
+xe-1/1/0                down  down
+xe-1/1/0.0              up    down eth-switch
+xe-1/2/0                up    down
+xe-1/2/0.0              up    down eth-switch
+ge-2/0/0                up    down
+ge-2/0/0.0              up    down eth-switch
+ge-2/0/1                up    down
+ge-2/0/1.0              up    down eth-switch
+ge-2/0/2                up    down
+ge-2/0/2.0              up    down eth-switch
+ge-2/0/3                up    down
+ge-2/0/3.0              up    down eth-switch
+ge-2/0/4                up    down
+ge-2/0/4.0              up    down eth-switch
+ge-2/0/5                up    down
+ge-2/0/5.0              up    down eth-switch
+ge-2/0/7                up    down
+ge-2/0/7.0              up    down eth-switch
+ge-2/0/8                up    down
+ge-2/0/8.0              up    down eth-switch
+ge-2/0/9                up    down
+ge-2/0/9.0              up    down eth-switch
+ge-2/0/10               up    down
+ge-2/0/10.0             up    down eth-switch
+ge-2/0/11               up    down
+ge-2/0/11.0             up    down eth-switch
+ge-2/0/12               up    down
+ge-2/0/12.0             up    down eth-switch
+ge-2/0/13               up    down
+ge-2/0/13.0             up    down eth-switch
+ge-2/0/15               up    down
+ge-2/0/15.0             up    down eth-switch
+ge-2/0/16               up    down
+ge-2/0/16.0             up    down eth-switch
+ge-2/0/17               up    down
+ge-2/0/17.0             up    down eth-switch
+ge-2/0/18               up    down
+ge-2/0/18.0             up    down eth-switch
+ge-2/0/19               up    down
+ge-2/0/19.0             up    down eth-switch
+ge-2/0/20               up    up
+ge-2/0/20.0             up    up   eth-switch
+ge-2/0/21               up    up
+ge-2/0/21.0             up    up   eth-switch
+ge-2/0/22               up    up
+ge-2/0/22.0             up    up   eth-switch
+ge-2/0/23               up    down
+ge-2/0/23.0             up    down eth-switch
+ge-2/0/24               up    down
+ge-2/0/24.0             up    down eth-switch
+ge-2/0/25               up    down
+ge-2/0/25.0             up    down eth-switch
+ge-2/0/26               up    up
+ge-2/0/26.0             up    up   eth-switch
+ge-2/0/27               up    up
+ge-2/0/27.0             up    up   eth-switch
+ge-2/0/28               up    up
+ge-2/0/28.0             up    up   eth-switch
+ge-2/0/29               up    up
+ge-2/0/29.0             up    up   eth-switch
+ge-2/0/30               up    up
+ge-2/0/30.0             up    up   eth-switch
+ge-2/0/31               up    up
+ge-2/0/31.0             up    up   eth-switch
+ge-2/0/34               up    up
+ge-2/0/34.0             up    up   eth-switch
+ge-2/0/35               up    up
+ge-2/0/35.0             up    up   eth-switch
+xe-2/0/36               up    up
+xe-2/0/36.0             up    up   eth-switch
+xe-2/0/37               up    up
+xe-2/0/37.0             up    up   eth-switch
+xe-2/0/38               up    up
+xe-2/0/38.0             up    up   eth-switch
+ge-3/0/8                up    down
+ge-3/0/8.0              up    down eth-switch
+ge-3/0/9                up    down
+ge-3/0/9.0              up    down eth-switch
+ge-3/0/10               up    down
+ge-3/0/10.0             up    down eth-switch
+ge-3/0/11               up    down
+ge-3/0/11.0             up    down eth-switch
+ge-3/0/12               up    down
+ge-3/0/12.0             up    down eth-switch
+ge-3/0/13               up    down
+ge-3/0/13.0             up    down eth-switch
+ge-3/0/14               up    down
+ge-3/0/14.0             up    down eth-switch
+ge-3/0/15               up    down
+ge-3/0/15.0             up    down eth-switch
+ge-3/0/16               up    down
+ge-3/0/16.0             up    down eth-switch
+ge-3/0/17               up    down
+ge-3/0/17.0             up    down eth-switch
+ge-3/0/18               up    down
+ge-3/0/18.0             up    down eth-switch
+ge-3/0/19               up    down
+ge-3/0/19.0             up    down eth-switch
+ge-3/0/20               up    up
+ge-3/0/20.0             up    up   eth-switch
+ge-3/0/21               up    up
+ge-3/0/21.0             up    up   eth-switch
+ge-3/0/23               up    down
+ge-3/0/23.0             up    down eth-switch
+ge-3/0/24               up    down
+ge-3/0/24.0             up    down eth-switch
+ge-3/0/25               up    down
+ge-3/0/25.0             up    down eth-switch
+ge-3/0/26               up    up
+ge-3/0/26.0             up    up   eth-switch
+ge-3/0/27               up    up
+ge-3/0/27.0             up    up   eth-switch
+ge-3/0/30               up    up
+ge-3/0/30.0             up    up   eth-switch
+ge-3/0/31               up    up
+ge-3/0/31.0             up    up   eth-switch
+ge-3/0/34               up    up
+ge-3/0/34.0             up    up   eth-switch
+ge-3/0/35               up    up
+ge-3/0/35.0             up    up   eth-switch
+xe-3/0/36               up    up
+xe-3/0/36.0             up    up   eth-switch
+xe-3/0/37               up    up
+xe-3/0/37.0             up    up   eth-switch
+xe-3/0/38               up    up
+xe-3/0/38.0             up    up   eth-switch
+ge-4/0/0                up    up
+ge-4/0/0.0              up    up   eth-switch
+ge-4/0/1                up    up
+ge-4/0/1.0              up    up   eth-switch
+xe-4/0/2                down  down
+xe-4/0/2.0              up    down eth-switch
+xe-4/0/3                down  down
+xe-4/0/3.0              up    down eth-switch
+xe-4/0/4                up    down
+xe-4/0/4.0              up    down eth-switch
+xe-4/0/6                down  down
+xe-4/0/6.0              up    down eth-switch
+xe-4/0/7                down  down
+xe-4/0/7.0              up    down eth-switch
+xe-4/0/8                up    down
+xe-4/0/8.0              up    down aenet    --> ae4.0
+xe-4/0/9                up    down
+xe-4/0/9.0              up    down aenet    --> ae2.0
+xe-4/0/12               down  down
+xe-4/0/12.0             up    down eth-switch
+xe-4/0/13               down  down
+xe-4/0/13.0             up    down eth-switch
+xe-4/0/14               down  down
+xe-4/0/14.0             up    down eth-switch
+xe-4/0/15               up    up
+xe-4/0/15.0             up    up   eth-switch
+xe-4/0/16               up    up
+xe-4/0/16.0             up    up   eth-switch
+xe-4/0/17               up    up
+xe-4/0/17.0             up    up   aenet    --> ae11.0
+xe-4/0/18               up    up
+xe-4/0/18.0             up    up   aenet    --> ae11.0
+ge-4/0/21               up    down
+ge-4/0/21.0             up    down eth-switch
+xe-4/0/22               down  down
+xe-4/0/22.0             up    down eth-switch
+xe-4/0/23               down  down
+xe-4/0/23.0             up    down eth-switch
+xe-4/0/24               down  down
+xe-4/0/24.0             up    down eth-switch
+xe-4/0/26               up    down
+xe-4/0/32               up    up
+xe-4/0/32.0             up    up   aenet    --> ae17.0
+xe-4/0/33               up    up
+xe-4/0/33.0             up    up   aenet    --> ae17.0
+ge-5/0/0                up    up
+ge-5/0/0.0              up    up   eth-switch
+ge-5/0/1                up    up
+ge-5/0/1.0              up    up   eth-switch
+xe-5/0/2                down  down
+xe-5/0/2.0              up    down eth-switch
+xe-5/0/3                down  down
+xe-5/0/3.0              up    down eth-switch
+xe-5/0/4                up    down
+xe-5/0/4.0              up    down eth-switch
+xe-5/0/5                up    down
+xe-5/0/5.0              up    down eth-switch
+xe-5/0/6                down  down
+xe-5/0/6.0              up    down eth-switch
+xe-5/0/7                down  down
+xe-5/0/7.0              up    down eth-switch
+xe-5/0/8                up    down
+xe-5/0/8.0              up    down aenet    --> ae4.0
+xe-5/0/9                up    down
+xe-5/0/9.0              up    down aenet    --> ae2.0
+xe-5/0/10               up    down
+xe-5/0/10.0             up    down aenet    --> ae3.0
+xe-5/0/12               down  down
+xe-5/0/12.0             up    down eth-switch
+xe-5/0/13               down  down
+xe-5/0/13.0             up    down eth-switch
+xe-5/0/14               down  down
+xe-5/0/14.0             up    down eth-switch
+xe-5/0/17               up    up
+xe-5/0/17.0             up    up   aenet    --> ae11.0
+xe-5/0/18               up    up
+xe-5/0/18.0             up    up   aenet    --> ae11.0
+ge-5/0/20               up    down
+ge-5/0/20.0             up    down eth-switch
+ge-5/0/21               up    down
+ge-5/0/21.0             up    down eth-switch
+xe-5/0/22               down  down
+xe-5/0/22.0             up    down eth-switch
+xe-5/0/23               down  down
+xe-5/0/23.0             up    down eth-switch
+xe-5/0/25               up    down
+ge-6/0/1                up    up
+ge-6/0/1.0              up    up   eth-switch
+ge-6/0/2                up    up
+ge-6/0/2.0              up    up   eth-switch
+ge-6/0/3                up    up
+ge-6/0/3.0              up    up   eth-switch
+xe-6/0/4                up    up
+xe-6/0/4.0              up    up   aenet    --> ae7.0
+xe-6/0/5                up    up
+xe-6/0/5.0              up    up   aenet    --> ae8.0
+xe-6/0/6                up    up
+xe-6/0/6.0              up    up   eth-switch
+xe-6/0/8                up    up
+xe-6/0/8.0              up    up   aenet    --> ae16.0
+xe-6/0/9                up    up
+xe-6/0/9.0              up    up   aenet    --> ae16.0
+xe-6/0/10               up    up
+xe-6/0/10.0             up    up   aenet    --> ae5.0
+xe-6/0/11               up    up
+xe-6/0/11.0             up    up   aenet    --> ae6.0
+xe-6/0/12               up    up
+xe-6/0/12.0             up    up   eth-switch
+xe-6/0/15               up    up
+xe-6/0/15.0             up    up   aenet    --> ae9.0
+xe-6/0/16               up    up
+xe-6/0/16.0             up    up   aenet    --> ae10.0
+ge-6/0/17               up    up
+ge-6/0/17.0             up    up   eth-switch
+ge-6/0/19               up    down
+ge-6/0/19.0             up    down eth-switch
+ge-6/0/20               up    up
+ge-6/0/20.0             up    up   eth-switch
+ge-6/0/21               up    up
+ge-6/0/21.0             up    up   eth-switch
+ge-6/0/22               up    up
+ge-6/0/22.0             up    up   eth-switch
+ge-6/0/23               up    up
+ge-6/0/23.0             up    up   eth-switch
+ge-6/0/24               up    up
+ge-6/0/24.0             up    up   eth-switch
+ge-6/0/25               up    up
+ge-6/0/25.0             up    up   eth-switch
+ge-6/0/30               up    up
+ge-6/0/30.0             up    up   aenet    --> ae14.0
+ge-6/0/31               up    up
+ge-6/0/31.0             up    up   aenet    --> ae15.0
+ge-6/0/34               up    up
+ge-6/0/34.0             up    up   aenet    --> ae13.0
+ge-6/0/35               up    up
+ge-6/0/35.0             up    up   aenet    --> ae12.0
+ge-6/0/36               up    up
+ge-6/0/36.0             up    up   eth-switch
+ge-6/0/37               up    up
+ge-6/0/37.0             up    up   eth-switch
+ge-7/0/1                up    up
+ge-7/0/1.0              up    up   eth-switch
+ge-7/0/2                up    up
+ge-7/0/2.0              up    up   eth-switch
+ge-7/0/3                up    up
+ge-7/0/3.0              up    up   eth-switch
+xe-7/0/4                up    up
+xe-7/0/4.0              up    up   aenet    --> ae7.0
+xe-7/0/5                up    up
+xe-7/0/5.0              up    up   aenet    --> ae8.0
+xe-7/0/6                up    up
+xe-7/0/6.0              up    up   eth-switch
+ge-7/0/7                up    down
+ge-7/0/7.0              up    down eth-switch
+xe-7/0/8                up    up
+xe-7/0/8.0              up    up   aenet    --> ae16.0
+xe-7/0/9                up    up
+xe-7/0/9.0              up    up   aenet    --> ae16.0
+xe-7/0/10               up    up
+xe-7/0/10.0             up    up   aenet    --> ae5.0
+xe-7/0/11               up    up
+xe-7/0/11.0             up    up   aenet    --> ae6.0
+xe-7/0/12               up    up
+xe-7/0/12.0             up    up   eth-switch
+ge-7/0/13               up    down
+ge-7/0/13.0             up    down eth-switch
+xe-7/0/15               up    up
+xe-7/0/15.0             up    up   aenet    --> ae9.0
+xe-7/0/16               up    up
+xe-7/0/16.0             up    up   aenet    --> ae10.0
+ge-7/0/17               up    up
+ge-7/0/17.0             up    up   eth-switch
+ge-7/0/19               up    down
+ge-7/0/19.0             up    down eth-switch
+ge-7/0/20               up    up
+ge-7/0/20.0             up    up   eth-switch
+ge-7/0/21               up    up
+ge-7/0/21.0             up    up   eth-switch
+ge-7/0/22               up    up
+ge-7/0/22.0             up    up   eth-switch
+ge-7/0/23               up    up
+ge-7/0/23.0             up    up   eth-switch
+ge-7/0/24               up    up
+ge-7/0/24.0             up    up   eth-switch
+ge-7/0/25               up    up
+ge-7/0/25.0             up    up   eth-switch
+ge-7/0/26               up    up
+ge-7/0/26.0             up    up   aenet    --> ae12.0
+ge-7/0/30               up    up
+ge-7/0/30.0             up    up   aenet    --> ae14.0
+ge-7/0/31               up    up
+ge-7/0/31.0             up    up   aenet    --> ae15.0
+ge-7/0/34               up    up
+ge-7/0/34.0             up    up   aenet    --> ae13.0
+vcp-0                   up    up
+vcp-0.32768             up    up  
+vcp-1                   up    up
+vcp-1.32768             up    up  
+ae0                     up    down
+ae0.0                   up    down eth-switch
+ae1                     up    down
+ae1.0                   up    down eth-switch
+ae2                     up    down
+ae2.0                   up    down eth-switch
+ae3                     up    down
+ae3.0                   up    down eth-switch
+ae4                     up    down
+ae4.0                   up    down eth-switch
+ae5                     up    up
+ae5.0                   up    up   eth-switch
+ae6                     up    up
+ae6.0                   up    up   eth-switch
+ae7                     up    up
+ae7.0                   up    up   eth-switch
+ae8                     up    up
+ae8.0                   up    up   eth-switch
+ae9                     up    up
+ae9.0                   up    up   eth-switch
+ae10                    up    up
+ae10.0                  up    up   eth-switch
+ae11                    up    up
+ae11.0                  up    up   eth-switch
+ae12                    up    up
+ae12.0                  up    up   eth-switch
+ae13                    up    up
+ae13.0                  up    up   eth-switch
+ae14                    up    up
+ae14.0                  up    up   eth-switch
+ae15                    up    up
+ae15.0                  up    up   eth-switch
+ae16                    up    up
+ae16.0                  up    up   eth-switch
+ae17                    up    up
+ae17.0                  up    up   eth-switch
+ae18                    up    down
+ae18.0                  up    down eth-switch
+ae19                    up    down
+ae19.0                  up    down eth-switch
+bme0                    up    up
+bme0.32768              up    up   inet     128.0.0.1/2     
+                                            128.0.0.17/2    
+                                            128.0.0.32/2    
+                                   tnp      0x11            
+bme0.32769              down  up   eth-switch
+bme0.32771              down  up   eth-switch
+bme0.32772              down  up   eth-switch
+bme0.32773              down  up   eth-switch
+bme0.32774              down  up   eth-switch
+bme0.32775              down  up   eth-switch
+bme0.32776              down  up   eth-switch
+dsc                     up    up
+gre                     up    up
+ipip                    up    up
+lo0                     up    up
+lo0.16384               up    up   inet     127.0.0.1           --> 0/0
+lsi                     up    up
+me0                     up    up
+me0.0                   up    up   eth-switch
+mtun                    up    up
+pimd                    up    up
+pime                    up    up
+tap                     up    up
+vlan                    up    up
+vlan.0                  up    up   inet    
+vme                     up    up
+vme.0                   up    up   inet     158.28.75.54/24 
+
+{master:1}
+nvsfarsyed@USDALIGW-LANOBA010> 
+
+{master:1}
+nvsfarsyed@USDALIGW-LANOBA010> show interfaces descriptions | noo
+                                                              ^
+syntax error, expecting <command>.
+nvsfarsyed@USDALIGW-LANOBA010> show interfaces descriptions | no-more 
+Interface       Admin Link Description
+ge-0/0/0        up    down Mobility S (Servers / NA domain)
+ge-0/0/1        up    down Mobility N (Servers)
+ge-0/0/2        up    down Mobility S (Servers / NA domain)
+ge-0/0/3        up    down Mobility S (Servers / NA domain)
+ge-0/0/4        up    down Mobility N (Servers)
+ge-0/0/5        up    down  DALAPP242 Mobility N(Servers)
+ge-0/0/6        up    down  DALAPP244 Mobility N (Servers)
+ge-0/0/7        up    down  DALAPP243 Mobility N (Servers)
+ge-0/0/8        up    down  DALAPP245 Mobility N (Servers)
+ge-0/0/9        up    down  DALAPP246 Mobility N (Servers)
+ge-0/0/10                  Shared Services S (Servers)
+xe-0/0/10       up    up   DALLCX30 NIC1
+ge-0/0/11                  Shared Services S (Servers)
+xe-0/0/11       up    up   DALLCX31 NIC1
+ge-0/0/12                  Shared Services S (Servers)
+xe-0/0/12       up    up   DALLCX32 NIC1
+ge-0/0/13       up    down Mobility S (Servers / NA domain)
+ge-0/0/14       up    down Mobility S (Servers / NA domain)
+ge-0/0/15       up    down Mobility S (Servers / NA domain)
+ge-0/0/16       up    down Mobility S (Servers / NA domain)
+ge-0/0/17       up    down Mobility N (Servers)
+ge-0/0/18       up    down Mobility S (Servers / NA domain)
+ge-0/0/19       up    down Mobility N (Servers)
+ge-0/0/20       up    down Mobility N (Servers)
+ge-0/0/21       up    down Shared Services S (Servers)
+ge-0/0/22       up    down Shared Services S (Servers)
+ge-0/0/23       up    down  DALAPP241 Mobility S (Servers)
+ge-0/0/24       up    down  DALAPP242 Mobility S (Servers)
+ge-0/0/25       up    down  DALAPP243 Mobility S (Servers)
+ge-0/0/26       up    down  DALAPP244 Mobility S (Servers)
+ge-0/0/27       up    down Mobility S (Servers)
+ge-0/0/28       up    down  DALAPP246 Mobility S (Servers)
+ge-0/0/29       up    up   Shared Services S (Servers)
+ge-0/0/30       up    down Shared Services S (Servers)
+ge-0/0/31       up    up   Shared Services S (Servers)
+ge-0/0/32                  Mobility S (Servers)
+ge-0/0/33                  Mobility S (Servers)
+ge-0/0/34       up    down UHSIS ports to DIDDSLW01
+ge-0/0/35       up    down UHSIS ports to DIDDSLW02
+ge-0/0/36       up    down Mobility  (Servers)
+ge-0/0/37       up    down Mobility  (Servers)
+ge-0/0/38       up    down Mobility S (Servers)
+xe-0/1/0        down  down USDIDSEC01 xe-5/1/1 reth0
+xe-0/2/0        down  down USDIDNWAH01 F5 Load balancer
+ge-1/0/0                   Mobility N (Servers)
+ge-1/0/1                   Mobility N (Servers)
+ge-1/0/2                   Mobility N (Servers)
+ge-1/0/3                   Mobility N (Servers)
+ge-1/0/4                   Mobility N (Servers)
+ge-1/0/5                   Mobility N (Servers)
+ge-1/0/6                    DALAPP243  Mobility N (Servers)
+ge-1/0/7                   Mobility N (Servers)
+ge-1/0/8                   Mobility N (Servers)
+ge-1/0/9                   Mobility N (Servers)
+ge-1/0/10                  Shared Services S (Servers)
+xe-1/0/10       up    up   DALLCX30 NIC2
+ge-1/0/11                  Shared Services S (Servers)
+xe-1/0/11       up    up   DALLCX31 NIC2
+ge-1/0/12                  Shared Services S (Servers)
+xe-1/0/12       up    up   DALLCX32 NIC2
+ge-1/0/13       up    down Mobility S (Servers / NA domain)
+ge-1/0/14       up    down Mobility S (Servers / NA domain)
+ge-1/0/15       up    down Mobility S (Servers / NA domain)
+ge-1/0/16       up    down Mobility S (Servers / NA domain)
+ge-1/0/17       up    down Mobility S (Servers / NA domain)
+ge-1/0/18       up    down Mobility S (Servers / NA domain)
+ge-1/0/19       up    down Mobility S (Servers / NA domain)
+ge-1/0/20       up    down Mobility S (Servers / NA domain)
+ge-1/0/21       up    down Shared Services S (Servers)
+ge-1/0/22       up    down Shared Services S (Servers)
+ge-1/0/23       up    down Mobility S (Servers)
+ge-1/0/24       up    down Mobility S (Servers)
+ge-1/0/25       up    down Mobility S (Servers)
+ge-1/0/26                  Mobility S (Servers)
+ge-1/0/27       up    down  DALAPP245 Mobility S (Servers)
+ge-1/0/28       up    down Mobility S (Servers)
+ge-1/0/29       up    up   Shared Services S (Servers)
+ge-1/0/30       up    down Shared Services S (Servers)
+ge-1/0/31       up    up   Shared Services S (Servers)
+ge-1/0/32                  Mobility S (Servers)
+xe-1/0/32       up    up   Connection to USDIDIGW-LANDCO003 - xe-1/0/0
+ge-1/0/33                  Mobility S (Servers)
+xe-1/0/33       up    up   Connection to USDIDIGW-LANDCO003 - xe-0/0/4
+ge-1/0/34       up    down UHSIS ports to DIDDSLW01
+ge-1/0/35       up    down UHSIS ports to DIDDSLW02
+ge-1/0/36       up    down Mobility N (Servers)
+ge-1/0/37       up    down Mobility N (Servers)
+ge-1/0/38       up    down Mobility N (Servers)
+xe-1/1/0        down  down USDIDSEC01 xe-17/1/1 reth0
+xe-1/2/0        up    down USDIDNWAH02 F5 Load balancer
+ge-2/0/0        up    down Mobility N (Servers)
+ge-2/0/1        up    down  DALAPP211 Mobility N (Servers)
+ge-2/0/2        up    down Mobility N (Servers)
+ge-2/0/3        up    down Mobility N (Servers)
+ge-2/0/4        up    down Mobility N (Servers)
+ge-2/0/5        up    down Mobility N (Servers)
+ge-2/0/6                   O365 N (Servers)
+ge-2/0/7        up    down Shared Services S (Servers)
+ge-2/0/8        up    down  DALAPP210 Mobility S (Servers)
+ge-2/0/9        up    down Mobility S (Servers)
+ge-2/0/10       up    down Mobility S (Servers)
+ge-2/0/11       up    down Mobility S (Servers)
+ge-2/0/12       up    down Mobility S (Servers)
+ge-2/0/13       up    down Mobility S (Servers)
+ge-2/0/14                  Shared Services S (Servers)
+ge-2/0/15       up    down O365 N (Servers)
+ge-2/0/16       up    down MobilityACC N (Servers)
+ge-2/0/17       up    down MobilityACC N (Servers)
+ge-2/0/18       up    down MobilityACC S (Servers)
+ge-2/0/19       up    down MobilityACC S (Servers)
+ge-2/0/20       up    up   Oracle Exadata Gateway Net0 VLAN465
+ge-2/0/21       up    up   Oracle Exadata Gateway Net2 VLAN466
+ge-2/0/22       up    up   Oracle Exadata Gateway ILOM VLAN466
+ge-2/0/23       up    down Mobility N (VIPs)
+ge-2/0/24       up    down Mobility N (VIPs)
+ge-2/0/25       up    down Mobility N (VIPs)
+ge-2/0/26       up    up   Video Conferencing N (Servers)
+ge-2/0/27       up    up   Video Conferencing S (Servers)
+ge-2/0/28       up    up   Video Conferencing S (Servers)
+ge-2/0/29       up    up   Video Conferencing S (Servers)
+ge-2/0/30       up    up   Outbound Internet Acceptance S (Servers)
+ge-2/0/31       up    up   Outbound Internet Acceptance S (Servers)
+ge-2/0/32                  DALWSG32
+ge-2/0/34       up    up   Outbound Internet Acceptance N (Servers)
+ge-2/0/35       up    up   Outbound Internet Acceptance N (Servers)
+ge-2/0/36                  Outbound Internet Acceptance N (Servers)
+xe-2/0/36       up    up   DALLCX30 NIC3
+ge-2/0/37                  Outbound Internet Acceptance N (Servers)
+xe-2/0/37       up    up   DALLCX31 NIC3
+ge-2/0/38                  O365 N (Servers)
+xe-2/0/38       up    up   DALLCX32 NIC3
+ge-3/0/0                    DALAPP210 Mobility N (Servers)
+ge-3/0/1                   Mobility N (Servers)
+ge-3/0/2                    DALAPP212 Mobility N (Servers)
+ge-3/0/3                    DALAPP213 Mobility N (Servers)
+ge-3/0/4                    DALAPP214 Mobility N (Servers)
+ge-3/0/5                    DALAPP215 Mobility N (Servers)
+ge-3/0/6                   O365 S (Servers)
+ge-3/0/7                   Shared Services S (Servers)
+ge-3/0/8        up    down Mobility S (Servers)
+ge-3/0/9        up    down DALAPP211 Mobility S (Servers)
+ge-3/0/10       up    down  DALAPP212 Mobility S (Servers)
+ge-3/0/11       up    down  DALAPP213 Mobility S (Servers)
+ge-3/0/12       up    down  DALAPP214 Mobility S (Servers)
+ge-3/0/13       up    down  DALAPP215 Mobility S (Servers)
+ge-3/0/14       up    down Shared Services S (Servers)
+ge-3/0/15       up    down O365 S (Servers NA)
+ge-3/0/16       up    down  DALAPP216 MobilityACC N (Servers)
+ge-3/0/17       up    down  DALAPP217 MobilityACC N (Servers)
+ge-3/0/18       up    down  DALAPP216 MobilityACC S (Servers)
+ge-3/0/19       up    down  DALAPP217 MobilityACC S (Servers)
+ge-3/0/20       up    up   Oracle Exadata Gateway Net1 VLAN465
+ge-3/0/21       up    up   Oracle Exadata Gateway Net3 VLAN466
+ge-3/0/22                  Mobility N (VIPs)
+ge-3/0/23       up    down Mobility N (VIPs)
+ge-3/0/24       up    down Mobility N (VIPs)
+ge-3/0/25       up    down Mobility N (VIPs)
+ge-3/0/26       up    up   Outbound Internet Acceptance S (Servers)
+ge-3/0/27       up    up   Outbound Internet Acceptance S (Servers)
+ge-3/0/28                  Outbound Internet Acceptance S (Servers)
+ge-3/0/29                  Outbound Internet Acceptance S (Servers)
+ge-3/0/30       up    up   Outbound Internet Acceptance S (Servers)
+ge-3/0/31       up    up   Outbound Internet Acceptance S (Servers)
+ge-3/0/34       up    up   Outbound Internet Acceptance N (Servers)
+ge-3/0/35       up    up   Outbound Internet Acceptance N (Servers)
+ge-3/0/36                  Outbound Internet Acceptance N (Servers)
+xe-3/0/36       up    up   DALLCX30 NIC4
+ge-3/0/37                  Outbound Internet Acceptance N (Servers)
+xe-3/0/37       up    up   DALLCX31 NIC4
+ge-3/0/38                  O365 S (Servers)
+xe-3/0/38       up    up   DALLCX32 NIC4
+ge-4/0/0        up    up   Mobility N (Servers)
+ge-4/0/1        up    up   Mobility S (Servers)
+xe-4/0/2        down  down USDIDSEC01:xe-5/1/0 reth2
+xe-4/0/3        down  down USDIDSEC01:xe-5/0/1 reth3
+xe-4/0/4        up    down CHOKE (FIREEYE)
+xe-4/0/5                   Outbound Internet Acceptance S (FIREEYE)
+ge-4/0/5.0                 iXi
+xe-4/0/6        down  down USDIDNEC01-P S1p1 OI-ACC-N
+xe-4/0/7        down  down USDIDNEC01-P S1p2 OI-SCREENING
+xe-4/0/8        up    down DIDWCM03 X10G WebSense A1 Switch
+xe-4/0/9        up    down DIDWCM02 X10G WebSense A1 Switch
+xe-4/0/10                  DIDWCM01 X10G WebSense A1 Switch
+xe-4/0/12       down  down USDIDNEC01-P s2p1 eDMZ
+xe-4/0/13       down  down USDIDNEC01-P s2p3 OI-N
+xe-4/0/14       down  down USDIDNEC01-P s2p2 Direct Outbound
+xe-4/0/15       up    up   Infoblox IBDIDIPA00 LAN1
+xe-4/0/16       up    up   Infoblox IBDIDIPA00 LAN2
+xe-4/0/17       up    up   USDID-LANDCA001 xe-0/1/0
+xe-4/0/18       up    up   USDID-LANDCA001 xe-1/1/0
+ge-4/0/20                  DALTMG06 NIC1
+ge-4/0/21       up    down DALTMG07 NIC1
+xe-4/0/22       down  down USDIDNEC01-P S1p3 AZURE-N
+xe-4/0/23       down  down USDIDNEC01-P S2p4 AZURE-S
+xe-4/0/24       down  down USDIDNWAH02 F5 Load balancer NEW
+xe-4/0/32       up    up   Connection to USDIDIGW-LANDCO004 - xe-1/0/0
+xe-4/0/33       up    up   Connection to USDIDIGW-LANDCO004 - xe-0/0/4
+ge-5/0/0        up    up   Mobility N (Servers)
+ge-5/0/1        up    up   Mobility S (Servers)
+xe-5/0/2        down  down USDIDSEC01:xe-17/1/0 reth2
+xe-5/0/3        down  down USDIDSEC01:xe-17/0/1 reth3
+xe-5/0/4        up    down CHOKE (FIREEYE) VLAN 836
+xe-5/0/5        up    down Outbound Internet S (FIREEYE) VLAN 835
+xe-5/0/6        down  down USDIDNEC01-S S1p1 OI-ACC-N
+xe-5/0/7        down  down USDIDNEC01-S S1p2 OI-SCREENING
+xe-5/0/8        up    down DIDWCM03 X10G WebSense A2 Switch
+xe-5/0/9        up    down DIDWCM02 X10G WebSense A2 Switch
+xe-5/0/10       up    down DIDWCM01 X10G WebSense A2 Switch
+xe-5/0/12       down  down USDIDNEC01-S s2p1 eDMZ
+xe-5/0/13       down  down USDIDNEC01-S s2p3 OI-N
+xe-5/0/14       down  down USDIDNEC01-S s2p2 Direct Outbound
+xe-5/0/17       up    up   USDID-LANDCA001 xe-0/1/2
+xe-5/0/18       up    up   USDID-LANDCA001 xe-1/1/2
+ge-5/0/20       up    down DALTMG06 NIC2
+ge-5/0/21       up    down DALTMG07 NIC2
+xe-5/0/22       down  down USDIDNEC01-S S1p3 AZURE-N
+xe-5/0/23       down  down USDIDNEC01-S S2p4 AZURE-S
+xe-5/0/24                  USDIDNWAH01 F5 Load balancer NEW
+ge-6/0/1        up    up   Shared Services S (Servers)
+ge-6/0/2        up    up   Shared Services S (Servers)
+ge-6/0/3        up    up   VCS Expressway outside
+xe-6/0/4        up    up   DALVESXDMZP11 (SN JVTHDX1) NIC1
+xe-6/0/5        up    up   DALVESXDMZP12 (SN JVT87Y1) NIC1
+xe-6/0/6        up    up   DALSNDMZP11A XTO DMZ
+xe-6/0/6.0      up    up   iXi
+ge-6/0/7                   FTWMAPPAWDP02 / 2JMGSW1 NIC1
+ge-6/0/7.0                 iXi
+xe-6/0/10       up    up   DALVESXDMZP01 (SN JVTHN22) NIC1
+xe-6/0/11       up    up   DALVESXDMZP02 (SN JVT8H02) NIC1
+xe-6/0/12       up    up   DALSNDMZ01B
+xe-6/0/12.0     up    up   iXi
+ge-6/0/13                  Mobility Prod S (XTO Servers)
+ge-6/0/14                  Mobility Prod S (XTO Servers)
+xe-6/0/15       up    up   DALVESXDMZP01 (SN JVTHN22) NIC 5 (Team)
+xe-6/0/16       up    up   DALVESXDMZP02 (SN JVT8H02) NIC 5 (Team)
+ge-6/0/17       up    up   IBDALIPA85 H51 U36
+xe-6/0/17                  XTO DALMSECTMGP01
+ge-6/0/18                  MobilityACC N (Servers)
+xe-6/0/18                  XTO DALMSECTMGP02
+ge-6/0/19       up    down FTWMAPPAWDP01 / BML98X1  NIC1
+ge-6/0/19.0     up    down iXi
+ge-6/0/20       up    up   vrf42-server-vir_mgmt-912 - VIM-Servers
+ge-6/0/21       up    up   vrf42-server-vir_mgmt-912 - VIM-Servers
+ge-6/0/22       up    up   vrf42-server-vir_mgmt-912 - VIM-Servers
+ge-6/0/23       up    up   vrf42-server-vir_mgmt-912 - VIM-Servers
+ge-6/0/24       up    up   vrf42-server-vir_mgmt-912 - VIM-Servers
+ge-6/0/25       up    up   vrf42-server-vir_mgmt-912 - VIM-Servers
+ge-6/0/26                  XTO WebSense V10Ks USDIGWCGP01/USDIGWCGP02
+ge-6/0/30       up    up   DALTX-SSLASA03-5525
+ge-6/0/31       up    up   DALTX-SSLASA04-5525
+ge-6/0/32                   DALMXP70nic1@  H49-test
+ge-6/0/33                   DALMXP70nic2@  H49-test
+ge-6/0/34       up    up   DALTX-VPNRTR01-4451
+ge-6/0/35       up    up   DALTX-DMVPN-ASR1002 / FOX1250GH73
+ge-6/0/36       up    up    DALMXP70nic1@  H49
+ge-6/0/37       up    up    DALMXP70nic2@  H49
+ge-7/0/1        up    up   Shared Services S (Servers)
+ge-7/0/2        up    up   Shared Services S (Servers)
+ge-7/0/3        up    up   VCS Expressway inside
+xe-7/0/4        up    up   DALVESXDMZP11 (SN JVTHDX1) NIC3
+xe-7/0/5        up    up   DALVESXDMZP12 (SN JVT87Y1) NIC3
+xe-7/0/6        up    up   DALSNDMZP11B XTO DMZ
+xe-7/0/6.0      up    up   iXi
+ge-7/0/7        up    down FTWMAPPAWDP02 / 2JMGSW1 NIC2
+ge-7/0/7.0      up    down iXi
+xe-7/0/10       up    up   DALVESXDMZP01 (SN JVTHN22) NIC3
+xe-7/0/11       up    up   DALVESXDMZP02 (SN JVT8H02) NIC3
+xe-7/0/12       up    up   DALSNDMZ01B
+xe-7/0/12.0     up    up   iXi
+ge-7/0/13       up    down Mobility Prod S (XTO Servers)
+ge-7/0/14                  Mobility Prod S (XTO Servers)
+xe-7/0/15       up    up   DALVESXDMZP01 (SN JVTHN22) NIC 7 (Team)
+xe-7/0/16       up    up   DALVESXDMZP02 (SN JVT8H02) NIC 7 (Team)
+ge-7/0/17       up    up   IBDALIPA86 H51 U35
+xe-7/0/17                  XTO DALMSECTMGP01
+ge-7/0/18                  MobilityACC N (Servers)
+xe-7/0/18                  XTO DALMSECTMGP02
+ge-7/0/19       up    down FTWMAPPAWDP01 / BML98X1  NIC2
+ge-7/0/19.0     up    down iXi
+ge-7/0/20       up    up   vrf42-server-vir_mgmt-912 - VIM-Servers
+ge-7/0/21       up    up   vrf42-server-vir_mgmt-912 - VIM-Servers
+ge-7/0/22       up    up   vrf42-server-vir_mgmt-912 - VIM-Servers
+ge-7/0/23       up    up   vrf42-server-vir_mgmt-912 - VIM-Servers
+ge-7/0/24       up    up   vrf42-server-vir_mgmt-912 - VIM-Servers
+ge-7/0/25       up    up   vrf42-server-vir_mgmt-912 - VIM-Servers
+ge-7/0/26       up    up   DALTX-DMVPN-ASR1002 / FOX1250GH73
+ge-7/0/27                  MobilityACC N (Servers)
+ge-7/0/28                  MobilityACC S (XTO Servers)
+ge-7/0/30       up    up   DALTX-SSLASA03-5525
+ge-7/0/31       up    up   DALTX-SSLASA04-5525
+ge-7/0/32                  Marked for deletion (reserve Tom Grisham XTO)
+ge-7/0/33                  Marked for deletion (reserve Tom Grisham XTO)
+ge-7/0/34       up    up   DALTX-VPNRTR01-4451
+ge-7/0/36                  Outbound Internet Production N (Servers)
+ge-7/0/37                  Outbound Internet Production N (Servers)
+ae0             up    down iPi - (Members: ge-0/0/34 ge-1/0/34)
+ae1             up    down iPi - (Members: ge-0/0/35 ge-1/0/35)
+ae2             up    down iPi DIDWCM02 (Members: xe-4/0/9 xe-5/0/9)
+ae3             up    down iPi DIDWCM01 (Members: xe-4/0/10 xe-5/0/10)
+ae4             up    down iPi DIDWCM03 - Room: 216 @J112 (Members: xe-4/0/8 xe-5/0/8)
+ae5             up    up   iPi to unknown-device (Members: xe-6/0/10 xe-7/0/10) # DALVESXDMZP01
+ae5.0           up    up   iPi to dalvesxdmzp01.xtonet.com (Members: xe-6/0/10.0 xe-7/0/10.0)
+ae6             up    up   iPi to unknown-device (Members: xe-6/0/11 xe-7/0/11) # DALVESXDMZP02
+ae6.0           up    up   iPi to dalvesxdmzp02.xtonet.com (Members: xe-6/0/11.0 xe-7/0/11.0)
+ae7             up    up   iPi to unknown-device (Members: xe-6/0/4 xe-7/0/4) # DALVESXDMZP11
+ae7.0           up    up   iPi to dalvesxdmzp11.xtonet.com (Members: xe-6/0/4.0 xe-7/0/4.0)
+ae8             up    up   iPi to unknown-device (Members: xe-6/0/5 xe-7/0/5) # DALVESXDMZP12
+ae8.0           up    up   iPi to dalvesxdmzp12.xtonet.com (Members: xe-6/0/5.0 xe-7/0/5.0)
+ae9             up    up   iPi to unknown-device (Members: xe-6/0/15 xe-7/0/15) # DALVESXDMZP01 (External)
+ae9.0           up    up   iPi to dalvesxdmzp01.xtonet.com (Members: xe-6/0/15.0 xe-7/0/15.0)
+ae10            up    up   iPi to unknown-device (Members: xe-6/0/16 xe-7/0/16) # DALVESXDMZP02 (External)
+ae10.0          up    up   iPi to dalvesxdmzp02.xtonet.com (Members: xe-6/0/16.0 xe-7/0/16.0)
+ae11            up    up   iPi to unknown-device (Members: xe-4/0/17 xe-4/0/18 xe-5/0/17 xe-5/0/18) # USDID-LANDCA001 ae0
+ae11.0          up    up   iPi to USDID-LANDCA001 (Members: xe-4/0/17.0 xe-4/0/18.0 xe-5/0/17.0 xe-5/0/18.0)
+ae12            up    up   iPi to unknown-device (Members: ge-6/0/35 ge-7/0/26) # DALTX-DMVPN-ASR1002
+ae12.0          up    up   iPi to daltx-dmvpn-1002.xtonet.com (Members: ge-6/0/35.0 ge-7/0/26.0)
+ae13            up    up   iPi to unknown-device (Members: ge-6/0/34 ge-7/0/34) # DALTX-VPNRTR01-4451
+ae13.0          up    up   iPi to unknown-device (Members: ge-6/0/34.0 ge-7/0/34.0)
+ae14            up    up   iPi to unknown-device (Members: ge-6/0/30 ge-7/0/30) # DALTX-SSLASA03-5525
+ae14.0          up    up   iPi to unknown-device (Members: ge-6/0/30.0 ge-7/0/30.0)
+ae15            up    up   iPi to unknown-device (Members: ge-6/0/31 ge-7/0/31) # DALTX-SSLASA04-5525
+ae15.0          up    up   iPi to unknown-device (Members: ge-6/0/31.0 ge-7/0/31.0)
+ae16            up    up   iPi to unknown-device (Members: xe-6/0/8 xe-6/0/9 xe-7/0/8 xe-7/0/9) # QFX:USDID-LANDCA002
+ae16.0          up    up   iPi to USDID-LANDCA002 (Members: xe-6/0/8.0 xe-6/0/9.0 xe-7/0/8.0 xe-7/0/9.0)
+ae17            up    up   iPi to unknown-device (Members: xe-1/0/32 xe-1/0/33 xe-4/0/32 xe-4/0/33) # Connection to USDIDIGW-LANDCO003/004 - ae17
+ae17.0          up    up   iPi to USDALIGW-LANDCO003 (Members: xe-1/0/32.0 xe-1/0/33.0 xe-4/0/32.0 xe-4/0/33.0)
+ae18            up    down FTWMAPPAWDP01 / BML98X1 (Members: ge-6/0/19 ge-7/0/19)
+ae19            up    down FTWMAPPAWDP02 / 2JMGSW1 (Members: ge-6/0/7 ge-7/0/7)
+vme.0           up    up   iLi to USDALIGW-DCNOBA005:Gi0/48 # DIDNW506 0/47
+
+{master:1}
+nvsfarsyed@USDALIGW-LANOBA010> show vlans | no-more 
+Name           Tag     Interfaces
+AZURE-N-NGFW_INT-VLAN 751    
+                       ae16.0*, ae17.0*, xe-4/0/2.0, xe-4/0/22.0, xe-5/0/2.0, xe-5/0/22.0
+AZURE-S-NGFW_INT-VLAN 851    
+                       ae16.0*, ae17.0*, xe-4/0/2.0, xe-4/0/23.0, xe-5/0/2.0, xe-5/0/23.0
+CHOKE-FIREEYE-VLAN 834    
+                       ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0, xe-4/0/4.0
+CHOKE-FIREEYE-VLAN-PROD 836    
+                       ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0, xe-5/0/4.0
+CNC-Network-Devices 502    
+                       ae5.0*, ae6.0*, ae16.0*, ae17.0*
+Cloud-Servers  704    
+                       ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0
+EDMZ-N-SERVERS-VLAN 745    
+                       ae9.0*, ae10.0*, ae16.0*, ae17.0*, xe-0/2/0.0, xe-1/2/0.0, xe-4/0/2.0, xe-4/0/15.0*, xe-4/0/24.0, xe-5/0/2.0
+EDMZ-S-SERVERS-VLAN 845    
+                       ae16.0*, ae17.0*, xe-4/0/3.0, xe-4/0/16.0*, xe-5/0/3.0
+Internet-services-North-SMTP-servers_I 3444   
+                       ae9.0*, ae10.0*, ae16.0*, ae17.0*
+Internet-services-North-SMTP-servers_II 3445   
+                       ae9.0*, ae10.0*, ae16.0*, ae17.0*, ge-6/0/37.0*
+Internet-services-South-devices_I 3023   
+                       ae5.0*, ae6.0*, ae7.0*, ae8.0*, ae16.0*, ae17.0*, ge-6/0/36.0*
+Internet-services-South-devices_II 3024   
+                       ae5.0*, ae6.0*, ae7.0*, ae8.0*, ae16.0*, ae17.0*
+MOBILITYACC-N-SERVERS-VLAN 712    
+                       ae9.0*, ae10.0*, ae16.0*, ae17.0*, ge-2/0/16.0, ge-2/0/17.0, ge-3/0/16.0, ge-3/0/17.0, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0, xe-4/0/24.0
+MOBILITYACC-N-VIPS-VLAN 711    
+                       ae16.0*, ae17.0*, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0, xe-4/0/24.0
+MOBILITYACC-S-SERVERS-VLAN 812    
+                       ae16.0*, ae17.0*, ge-2/0/18.0, ge-2/0/19.0, ge-3/0/18.0, ge-3/0/19.0, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0, xe-4/0/24.0
+MOBILITYACC-S-XTO-SERVERS-VLAN 813    
+                       ae5.0*, ae6.0*, ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0, xe-6/0/6.0*, xe-7/0/6.0*
+Mobility-N-Servers 702    
+                       ae9.0*, ae10.0*, ae16.0*, ae17.0*, ge-0/0/1.0, ge-0/0/4.0, ge-0/0/5.0, ge-0/0/6.0, ge-0/0/7.0, ge-0/0/8.0, ge-0/0/9.0, ge-0/0/17.0, ge-0/0/19.0, ge-0/0/20.0,
+                       ge-1/0/36.0, ge-1/0/37.0, ge-1/0/38.0, ge-2/0/0.0, ge-2/0/1.0, ge-2/0/2.0, ge-2/0/3.0, ge-2/0/4.0, ge-2/0/5.0, ge-4/0/0.0*, ge-5/0/0.0*, ge-5/0/20.0,
+                       ge-5/0/21.0, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0, xe-4/0/24.0
+Mobility-N-VIPs 701    
+                       ae16.0*, ae17.0*, ge-2/0/23.0, ge-2/0/24.0, ge-2/0/25.0, ge-3/0/21.0*, ge-3/0/23.0, ge-3/0/24.0, ge-3/0/25.0, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0,
+                       xe-4/0/24.0
+Mobility-N-VIPs_3209 3209   
+                       ae16.0*, ae17.0*, xe-0/0/10.0*, xe-0/0/11.0*, xe-0/0/12.0*, xe-2/0/36.0*, xe-2/0/37.0*, xe-2/0/38.0*
+Mobility-S-Servers 802    
+                       ae16.0*, ae17.0*, ge-0/0/23.0, ge-0/0/24.0, ge-0/0/25.0, ge-0/0/26.0, ge-0/0/27.0, ge-0/0/28.0, ge-0/0/36.0, ge-0/0/37.0, ge-0/0/38.0, ge-1/0/23.0,
+                       ge-1/0/24.0, ge-1/0/25.0, ge-1/0/27.0, ge-1/0/28.0, ge-2/0/8.0, ge-2/0/9.0, ge-2/0/10.0, ge-2/0/11.0, ge-2/0/12.0, ge-2/0/13.0, ge-3/0/8.0, ge-3/0/9.0,
+                       ge-3/0/10.0, ge-3/0/11.0, ge-3/0/12.0, ge-3/0/13.0, ge-3/0/20.0*, ge-4/0/1.0*, ge-5/0/1.0*, xe-0/1/0.0, xe-1/1/0.0
+Mobility-S-Servers-NA 803    
+                       ae16.0*, ae17.0*, ge-0/0/0.0, ge-0/0/2.0, ge-0/0/3.0, ge-0/0/13.0, ge-0/0/14.0, ge-0/0/15.0, ge-0/0/16.0, ge-0/0/18.0, ge-1/0/13.0, ge-1/0/14.0, ge-1/0/15.0,
+                       ge-1/0/16.0, ge-1/0/17.0, ge-1/0/18.0, ge-1/0/19.0, ge-1/0/20.0, ge-4/0/21.0, xe-0/1/0.0, xe-1/1/0.0
+Mobility-S-Servers_3009 3009   
+                       ae16.0*, ae17.0*, xe-1/0/10.0*, xe-1/0/11.0*, xe-1/0/12.0*, xe-3/0/36.0*, xe-3/0/37.0*, xe-3/0/38.0*
+Mobility-S-VIPs 801    
+                       ae16.0*, ae17.0*, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0, xe-4/0/24.0
+O365-N-SERVERS-VLAN 705    
+                       ae16.0*, ae17.0*, ge-2/0/15.0, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0, xe-4/0/24.0
+O365-S-SERVERS-VLAN 805    
+                       ae16.0*, ae17.0*, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0, xe-4/0/24.0
+O365-S-SERVERSNA-VLAN 806    
+                       ae16.0*, ae17.0*, ge-3/0/15.0, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0, xe-4/0/24.0
+OI-ACC-N-NGFW_EXT-VLAN 733    
+                       ae16.0*, ae17.0*, xe-4/0/2.0, xe-4/0/7.0, xe-5/0/2.0, xe-5/0/7.0
+OI-ACC-N-NGFW_INT-VLAN 734    
+                       ae16.0*, ae17.0*, xe-4/0/2.0, xe-4/0/6.0, xe-5/0/2.0, xe-5/0/6.0
+OI-ACC-N-SERVERS-VLAN 732    
+                       ae4.0, ae16.0*, ae17.0*, ge-2/0/34.0*, ge-2/0/35.0*, ge-3/0/34.0*, ge-3/0/35.0*, xe-0/1/0.0, xe-1/1/0.0
+OI-ACC-S-FIREEYE-VLAN 833    
+                       ae16.0*, ae17.0*, xe-4/0/3.0, xe-5/0/3.0
+OI-ACC-S-SERVERS-VLAN 832    
+                       ae4.0, ae16.0*, ae17.0*, ge-2/0/30.0*, ge-2/0/31.0*, ge-3/0/26.0*, ge-3/0/27.0*, ge-3/0/30.0*, ge-3/0/31.0*, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0,
+                       xe-4/0/24.0
+OI-ACC-S-VIPs-VLAN 831    
+                       ae16.0*, ae17.0*, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0, xe-4/0/24.0
+OI-N-DIRECT-VLAN 746    
+                       ae16.0*, ae17.0*, xe-4/0/2.0, xe-4/0/14.0, xe-5/0/2.0, xe-5/0/14.0
+OI-N-NGFW_INT-VLAN 744    
+                       ae16.0*, ae17.0*, xe-4/0/2.0, xe-4/0/13.0, xe-5/0/2.0, xe-5/0/13.0
+OI-N-SERVERS-VLAN 742    
+                       ae2.0, ae3.0, ae9.0*, ae10.0*, ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0
+OI-S-FIREEYE-VLAN 835    
+                       ae16.0*, ae17.0*, xe-4/0/3.0, xe-5/0/3.0, xe-5/0/5.0
+OI-S-SERVERS-VLAN 842    
+                       ae2.0, ae3.0, ae16.0*, ae17.0*, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0, xe-4/0/24.0
+OI-S-VIPs-VLAN 841    
+                       ae16.0*, ae17.0*, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0, xe-4/0/24.0
+OI-S-XTO-SERVERS-VLAN 847    
+                       ae16.0*, ae17.0*, xe-0/1/0.0, xe-0/2/0.0, xe-1/1/0.0, xe-1/2/0.0, xe-4/0/24.0, xe-6/0/6.0*, xe-7/0/6.0*
+OI-S-XTO-VIP-VLAN 846    
+                       ae16.0*, ae17.0*, xe-0/2/0.0, xe-1/2/0.0, xe-4/0/24.0
+SS-N-NGFW_INT-VLAN 743    
+                       ae16.0*, ae17.0*, xe-4/0/2.0, xe-4/0/12.0, xe-5/0/2.0, xe-5/0/12.0
+SWIFT_VPN_PROD_BU_NORTH 3237   
+                       ae11.0*, ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0
+SWIFT_VPN_PROD_NORTH 3236   
+                       ae11.0*, ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0
+SWIFT_VPN_PROD_SOUTH 3036   
+                       ae11.0*, ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0
+SharedServices-S-Servers 902    
+                       ae7.0*, ae8.0*, ae16.0*, ae17.0*, ge-0/0/21.0, ge-0/0/22.0, ge-0/0/29.0*, ge-0/0/30.0, ge-0/0/31.0*, ge-1/0/21.0, ge-1/0/22.0, ge-1/0/29.0*, ge-1/0/30.0,
+                       ge-1/0/31.0*, ge-2/0/7.0, ge-3/0/14.0, ge-6/0/1.0*, ge-6/0/2.0*, ge-6/0/17.0*, ge-7/0/1.0*, ge-7/0/2.0*, ge-7/0/17.0*, xe-0/1/0.0, xe-1/1/0.0, xe-6/0/6.0*,
+                       xe-7/0/6.0*
+UHSIS-N        850    
+                       ae0.0, ae1.0, ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0
+UHSIS-S        750    
+                       ae0.0, ae1.0, ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0
+VC-N-SERVERS-VLAN 722    
+                       ae16.0*, ae17.0*, ge-2/0/26.0*, ge-6/0/3.0*, xe-0/1/0.0, xe-1/1/0.0
+VC-S-SERVERS-VLAN 822    
+                       ae16.0*, ae17.0*, ge-2/0/27.0*, ge-2/0/28.0*, ge-2/0/29.0*, ge-7/0/3.0*, xe-0/1/0.0, xe-1/1/0.0
+VRF202-EXADATA-GATEWAY-NORTH-465 465    
+                       ae16.0*, ae17.0*, ge-2/0/20.0*
+VRF203-EXADATA-GATEWAY-SOUTH-466 466    
+                       ae16.0*, ae17.0*, ge-2/0/21.0*, ge-2/0/22.0*
+default       
+                       ge-1/0/39.0*
+vrf35-server-phy_general-848_vlan 848    
+                       ae5.0*, ae6.0*, ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0, xe-4/0/3.0, xe-5/0/3.0, xe-6/0/12.0*, xe-7/0/12.0*
+vrf35_server_phy_general_849_vlan 849    
+                       ae5.0*, ae6.0*, ae16.0*, ae17.0*, xe-4/0/3.0, xe-5/0/3.0, xe-6/0/12.0*, xe-7/0/12.0*
+vrf36_server_phy_general_747_vlan 747    
+                       ae9.0*, ae10.0*, ae16.0*, ae17.0*, xe-0/2/0.0, xe-1/2/0.0, xe-4/0/2.0, xe-4/0/24.0, xe-5/0/2.0
+vrf36_server_phy_general_748_vlan 748    
+                       ae16.0*, ae17.0*, xe-0/2/0.0, xe-1/2/0.0, xe-4/0/2.0, xe-4/0/24.0, xe-5/0/2.0
+vrf42-server-VMotion_Hosts_DMZ_Application_3548_vlan 3548   
+                       ae16.0*, ae17.0*, xe-1/1/0.0
+vrf42-server-VMotion_Hosts_Shared_Services_3547_vlan 3547   
+                       ae16.0*, ae17.0*, xe-0/1/0.0
+vrf42-server-vir_mgmt-3549 3549   
+                       ae5.0*, ae6.0*, ae7.0*, ae8.0*, ae9.0*, ae10.0*, ae16.0*, ae17.0*
+vrf42-server-vir_mgmt-912_vlan 912    
+                       ae5.0*, ae6.0*, ae9.0*, ae10.0*, ae16.0*, ae17.0*, ge-6/0/20.0*, ge-6/0/21.0*, ge-6/0/22.0*, ge-6/0/23.0*, ge-6/0/24.0*, ge-6/0/25.0*, ge-7/0/20.0*,
+                       ge-7/0/21.0*, ge-7/0/22.0*, ge-7/0/23.0*, ge-7/0/24.0*, ge-7/0/25.0*, xe-0/1/0.0, xe-1/1/0.0
+vrf44-North-LB-Range 3438   
+                       ae16.0*, ae17.0*
+vrf44-North-Load-Balancing-Range 3437   
+                       ae16.0*, ae17.0*
+vrf44-server-phy_general-3436_vlan 3436   
+                       ae16.0*, ae17.0*, xe-4/0/2.0, xe-5/0/2.0
+vrf45-Internet-Services-South-3022_vlan 3022   
+                       ae16.0*, ae17.0*
+vrf45-server-eDMZ-VIP-3227_vlan 3227   
+                       ae16.0*, ae17.0*
+vrf45-server-eDMZ-n-3226_vlan 3226   
+                       ae16.0*, ae17.0*
+vrf45-server-eDMZ-n_II-3228_vlan 3228   
+                       ae16.0*, ae17.0*
+vrf45-server-eDMZ-s-3026_vlan 3026   
+                       ae16.0*, ae17.0*
+vrf45-server-eDMZ-s_II-3027_vlan 3027   
+                       ae16.0*, ae17.0*
+vrf45-server-phy_general-3021_vlan 3021   
+                       ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0
+vrf45-share-services-server-3521_vlan 3521   
+                       ae16.0*, ae17.0*
+vrf46-server-phy_general-903_vlan 903    
+                       ae7.0*, ae8.0*, ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0, xe-6/0/12.0*, xe-7/0/12.0*
+vrf46-server-phy_general-904_vlan 904    
+                       ae7.0*, ae8.0*, ae16.0*, ae17.0*, xe-0/1/0.0, xe-1/1/0.0
+vrf55-v0807-mobility-south 807    
+                       ae16.0*, ae17.0*
+vrf55-v0808-mobility-south 808    
+                       ae16.0*, ae17.0*
+vrf58_server_phy_general_3431 3431   
+                       ae12.0*, ae16.0*, ae17.0*, xe-4/0/2.0, xe-5/0/2.0
+vrf60_server_phy_general_3206 3206   
+                       ae9.0*, ae10.0*, ae13.0*, ae14.0*, ae15.0*, ae16.0*, ae17.0*, xe-4/0/2.0, xe-5/0/2.0
+vrf61_server_phy_general_3006 3006   
+                       ae5.0*, ae6.0*, ae16.0*, ae17.0*
+vrf94-server-phy_general-3029 3029   
+                       ae16.0*, ae17.0*
+vrf94-server-phy_general-3030 3030   
+                       ae16.0*, ae17.0*
+vrfxx_server_phy_general_804_vlan 804    
+                       ae5.0*, ae6.0*, ae16.0*, ae17.0*, ae18.0, ae19.0, ge-6/0/19.0, ge-7/0/7.0, ge-7/0/13.0, ge-7/0/19.0, xe-4/0/3.0, xe-5/0/3.0, xe-6/0/6.0*, xe-7/0/6.0*
+
+{master:1}
+nvsfarsyed@USDALIGW-LANOBA010> show route 
+
+inet.0: 4 destinations, 4 routes (4 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+
+0.0.0.0/0          *[Static/5] 19w2d 15:56:22
+                    > to 158.28.75.254 via vme.0
+158.28.75.0/24     *[Direct/0] 19w2d 15:56:22
+                    > via vme.0
+158.28.75.54/32    *[Local/0] 19w2d 15:56:22
+                      Local via vme.0
+224.0.0.22/32      *[IGMP/0] 19w2d 15:56:41
+                      MultiRecv
+
+{master:1}
+nvsfarsyed@USDALIGW-LANOBA010> 
+
+{master:1}
+nvsfarsyed@USDALIGW-LANOBA010> show lldp neighbors 
+Local Interface    Parent Interface    Chassis Id          Port info          System Name
+ge-6/0/35.0        ae12.0              00:24:97:e3:12:00   @L@ Link to DIDNWX69_ge-6/0/35 daltx-dmvpn-1002.xtonet.com
+ge-7/0/26.0        ae12.0              00:24:97:e3:12:00   @L@ Link to DIDNWX69_ge-7/0/26 daltx-dmvpn-1002.xtonet.com
+xe-6/0/8.0         ae16.0              00:31:46:41:ef:00   iWi to USDALIGW-LANOBA010:xe-6/0/8 (Member of: ae0) # DIDNWX69_6/0/8 USDID-LANDCA002     
+xe-7/0/8.0         ae16.0              00:31:46:41:ef:00   iWi to USDALIGW-LANOBA010:xe-7/0/8 (Member of: ae0) # DIDNWX69_7/0/8 USDID-LANDCA002     
+xe-7/0/9.0         ae16.0              00:31:46:41:ef:00   iWi to USDALIGW-LANOBA010:xe-7/0/9 (Member of: ae0) # DIDNWX69_7/0/9 USDID-LANDCA002     
+xe-6/0/6.0         -                   00:a0:98:79:9d:96   00:a0:98:79:9d:96
+xe-6/0/12.0        -                   00:a0:98:7a:3e:e3   00:a0:98:7a:3e:e3
+xe-7/0/6.0         -                   00:a0:98:7a:4b:f0   00:a0:98:7a:4b:f0
+xe-7/0/12.0        -                   00:a0:98:7a:c9:62   00:a0:98:7a:c9:62
+xe-1/0/32.0        ae17.0              30:b6:4f:e4:d2:c0   iLi to USDALIGW-LANOBA010:xe-1/0/32 (Member of: ae17) # Connection to DIDNWX69 - xe-1/0/32 USDALIGW-LANDCO003  
+xe-1/0/33.0        ae17.0              30:b6:4f:e4:d2:c0   iLi to USDALIGW-LANOBA010:xe-1/0/33 (Member of: ae17) # Connection to DIDNWX69 - xe-1/0/33 USDALIGW-LANDCO003  
+xe-4/0/32.0        ae17.0              30:b6:4f:e4:da:c0   iLi to USDALIGW-LANOBA010:xe-4/0/32 (Member of: ae17) # Connection to DIDNWX69 - xe-4/0/32 USDALIGW-LANDCO004  
+xe-4/0/33.0        ae17.0              30:b6:4f:e4:da:c0   iLi to USDALIGW-LANOBA010:xe-4/0/33 (Member of: ae17) # Connection to DIDNWX69 - xe-4/0/33 USDALIGW-LANDCO004  
+xe-0/0/10.0        -                   34:80:0d:06:05:c8   34:80:0d:06:05:c8
+xe-1/0/10.0        -                   34:80:0d:06:05:c9   34:80:0d:06:05:c9
+xe-0/0/12.0        -                   34:80:0d:06:16:44   34:80:0d:06:16:44
+xe-1/0/12.0        -                   34:80:0d:06:16:45   34:80:0d:06:16:45
+xe-0/0/11.0        -                   34:80:0d:06:23:28   34:80:0d:06:23:28
+xe-1/0/11.0        -                   34:80:0d:06:23:29   34:80:0d:06:23:29
+xe-2/0/36.0        -                   34:80:0d:1b:d9:d2   34:80:0d:1b:d9:d2
+xe-3/0/36.0        -                   34:80:0d:1b:d9:d3   34:80:0d:1b:d9:d3
+xe-2/0/37.0        -                   34:80:0d:1b:da:74   34:80:0d:1b:da:74
+xe-3/0/37.0        -                   34:80:0d:1b:da:75   34:80:0d:1b:da:75
+xe-2/0/38.0        -                   34:80:0d:1b:db:3a   34:80:0d:1b:db:3a
+xe-3/0/38.0        -                   34:80:0d:1b:db:3b   34:80:0d:1b:db:3b
+vme.0              -                   c0:62:6b:9c:51:80   GigabitEthernet0/48 USDALIGW-DCNOBA005.na.xom.com
+xe-4/0/17.0        ae11.0              f0:1c:2d:56:71:00   xe-0/1/0.0         USDID-LANDCA001     
+xe-5/0/17.0        ae11.0              f0:1c:2d:56:71:00   xe-0/1/2.0         USDID-LANDCA001     
+xe-4/0/18.0        ae11.0              f0:1c:2d:56:71:00   xe-1/1/0.0         USDID-LANDCA001     
+xe-5/0/18.0        ae11.0              f0:1c:2d:56:71:00   xe-1/1/2.0         USDID-LANDCA001     
+xe-7/0/5.0         ae8.0               vmnic4              port 112 on dvSwitch DALDMZ-vDS01 (etherswitch) dalvesxdmzp12.xtonet.com
+xe-7/0/11.0        ae6.0               vmnic4              port 100 on dvSwitch DALDMZ-vDS01 (etherswitch) dalvesxdmzp02.xtonet.com
+xe-7/0/10.0        ae5.0               vmnic4              port 98 on dvSwitch DALDMZ-vDS01 (etherswitch) dalvesxdmzp01.xtonet.com
+xe-7/0/4.0         ae7.0               vmnic4              port 118 on dvSwitch DALDMZ-vDS01 (etherswitch) dalvesxdmzp11.xtonet.com
+xe-7/0/16.0        ae10.0              vmnic5              port 140 on dvSwitch DALDMZ-vDS01 (etherswitch) dalvesxdmzp02.xtonet.com
+xe-7/0/15.0        ae9.0               vmnic5              port 138 on dvSwitch DALDMZ-vDS01 (etherswitch) dalvesxdmzp01.xtonet.com
+xe-6/0/11.0        ae6.0               vmnic6              port 101 on dvSwitch DALDMZ-vDS01 (etherswitch) dalvesxdmzp02.xtonet.com
+xe-6/0/5.0         ae8.0               vmnic6              port 113 on dvSwitch DALDMZ-vDS01 (etherswitch) dalvesxdmzp12.xtonet.com
+xe-6/0/4.0         ae7.0               vmnic6              port 119 on dvSwitch DALDMZ-vDS01 (etherswitch) dalvesxdmzp11.xtonet.com
+xe-6/0/10.0        ae5.0               vmnic6              port 99 on dvSwitch DALDMZ-vDS01 (etherswitch) dalvesxdmzp01.xtonet.com
+xe-6/0/16.0        ae10.0              vmnic7              port 141 on dvSwitch DALDMZ-vDS01 (etherswitch) dalvesxdmzp02.xtonet.com
+xe-6/0/15.0        ae9.0               vmnic7              port 139 on dvSwitch DALDMZ-vDS01 (etherswitch) dalvesxdmzp01.xtonet.com
+
+{master:1}
+nvsfarsyed@USDALIGW-LANOBA010> 
+
+{master:1}
+nvsfarsyed@USDALIGW-LANOBA010> 
+
+{master:1}
