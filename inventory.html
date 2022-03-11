@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="../static/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IC-INTERNET</title>
+</head>
+
+<body>
+  <nav class="navbar background">
+    <ul class="nav-list">
+      <h1>INTERNET CONNECTIVITY PORTAL</h1>
+      <li> <a href="/home"> HOME</a></li>
+      <li> <a href="/about"> ABOUT</a></li>
+      <li> <a href="/contact">CONTACT</a></li>
+    </ul>
+  </nav>
+  <section class="background2 firstSection2">
+      <div class="box2-main">
+          <div class="para">
+              <h1 class="Bold"> Know your Device </h1>
+              <ul class="nav-list1">
+                  <form action="/result" method="POST">
+                      <label for="devicename">Device Name/Ip:</label>
+                      <input type="text" id="devicename" name="devicename">
+                      <input type="submit" class="file_submit"><br><br>
+              </ul>
+              <left>
+                  {% if result %}
+                  <h3> Device information from Inventory List for: {{ result[5] }}</h3><br>
+                  <ul>
+                      <li>Device Name     : {{ result[3] }}</li>
+                      <li>Device IP       : {{ result[0] }}</li>
+                      <li>Device Vendor   : {{ result[1] }}</li>
+                      <li>Device SerialNo : {{ result[2] }}</li>
+                      <li>Device Model    : {{ result[4] }}</li>
+                  </ul>
+                  <!--                  <br><h3> Device information from SNMPWALK: {{ result[5] }}</h3>
+            {{ result[6] }}-->
+                  {% endif %}<br><br><br><br>
+              </left>
+              <h1 class="Bold"> Find Devices in Inventory </h1>
+              <ul class="nav-list1">
+                  <form action="/invresult" method="POST">
+                      <label for="devicetype">Choose from dropdown:</label>
+                      <input list="devicetype" name="devicetype">
+                      <datalist id="devicetype">
+                          <option value="Firewall">
+                          <option value="Routers">
+                          <option value="Switches">
+                          <option value="Load Balancer">
+                          <option value="Circuit">
+                      </datalist>
+                      <input type="submit" class="file_submit" formaction="/invresult"><br><br>
+                  </form>
+              </ul>
+              <left>
+                  {% if invcount %}
+                  <ul>
+                      <li>The total number of {{ invcount[0]}} : {{ invcount[1]}}</li>
+                      <li>Device Names are : {{invcount[2]}}</li>
+                  </ul>
+                  {% endif %}<br><br><br><br>
+              </left>
+              <h1 class="Bold"> Check Live Status </h1>
+              <ul class="nav-list1">
+                  <form action="/liveresult" method="POST">
+                      <label for="Devicename">Device Name/Ip:</label>
+                      <input type="text" id="Devicename" name="Devicename">
+                      <label for="Username">Login as:</label>
+                      <input type="text" id="Username" name="Username">
+                      <label for="password">Password:</label>
+                      <input type="password" id="password" name="password">
+                      <label for="commands">Action:</label>
+                      <input list="commands" name="commands">
+                      <datalist id="commands">
+                          <option value="Check Version">
+                          <option value="Check Inventory">
+                          <option value="Interface Status">
+                          <option value="CDP Status">
+                      </datalist>
+                      <input type="submit" class="file_submit" formaction="/liveresult"><br><br>
+                  </form>
+              </ul>
+              <left>
+                  {% if liveresult %}
+                  {% for line in liveresult %}
+                  <pre>{{ line }}</pre>
+                  {% endfor %}
+                  {% endif %}<br><br><br><br>
+              </left>
+              <left>
+              <h1 class="Bold"> Chech Functional output for F5 </h1>
+              <ul class="nav-list1">
+                  <form action="/livef5result" method="POST">
+                      <label for="Devicename">Device Name/Ip:</label>
+                      <input type="text" id="Devicename" name="Devicename">
+<!--                      <label for="Username">Login as:</label>
+                      <input type="text" id="Username" name="Username">
+                      <label for="password">Password:</label>
+                      <input type="password" id="password" name="password">-->
+                      <label for="commandsf5">Action:</label>
+                      <input list="commandsf5" name="commandsf5">
+                      <datalist id="commandsf5">
+                          <option value="List node configuration">
+                          <option value="Show node statuses">
+                          <option value="List pool configuration">
+                          <option value="Show pool statuses">
+                          <option value="List virtual server configuration">
+                          <option value="Show virtual server statuses">
+                          <option value="List client ssl profiles">
+                          <option value="Show client ssl profile statistics">
+                      </datalist>
+                      <input type="submit" class="file_submit" formaction="/livef5result"><br><br>
+                  </form>
+              </ul>
+              <left>
+                  <pre>{{ livef5result }}</pre>
+              </left>
+          </div>
+      </div>
+  </section>
+      <footer>
+        <p class="text-footer">
+          This website designed by Farina Syed; Copyright &copy;2022 -All rights reserved
+        </p>
+      </footer>
+    </body>
+    </html>
