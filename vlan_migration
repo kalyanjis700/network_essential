@@ -1,0 +1,138 @@
+from netmiko import ConnectHandler
+import getpass
+import re
+print("""Welcome to VLAN changing script!! it will prepare the script ready for manual deployment
+
+""")
+existingdeviceip = "null"
+username = input("Login As : ")
+password = getpass.getpass("Login Password : ")
+filename = input("enter the file name: ")
+#goahead = 1
+with open (filename) as f:
+  command = f.readlines()
+for vlanid in command:
+  existingvlan = vlanid.split(",")[0]
+  newvlanid = vlanid.split(",")[1]
+  deviceip = vlanid.split(",")[2]
+  interfacevlanexist = 1
+  goahead = 1
+  capture = open("VLAN_Migration", 'a')
+  nextdevicecapture = open("nei_details", 'a')
+  try:
+    if existingdeviceip != deviceip:
+      netconnect = ConnectHandler(device_type="cisco_ios", ip=deviceip, username=username, password=password, port=22)
+      netconnect.enable()
+      #print ("connection successfull to "+ deviceip)
+      print ("connected successfully for capturing data for vlan "+ existingvlan + " on device " + str(deviceip))
+      existingdeviceip = deviceip
+    else:
+      #print ("using existing connection to "+ deviceip)
+      print ("using existing connection to capture data for vlan "+ existingvlan + " on device " + str(deviceip))
+    try:
+      output = netconnect.send_command("show vlan id "+ existingvlan)
+      vlanname = netconnect.send_command("show vlan id "+ existingvlan + " | in active")
+              
+      capture.write("config for Vlan " + str(newvlanid) + " " + str(deviceip) + '\n' +'-----------------------------'+ '\n') 
+      outputlist = re.split('\s+', output)
+      vlanname1 = re.split('\s+', vlanname)
+      vlanname = vlanname1[1]
+      capture.write("conf t"+ '\n' "no vlan id "+ str(existingvlan) + '\n' +"no interface vlan id "+ str(existingvlan) + '\n')
+      capture.write("vlan "+ str(newvlanid) + '\n' + " name "+ vlanname + '\n'+"!"+ '\n')
+
+      impacteddevice = []
+      interfacelist =[]
+      vlanallowedinterfaces=[]
+      for line in outputlist:
+        trunkvalue = 0
+        patterns = ["^Gi","^Po.\d+$","^Te"]
+        if any (re.findall(x, line) for x in patterns):
+          interface = line.replace(",","")
+          interfacelist.append(interface)
+          output3 = netconnect.send_command("show run interface "+ interface)
+          interfaceconf = output3.strip().splitlines()
+          nativevlanidentification = "switchport trunk native vlan "+ str(existingvlan)
+          for line in interfaceconf:
+            if "switchport trunk allowed vlan" in line:
+              if trunkvalue!=200: 
+                capture.write("interface "+interface+ '\n')
+                capture.write("switchport trunk allowed vlan add "+ newvlanid+ '\n')
+                capture.write("switchport trunk allowed vlan remove "+ existingvlan + '\n')
+                capture.write("!"+ '\n')
+                trunkvalue = 200
+              else:
+                pass
+            elif nativevlanidentification in line:
+              capture.write(line + '\n')
+            elif "switchport access vlan " in line:
+              capture.write("interface "+interface+ '\n') 
+              capture.write("switchport access vlan " + newvlanid+ '\n')
+              capture.write("!"+ '\n')
+            elif "description " in line:
+              nextdevicecapture.write(existingvlan+","+newvlanid+","+line.replace("description ","") + '\n')
+              impacteddevice.append(line.replace("description ",""))
+      # print(interfacelist)
+      # print(impacteddevice)
+    except:
+      print (existingvlan + " is not in vlan DB")
+      goahead = 0
+    if goahead == 1:
+      try:
+        output2 =netconnect.send_command("show run interface vlan "+ existingvlan)
+        vlanconfig = output2.strip().splitlines() 
+        for line in vlanconfig:
+          if "interface Vlan" in line:
+            capture.write("interface vlan"+str(newvlanid)+ '\n')
+          elif "Building configuration" in line:
+            pass
+          elif "Current configuration" in line:
+            pass
+          elif line == "end":
+            capture.write(" no shutdown"+ '\n')
+          elif line == "^":
+            pass
+          elif "Invalid input detected" in line:
+            interfacevlanexist = 0
+          else:
+            capture.write(line+ '\n')
+
+      except:
+        interfacevlanexist = 0
+
+      passiveinterfacevalue = 0
+      try:
+        if interfacevlanexist == 1:
+          output4 = netconnect.send_command("show ip ospf interface vlan "+ str(existingvlan))
+          lineoutput = output4.strip().splitlines()
+        for line in lineoutput:
+          if "Process ID" in line:
+            processid = (line.split(",")[0].replace("Process ID ",""))
+            processid = processid.replace(" ","")
+          elif "Passive interface" in line:
+            passiveinterfacevalue = 1
+          elif "OSPF not enabled on" in line:
+            passiveinterfacevalue = 1
+          else:
+            pass
+      except:
+        print ("OSPF FOR VLAN "+ existingvlan +" is not running for "+ deviceip)
+      try:
+        if passiveinterfacevalue == 0:
+          output5 = netconnect.send_command("show run | i router ospf " + processid)
+          capture.write('\n'+ output5 + '\n'+" no passive-interface Vlan" + newvlanid + '\n' +" passive-interface Vlan"+ existingvlan + '\n' )
+        else:
+          pass
+      except:
+        print ("OSPF configuration FOR VLAN "+ existingvlan +" may not required for "+ deviceip)
+      netconnect.disconnect()  
+      capture.write("\n"+"\n"+"Impacted Device List"+"\n")
+      capture.write("====================="+"\n")
+      i=0
+      for xyz in interfacelist:
+        capture.write(xyz + "---------------->>" + impacteddevice[i] + '\n')
+        i =i +1
+      capture.write("====================="+"\n")
+    else:
+      pass
+  except:
+    print ("This device vendor may different or login issue-----" + str(deviceip))
