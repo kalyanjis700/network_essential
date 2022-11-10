@@ -1,0 +1,379 @@
+from flask import Flask, jsonify, redirect, request, url_for, session
+from argparse import ArgumentParser
+from unity_jinja.jinjalibs import get_environment
+import csv
+import traceback
+import httpx
+from httpx._auth import BasicAuth
+# blueprints
+from blueprints.auth.auth import auth_bp
+from blueprints.ansible.ansible import ansible_bp
+from blueprints.admin.admin import admin_bp
+# app settings
+from config.app_conf import settings
+# auth
+from flask_session import Session
+from blueprints.auth.decorators.deco import authorize
+from blueprints.auth.auth import _get_token_from_cache
+import json
+
+parser = ArgumentParser(description="unity-jinja test")
+parser.add_argument("-s", "--server", action="store_true", help="Run web servlet")
+parser.add_argument("-p", "--port", default="8080", help="Web server port")
+parser.add_argument("-o", "--output", default="gen.html", help="Output file if not run in server mode")
+
+args = parser.parse_args()
+
+## DEMO - this section is need for reading a CSV file to put some content on the demo pages, can be deleted once actual content can be fatched from a backend
+## Open F5 inventory list from file
+def loadData(file_name):
+    data = {
+        "header" : [], "rows" : []
+    }
+    with open(file_name, 'r') as csvFile: 
+        csvReader = csv.reader(csvFile)
+        for i,row in enumerate(csvReader):
+            if i > 0:
+                data['rows'].append(row)
+            else:
+                data['header'] = row
+    return data
+
+adc_inventory = loadData("ADCInventory_full.csv")
+
+# Construct inventory summary for the inventory page
+def data_summary(input):
+    sum = { "header": [], "rows": []}
+
+    head0 = "Details"
+
+    sum['header'] = input['header'][0:8]
+    sum['header'].insert(0, head0)
+    
+    for i,row in enumerate(input['rows']):
+            
+            row0 = """<button id="{index}" class="em-c-btn em-c-btn--tertiary em-c-btn--small" onclick="dev_details(this.id)">
+                        <div class="em-c-btn__inner">
+                            <svg class="em-c-icon em-c-icon--small em-c-btn__icon " data-em-icon-path="./static/unity-1.6.0/images/em-icons.svg">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="./static/unity-1.6.0/images/em-icons.svg#more-horizontal"></use>
+                            </svg>
+                        </div>
+                    </button>""".format(index=i)
+#            row0 = "testinsert"
+#            row.insert(0, row0)
+            sum['rows'].append(row[0:8])
+            sum['rows'][i].insert(0, row0)
+    return sum
+
+summary = data_summary(adc_inventory)
+## END OF DEMO
+
+if __name__ == "__main__":
+    env = get_environment(root_dir="static", directories=['.', 'templates'])
+
+    ### TODO: reworks args handling
+    #print(args.server)
+
+    app = Flask("adc-portal")
+        
+    # reister router blueprints
+    app.register_blueprint(ansible_bp, url_prefix='/ansible')
+    app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(auth_bp, url_prefix='/auth')
+
+    # Load config data from app_config
+    app.config.from_object(settings)
+
+    # Initialize user session
+    Session(app)
+
+    # This section is needed for url_for("foo", _external=True) to automatically
+    # generate http scheme when this sample is running on localhost,
+    # and to generate https scheme when it is deployed behind reversed proxy.
+    # See also https://flask.palletsprojects.com/en/1.0.x/deploying/wsgi-standalone/#proxy-setups
+    from werkzeug.middleware.proxy_fix import ProxyFix
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
+
+    # The httpx default CA cert does not include company internal CAs, so we're setting up an SSL context
+    # wich uses a XOM CA bundle (included in this app) to verify SSL certificates. The context is stored in 
+    # the app config so we can access it anywhere in the application. 
+    # TODO: Tis might not be the best approach, need further investigation. E.g. storing the cert in an OCP secret and reading it via ENV
+    app.config['SSL_CTX'] = httpx.create_ssl_context(verify="./static/XOM_ICA_12.cer")
+    # To disable cert verification completely comment above line and uncomment the below one
+    #app.config['SSL_CTX'] = False
+        
+    ## This enforces authentication on the whole portal.
+    @app.before_request
+    @authorize
+    def before_request():
+        """ Reqire login for all endpoints and set username to display """
+        ## Display user name in menu if user is logged in, otherwise display a login button
+        if 'user' in session:
+            app.config['SOLID_MENU'][0]['title'] = session['user']['name']
+            app.config['SOLID_MENU'][0]['url'] = '#'
+        else:
+            app.config['SOLID_MENU'][0]['title'] = "Login"
+            app.config['SOLID_MENU'][0]['url'] = "/login"
+
+    ## DEMO PAGES
+    @app.route('/example')
+    def index_page():
+        """
+        Example page, shows a table, data read from CSV file. Used for demo only.
+        """
+        index = env.get_template('./templates/example.html')
+        #app.config["CURRENT_PAGE"] = "/test/example"
+        #page = index.render(pd=app.config["PAGE_DATA"], table_data=adc_inventory)
+        page = index.render(
+            sm=app.config["SOLID_MENU"],
+            mt = app.config["MENU_TREE"],
+            current = "/test/example",
+            table_data=adc_inventory
+        )
+        return page
+
+    @app.route('/inventory', methods=['GET'])
+    def inventory():
+        """
+        Inventory page. A list of devices, read from a CSV file. Used for demo only.
+        """
+        inventory = env.get_template('./templates/inventory.html')
+        #return inventory.render(pd=app.config["PAGE_DATA"], table_data=summary)
+        return inventory.render(
+            sm=app.config["SOLID_MENU"],
+            mt = app.config["MENU_TREE"],
+            current = "/test/inventory",
+            table_data=summary
+        )
+
+    @app.route('/testform', methods=['GET'])
+    def testform():
+        """
+        Test input form. Showcasing how a VIP request form would look like. No submit action implemented, just the looks.
+        """
+        testform = env.get_template('./templates/form.html')
+        #return testform.render(pd=app.config["PAGE_DATA"])
+        return testform.render(
+            sm=app.config["SOLID_MENU"],
+            mt = app.config["MENU_TREE"],
+            current = "/test/form"
+        )
+    ## END OF DEMO
+
+    @app.route('/hello', methods=['GET'])
+    def hello():
+        """
+        Hello for service health check
+        """
+        return jsonify('hello')
+    @app.route('/', methods=['GET'])
+    #@authorize
+    def landing():
+        """
+        Home page of the portal. It has a number of form elements to showcase the looks. Nothing functional here.
+        """
+        landing = env.get_template('./templates/index.html')
+        
+        return landing.render(
+            sm=app.config["SOLID_MENU"],
+            mt = app.config["MENU_TREE"],
+            current = "/",
+            user=session.get("user"),
+            jwt=_get_token_from_cache(["36934dbb-d83f-4354-8dae-45487ea4d72a/.default"])
+        )
+
+    @app.route('/error')
+    def error():
+        """
+        Basic error page
+        """
+        if not "LAST_ERR" in app.config:
+            app.config['LAST_ERR'] = {
+                'type': "test_type",
+                'args': "test.args",
+                'trace': "test trace"
+            }
+        index = env.get_template('error.html')
+        page = index.render(
+            sm=app.config["SOLID_MENU"],
+            mt = app.config["MENU_TREE"],
+            current = "",
+            error = app.config["LAST_ERR"]
+        )
+        return page
+
+    @app.route('/devices', methods=['GET'])
+    def devices():
+        """
+        Device list queried from API
+        """
+        try:
+            token = _get_token_from_cache(["36934dbb-d83f-4354-8dae-45487ea4d72a/.default"])
+            with httpx.Client(verify=app.config['SSL_CTX']) as client:
+                    response = client.get(app.config["API_URL"]+"/data/device/get",
+                                headers={'Authorization': 'Bearer '+ token['access_token']}
+                                )
+
+            header = [*response.json()[0]]
+            data = []
+            for row in response.json():
+                line = row.values()
+                data.append(line)
+
+            inventory = env.get_template('./templates/devices.html')
+            #return inventory.render(pd=app.config["PAGE_DATA"], table_header=header, table_data=data)
+            return inventory.render(
+                sm=app.config["SOLID_MENU"],
+                mt = app.config["MENU_TREE"],
+                current = "/device list",
+                table_header=header,
+                table_data=data
+            )
+        except Exception as e:
+            app.config['LAST_ERR'] = {
+                'type': type(e).__name__,
+                'args': e.args,
+                #'trace': f"<pre>{traceback.format_exc()}</pre>"
+                'trace': traceback.format_exc()
+            }
+            
+            return redirect(url_for("error"))
+
+    @app.route('/devicedetails', methods=['GET'])
+    def devicedetails():
+        """
+        Device detials page. Diplays all details of a device. Can be accessed through the inventory page.
+        """
+        id = int(request.args.get('dev'))
+        devicedetails = env.get_template('./templates/devicedetails.html')
+        #return devicedetails.render(pd=app.config["PAGE_DATA"], header=adc_inventory['header'], device_details=adc_inventory['rows'][id])
+        return devicedetails.render(
+            sm=app.config["SOLID_MENU"],
+            mt = app.config["MENU_TREE"],
+            current = "/inventory",
+            header=adc_inventory['header'],
+            device_details=adc_inventory['rows'][id]
+        )
+
+    @app.route('/vipsearch', methods=['GET', 'POST'])
+    def vipsearch():
+        """
+        Search for vips. Uses the ADC API to look for VIPs on the devices.
+        """
+        data = []
+        header = []
+        if request.args.get('srch'):
+            try:
+                token = _get_token_from_cache(["36934dbb-d83f-4354-8dae-45487ea4d72a/.default"])
+                with httpx.Client(verify=app.config['SSL_CTX']) as client:
+                    response = client.get(app.config["API_URL"]+"/bigip/searchvip/"+request.args.get('srch'),
+                                headers={'Authorization': 'Bearer '+ token['access_token']}
+                                )
+                srch = request.args.get('srch')
+            except Exception as e:
+                app.config['LAST_ERR'] = {
+                    'type': type(e).__name__,
+                    'args': e.args,
+                    'trace': traceback.format_exc()
+                }
+                return redirect(url_for("error"))
+        else:
+            response = None
+            srch = None
+        print(response)
+        if response and response.status_code == 401:
+            app.config['LAST_ERR'] = {
+                'type': "Backend error",
+                'args': "",
+                'trace': response.content
+            }
+            return redirect(url_for("error"))
+        if response and response.text != "\"{ Not found }\"":
+            header = ["Name", "Address", "Port"]
+            for row in response.json():
+                line = []
+                for key, value in row.items():
+                    line.append(value)
+                data.append(line)
+            #print(data)
+
+        if response and response.text == "\"{ Not found }\"":
+            data = False
+
+        vip_search = env.get_template('./templates/vipsearch.html')
+        #return testform.render(pd=app.config["PAGE_DATA"], vip_header=header, vip_data=data, srch=srch)
+        return vip_search.render(
+            sm=app.config["SOLID_MENU"],
+            mt = app.config["MENU_TREE"],
+            current = "/test/vip search",
+            vip_header=header,
+            vip_data=data,
+            srch=srch
+        )
+
+    @app.route('/vipdetails', methods=['GET'])
+    def vipdetails():
+        """
+        Show VIP details. Used to show the details of the results of the VIP search.
+        Uses the ADC API to get the details from the device.
+        """
+        if request.args.get('name'):
+            try:
+                token = _get_token_from_cache(["36934dbb-d83f-4354-8dae-45487ea4d72a/.default"])
+                with httpx.Client(verify=app.config['SSL_CTX']) as client:
+                    response = client.get(app.config["API_URL"]+"/bigip/getvip/"+request.args.get('name'),
+                                headers={'Authorization': 'Bearer '+ token['access_token']})
+            except Exception as e:
+                app.config['LAST_ERR'] = {
+                    'type': type(e).__name__,
+                    'args': e.args,
+                    'trace': traceback.format_exc()
+                }
+                return redirect(url_for("error"))
+        else:
+            response = None
+
+        if response:
+            r_json = response.json()
+            header = ["Name", "Address", "Port", "Description", "Protocol", "Pool", "SNAT"]
+            data = []
+            data.append(r_json["name"])
+            data.append(r_json["destination"])
+            data.append(r_json["destination"])
+            if "description" in r_json:
+                data.append(r_json["description"])
+            else:
+                data.append(" ")
+            data.append(r_json["ipProtocol"])
+            if "pool" in r_json:
+                data.append(r_json["pool"])
+                try:
+                    token = _get_token_from_cache(["36934dbb-d83f-4354-8dae-45487ea4d72a/.default"])
+                    with httpx.Client(verify=app.config['SSL_CTX']) as client:
+                        p = client.get(app.config["API_URL"]+"/bigip/getpool/"+r_json["pool"].split("/")[2],
+                                headers={'Authorization': 'Bearer '+ token['access_token']})
+                except Exception as e:
+                    app.config['LAST_ERR'] = {
+                        'type': type(e).__name__,
+                        'args': e.args,
+                        'trace': traceback.format_exc()
+                    }
+                    return redirect(url_for("error"))
+                pool = p.json()
+            else:
+                data.append("None")
+                pool = None
+            data.append(r_json["sourceAddressTranslation"]["type"])
+
+        testform = env.get_template('./templates/vipdetails.html')
+        #return testform.render(pd=app.config["PAGE_DATA"], vip_header=header, vip_data=data, pool_data=pool)
+        return testform.render(
+            sm=app.config["SOLID_MENU"],
+            mt = app.config["MENU_TREE"],
+            current = "/test/vip search",
+            vip_header=header,
+            vip_data=data,
+            pool_data=pool
+        )
+
+    app.run(host="0.0.0.0", port=args.port)
