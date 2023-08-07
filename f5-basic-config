@@ -1,0 +1,108 @@
+---
+- name: Configure BIG-IP Settings
+  hosts: bigip
+  connection: local
+  gather_facts: false
+  collections:
+    - f5networks.f5_modules
+
+  vars:
+    bigip_hostname: "your_bigip_hostname_or_ip"
+    bigip_username: "your_bigip_username"
+    bigip_password: "your_bigip_password"
+    ntp_servers:
+      - "your_ntp_server_1"
+      - "your_ntp_server_2"
+    syslog_servers:
+      - "your_syslog_server_1"
+      - "your_syslog_server_2"
+    snmp_community: "your_snmp_community_string"
+    guest_name: "your_guest_name"
+    guest_ip: "guest_ip_address"
+    guest_vlan: "your_vlan_name"
+    guest_port: "guest_port_name"
+
+  tasks:
+    - name: Set the hostname
+      bigip_hostname:
+        provider:
+          server: "{{ bigip_hostname }}"
+          user: "{{ bigip_username }}"
+          password: "{{ bigip_password }}"
+          validate_certs: no
+        name: "your_bigip_hostname"
+        state: present
+
+    - name: Configure DNS servers
+      bigip_dns:
+        provider:
+          server: "{{ bigip_hostname }}"
+          user: "{{ bigip_username }}"
+          password: "{{ bigip_password }}"
+          validate_certs: no
+        name_servers:
+          - "your_dns_server_1"
+          - "your_dns_server_2"
+        state: present
+
+    - name: Configure NTP servers
+      bigip_ntp:
+        provider:
+          server: "{{ bigip_hostname }}"
+          user: "{{ bigip_username }}"
+          password: "{{ bigip_password }}"
+          validate_certs: no
+        servers: "{{ ntp_servers }}"
+        state: present
+
+    - name: Configure syslog servers
+      bigip_syslog_remote_server:
+        provider:
+          server: "{{ bigip_hostname }}"
+          user: "{{ bigip_username }}"
+          password: "{{ bigip_password }}"
+          validate_certs: no
+        name: "syslog_server"
+        host: "{{ syslog_servers }}"
+        state: present
+
+    - name: Configure SNMP community
+      bigip_snmp:
+        provider:
+          server: "{{ bigip_hostname }}"
+          user: "{{ bigip_username }}"
+          password: "{{ bigip_password }}"
+          validate_certs: no
+        communities:
+          - name: "{{ snmp_community }}"
+            access: "ro"
+        state: present
+
+    - name: Create guest
+      bigip_guest:
+        provider:
+          server: "{{ bigip_hostname }}"
+          user: "{{ bigip_username }}"
+          password: "{{ bigip_password }}"
+          validate_certs: no
+        name: "{{ guest_name }}"
+        ip_address: "{{ guest_ip }}"
+        vlan: "{{ guest_vlan }}"
+        port: "{{ guest_port }}"
+        state: present
+
+    - name: Save the configuration
+      bigip_config_save:
+        provider:
+          server: "{{ bigip_hostname }}"
+          user: "{{ bigip_username }}"
+          password: "{{ bigip_password }}"
+          validate_certs: no
+
+    - name: Reboot the BIG-IP (optional if needed)
+      bigip_software_restart:
+        provider:
+          server: "{{ bigip_hostname }}"
+          user: "{{ bigip_username }}"
+          password: "{{ bigip_password }}"
+          validate_certs: no
