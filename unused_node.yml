@@ -1,0 +1,26 @@
+---
+- name: Find Unused Nodes on F5 BIG-IP
+  hosts: 10.81.16.164
+  connection: local
+  gather_facts: False
+  collections:
+    - f5networks.f5_modules
+  vars:
+    providerA:
+      password: "Year1month"
+      server: "10.81.16.164"
+      user: "admin"
+      validate_certs: False
+  tasks:
+    - name: Run command to find unused nodes
+      bigip_command:
+        commands:
+          - show ltm node field-fmt all
+        expect:
+          - "Are you sure you want to continue? (y/n): "
+        send: "yes\n"
+      register: nodes_result
+
+    - name: Display unused nodes
+      debug:
+        var: nodes_result.stdout_lines
