@@ -1,0 +1,28 @@
+---
+- name: Run F5 command to list nodes
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Accept SSH Fingerprint
+      command: ssh-keyscan -H {{ providerA.server }} >> ~/.ssh/known_hosts
+      environment:
+        ANSIBLE_SSH_PASS: "{{ providerA.password }}"
+      args:
+        warn: no
+      changed_when: false
+
+    - name: Run F5 command to list nodes
+      command: ssh {{ providerA.user }}@{{ providerA.server }} "tmsh show ltm node field-fmt all"
+      register: nodes_result
+      environment:
+        ANSIBLE_SSH_PASSWORD: "{{ providerA.password }}"
+
+    - name: Provide "yes" as the response to the prompt
+      expect:
+        command: ssh {{ providerA.user }}@{{ providerA.server }} "tmsh show ltm node field-fmt all"
+        responses:
+          "Display all .* items? (y/n)": "yes\n"
+      when: "'Display all .* items? (y/n)' in nodes_result.stdout"
+
+    - debug:
+        var: nodes_result.stdout_lines
