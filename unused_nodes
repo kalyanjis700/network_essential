@@ -19,3 +19,7 @@
 
     - debug:
         var: nodes_result.stdout_lines
+
+    - name: Extract nodes with serverside.pkts-in 0
+      set_fact:
+        matching_nodes: "{{ nodes_result.stdout_lines | select('search', 'serverside.pkts-in 0') | list }}"
