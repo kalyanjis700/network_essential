@@ -1,28 +1,21 @@
 ---
-- name: Run F5 command to list nodes
-  hosts: localhost
+- name: Configure and list LTM nodes without pager
+  hosts: your_f5_host
   gather_facts: no
   tasks:
-    - name: Accept SSH Fingerprint
-      command: ssh-keyscan -H {{ providerA.server }} >> ~/.ssh/known_hosts
-      environment:
-        ANSIBLE_SSH_PASS: "{{ providerA.password }}"
-      args:
-        warn: no
-      changed_when: false
+    - name: Disable pager
+      bigip_command:
+        commands:
+          - "tmsh modify cli preference pager disabled display-threshold 0"
+      register: pager_disabled_result
+      provider: "{{ providerA }}"
 
-    - name: Run F5 command to list nodes
-      command: ssh {{ providerA.user }}@{{ providerA.server }} "tmsh show ltm node field-fmt all"
+    - name: List LTM nodes without pager
+      bigip_command:
+        commands:
+          - "tmsh show ltm node field-fmt all"
       register: nodes_result
-      environment:
-        ANSIBLE_SSH_PASSWORD: "{{ providerA.password }}"
-
-    - name: Provide "yes" as the response to the prompt
-      expect:
-        command: ssh {{ providerA.user }}@{{ providerA.server }} "tmsh show ltm node field-fmt all"
-        responses:
-          "Display all .* items? (y/n)": "yes\n"
-      when: "'Display all .* items? (y/n)' in nodes_result.stdout"
+      provider: "{{ providerA }}"
 
     - debug:
         var: nodes_result.stdout_lines
