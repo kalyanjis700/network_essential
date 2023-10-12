@@ -26,6 +26,25 @@
       set_fact:
         node_names: "{{ node_names | default([]) + [item | regex_search('ltm node ([^\\s]+) {') | first] }}"
       loop: "{{ matching_nodes }}"
+    - name: Run Python code
+      ansible.builtin.script: |
+        #!/usr/bin/python
+
+        # Your Python code here
+        nodelist = []
+        for line in "{{ nodes_result.stdout_lines }}":
+            if "ltm node" in line:
+                nodename = line.split()[-2]
+            elif "serverside.pkts-in 0" in line:
+                nodelist.append(nodename)
+
+        print(nodelist)
+      # Set the script to be executable
+      mode: +x
+
+    - name: Display matching node names
+      debug:
+        var: nodelist
 
     - debug:
         var: nodes_result.stdout_lines
