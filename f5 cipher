@@ -1,0 +1,66 @@
+
+
+
+import csv
+import getpass
+import netmiko
+import getpass
+username = raw_input('login as :')
+password = getpass.getpass('password :')
+
+Devicelist = ['158.28.75.77','158.28.75.74']
+with open('cipher.csv','w') as csvfile:
+        fieldnames=['DeviceName','CLIENT_SSL_PROFILENAME','VIPNAME','CIPHER_SUITE']
+        writer=csv.DictWriter(csvfile,fieldnames=fieldnames)
+        writer.writeheader()
+
+        for device in Devicelist:
+                connection = netmiko.ConnectHandler(ip=device, device_type='f5_ltm',username=username,password=password,global_delay_factor=3)
+                connection.send_command_timing ('modify cli preference pager disabled')
+                print('connection successful')
+                x=4
+                cmd =["list /ltm profile client-ssl ciphers","show /ltm virtual profiles | grep 'Ltm::Virtual Server:\|Ltm::ClientSSL Profile:'"]
+
+
+                outputvirtualserver  = connection.send_command_timing ("show /ltm virtual profiles | grep 'Ltm::Virtual Server:\|Ltm::ClientSSL Profile:'")
+                output =outputvirtualserver.strip().splitlines()
+                outputciphers  = connection.send_command_timing ("list /ltm profile client-ssl ciphers")
+                output1 =outputciphers.strip().splitlines()
+                vsl={}
+                for index in range(len(output)):
+                        if x==4:
+
+                                if "Virtual Server" in output[index]:
+                                        if "Virtual Server" in output[index+1]:
+                                                x=4
+                                        else:
+
+                                                virtualserver =str(output[index])
+                                                serversplit =virtualserver.split(':')
+                                                vserver =serversplit[3]
+                                                #print(vserver)
+                                                x=5
+                        if x==5:
+                                if "Ltm::ClientSSL" in output[index]:
+                                        ltmssl =str(output[index])
+                                        sslsplit =ltmssl.split(':')
+                                        ssl =sslsplit[3]
+                                        vserver =vserver.replace(' ','')
+                                        ssl =ssl.replace(' ','')
+                                        vsl[vserver]=ssl
+                                        x=4
+
+                finaloutput ={}
+                for key,value in vsl.items():
+                        for index in range(len(output1)):
+                                if value in output1[index]:
+                                        cipher =output1[index+1]
+                                        cipher=cipher.replace(' ','')
+                                        finaloutput[key]=[value,cipher]
+
+                #print(finaloutput)
+                for key,value in finaloutput.items():
+                        writer.writerow({'DeviceName':device,'CLIENT_SSL_PROFILENAME':value[0],'VIPNAME':key,'CIPHER_SUITE':value[1]})
+
+                connection.disconnect()
+print('script has been execute successfully! you can see output in cipher.csv file ')
